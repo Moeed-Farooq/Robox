@@ -17,6 +17,9 @@ const RootNavigator = () => {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={SCREEN.SPLASH_SCREEN} component={ui.SplashScreen} />
         <Stack.Screen name={TAB.BOTTOM} component={BottomNavigator} />
+        <Stack.Screen name={SCREEN.FREE_DAILY_ROBUX_SCREEN} component={ui.FreeDailyRobuxScreen} />
+        <Stack.Screen name={SCREEN.DAILY_ROBUX_QUIZ} component={ui.DailyRobuxQuiz} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,12 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import Label from '../../common';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { hexToRgba } from '../../helpers';
+import { useNavigation } from '@react-navigation/native';
 
 const DailyRewardsCards = ({ item }) => {
+  const navigation = useNavigation();
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+    onPress={()=>navigation.navigate(item.screen)}
+     style={styles.card}>
       <View style={styles.imageContainer}>
         <Image source={item.src} style={styles.image} resizeMode="contain" />
       </View>
@@ -20,7 +24,7 @@ const DailyRewardsCards = ({ item }) => {
           <Label style={styles.title2}>{item.title2}</Label>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

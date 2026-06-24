@@ -35,6 +35,7 @@ export const DailyReward = [
     src: IMAGES.DAILY_ROBUX,
     reward: '2,500',
     color: COLORS.yellow,
+    screen:SCREEN.FREE_DAILY_ROBUX_SCREEN
   },
   {
     id: 2,
@@ -43,6 +44,7 @@ export const DailyReward = [
     src: IMAGES.FREE_EMOTE,
     reward: 'Elite',
     color: COLORS.pink,
+    screen:""
   },
 ];
 
@@ -136,5 +138,85 @@ export const AVATAR_STYLES = [
     subtitle: 'Magical Worlds',
     icon: SVG.magicWhite,
     activeIcon: SVG.magicBlack,
+  },
+];
+
+
+export const SETTINGS_SECTIONS = [
+  {
+    title: 'Preferences',
+    type: 'toggle',
+    data: [
+      {
+        id: '1',
+        title: 'Notifications',
+        subtitle: 'Receive\ngame alerts',
+        icon: SVG.bell,
+        value: true,
+      },
+      {
+        id: '2',
+        title: 'Dark Mode',
+        subtitle: 'Use dark theme',
+        icon: SVG.moon,
+        value: true,
+      },
+      {
+        id: '3',
+        title: 'Sound Effects',
+        subtitle: 'Play game\nsounds',
+        icon: SVG.speaker,
+        value: true,
+      },
+      {
+        id: '4',
+        title: 'Haptics Feedback',
+        subtitle: 'Device\nvibrations',
+        icon: SVG.mobileVibration,
+        value: true,
+      },
+    ],
+  },
+  {
+    title: 'About',
+    type: 'navigation',
+    data: [
+      {
+        id: '5',
+        title: 'Rate App',
+        subtitle: 'Rate us on the app store',
+        icon: SVG.starRating,
+      },
+      {
+        id: '6',
+        title: 'Share app',
+        subtitle: 'Share with friends',
+        icon: SVG.share,
+      },
+      {
+        id: '7',
+        title: 'Terms And Conditions',
+        subtitle: 'Read our terms',
+        icon: SVG.paper,
+      },
+      {
+        id: '8',
+        title: 'Help And Support',
+        subtitle: 'Get help with the app',
+        icon: SVG.help,
+      },
+      {
+        id: '9',
+        title: 'Privacy',
+        subtitle: 'Manage your privacy',
+        icon: SVG.lock,
+      },
+      {
+        id: '10',
+        title: 'App Version',
+        subtitle: 'Version 1.4.0',
+        icon: SVG.about,
+      },
+    ],
   },
 ];

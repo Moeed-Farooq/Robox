@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
     borderRadius: hp(2.5),
     justifyContent: 'center',
     backgroundColor: COLORS.splashBg,
+    flexDirection:'row',
+    gap:hp(2)
   },
 
   iconContainer: {
-    position: 'absolute',
-    left: hp(3),
     justifyContent: 'center',
     alignItems: 'center',
   },

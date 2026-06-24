@@ -10,5 +10,12 @@
 "avatarPrompt":"e.g : Anime-style female character portrait, long flowing silver hair",
 "aiPrompt":"AI Prompt",
 "avatarStyle":"Avatar Style",
-"generateAvatar":"Generate Avatar"
+"generateAvatar":"Generate Avatar",
+"settings":"Settings",
+"dailyRobux":"Daily Robux",
+"startRobux":"Start Robux",
+"playRobuxBlast":"Play Robux Blast",
+"dailyNewRobux":"Daily New Robux",
+"eliteChallenge":"Elite Challenge",
+"testYourKnowledge":"Test your knowledge with our new daily robux quiz"
 }
