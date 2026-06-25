@@ -48,9 +48,12 @@ import userAvatarYellow from './user-avatar-yellow.svg';
 import arrowRight from './arrow-right.svg';
 import mind from './mind.svg';
 import goBack from './go-back.svg';
+import stopWatch from './stopwatch.svg'
+
 
 export const SVG = {
   mind,
+  stopWatch,
   goBack,
   about,
   arrowRight,

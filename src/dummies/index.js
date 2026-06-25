@@ -220,3 +220,101 @@ export const SETTINGS_SECTIONS = [
     ],
   },
 ];
+
+export const QUIZ_DATA = [
+  {
+    id: 1,
+    question: "What is the official currency used in Roblox?",
+    options: ["Robux", "RoboCoins", "Tickets", "BloxBucks"],
+    correctAnswer: "Robux",
+  },
+  {
+    id: 2,
+    question: "Who created Roblox?",
+    options: [
+      "David Baszucki",
+      "Elon Musk",
+      "Bill Gates",
+      "Mark Zuckerberg",
+    ],
+    correctAnswer: "David Baszucki",
+  },
+  {
+    id: 3,
+    question: "Which programming language is used in Roblox Studio?",
+    options: ["Python", "JavaScript", "Lua", "C++"],
+    correctAnswer: "Lua",
+  },
+  {
+    id: 4,
+    question: "What is the name of the software used to make Roblox games?",
+    options: ["Roblox Creator", "Roblox Studio", "Roblox Engine", "Roblox Build"],
+    correctAnswer: "Roblox Studio",
+  },
+  {
+    id: 5,
+    question: "What is the default name given to any new Roblox user?",
+    options: ["Player", "Robloxian", "Guest", "Noob"],
+    correctAnswer: "Player",
+  },
+  {
+    id: 6,
+    question: "In which popular Roblox game can you adopt pets and build houses?",
+    options: ["Blox Fruits", "Brookhaven", "Adopt Me!", "Piggy"],
+    correctAnswer: "Adopt Me!",
+  },
+  {
+    id: 7,
+    question: "What does 'Obby' stand for in Roblox?",
+    options: ["Object Building", "Obstacle Course", "Obvious Way", "Online Battle"],
+    correctAnswer: "Obstacle Course",
+  },
+  {
+    id: 8,
+    question: "What year was Roblox officially released?",
+    options: ["2004", "2006", "2010", "2015"],
+    correctAnswer: "2006",
+  },
+  {
+    id: 9,
+    question: "What is the name of the character customization model in Roblox?",
+    options: ["Player", "Avatar", "Skin", "Actor"],
+    correctAnswer: "Avatar",
+  },
+  {
+    id: 10,
+    question: "Which Roblox game is focused on living and roleplaying in a big city?",
+    options: ["Brookhaven RP", "Murder Mystery 2", "BedWars", "Arsenal"],
+    correctAnswer: "Brookhaven RP",
+  },
+  {
+    id: 11,
+    question: "What icon is famously used as the logo of Roblox?",
+    options: ["A red square with a hole", "A blue circle", "A yellow star", "A green triangle"],
+    correctAnswer: "A red square with a hole",
+  },
+  {
+    id: 12,
+    question: "What color is the standard Roblox 'Noob' character's torso?",
+    options: ["Green", "Blue", "Yellow", "Red"],
+    correctAnswer: "Blue",
+  },
+  {
+    id: 13,
+    question: "Can you play Roblox on mobile phones?",
+    options: ["Yes, Android & iOS", "Only iOS", "Only Android", "No"],
+    correctAnswer: "Yes, Android & iOS",
+  },
+  {
+    id: 14,
+    question: "What are items that give you special perks inside a specific Roblox game called?",
+    options: ["Gamepasses", "Robux Premium", "Badges", "Admin Tools"],
+    correctAnswer: "Gamepasses",
+  },
+  {
+    id: 15,
+    question: "What was Roblox's original name during its early development stage?",
+    options: ["BlockWorld", "DynaBlocks", "BuildCraft", "LegoSim"],
+    correctAnswer: "DynaBlocks",
+  },
+];
