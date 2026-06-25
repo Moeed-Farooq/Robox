@@ -3,6 +3,7 @@
 "welconeBack":"Welcome back!",
 "dailyRewards":"Daily Rewards",
 "robuxFeatures":"Robux Features",
+"robuxCodes":"Robux Codes",
 "games":"Games",
 "avatarGeneration":"Avatar Generation",
 "createAvatar":"Create amazing Robux avatars with AI",
@@ -19,5 +20,10 @@
 "eliteChallenge":"Elite Challenge",
 "testYourKnowledge":"Test your knowledge with our new daily robux quiz",
 "quizCompleted":"Quiz Completed",
-"totalScore":"Total Score"
+"totalScore":"Total Score",
+"settingsintro":"Welcome to Robux Points .Your privacy isimportant to us. This Privacy Policy explains how we collect, use, and protect your personal information when you use the App.",
+"privacyPolicy":"Privacy Policy",
+"termsAndConditions":"Terms And Conditions",
+"termsAndConditionsTitle":"Welcome to Robux Points!\nBy downloading or using the App, you agree to these Terms of Service. Please read them carefully before using Robux Points."
+
 }

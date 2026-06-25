@@ -34,7 +34,6 @@ const FreeDailyRobuxScreen = () => {
           />
         </View>
       </View>
-
       <View style={styles.mindIconContainer}>
         <View style={styles.insideMindContainer}>
           <SvgIcon icon={SVG.mind} width={hp(4)} height={hp(4)} />

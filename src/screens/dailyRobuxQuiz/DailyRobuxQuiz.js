@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
   },
 
   questionText: {
-    color: COLORS.black,
+    color: COLORS.black ,
     fontSize: hp(3),
     textAlign: 'center',
     fontFamily: FONT.bold,

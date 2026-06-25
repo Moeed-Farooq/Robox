@@ -43,7 +43,7 @@ export const COLORS = {
   pink: '#FF4D91',
   orange: '#FF7A59',
   green: '#3DDC97',
-  darkGreen: '#1eff00',
+  darkGreen: '#138a03',
   lightGreen: '#59ffb7',
   splashBg: '#6C63FF',
   primary: '#6C63FF',
@@ -57,6 +57,7 @@ export const COLORS = {
   gradientEnd: '#FF7A59',
   gradientMid: '#4E5BFF',
   mutedText: '#9AA4C7',
+  darkWhite: '#ffffff',
 };
 
 export const FONT = {
