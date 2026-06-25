@@ -20,27 +20,55 @@ import croessSwords from './crossed-swords.svg';
 import manRunnung from './man-running.svg';
 import crown from './crown.svg';
 import play from './play.svg';
-import userAvatarBlack from './user-avatar-black.svg'
-import userAvatarWhite from './user-avatar-white.svg'
-import starsBlack from './stars-black.svg'
-import starsWhite from './stars-white.svg'
-import smileBlack from './smile-black.svg'
-import smileWhite from './smile-white.svg'
-import cameraBlack from './camera-black.svg'
-import cameraWhite from './camera-white.svg'
-import lighteningblack from './lightning-black.svg'
-import lighteningWhite from './lightning-white.svg'
-import magicBlack from './magic-black.svg'
-import magicWhite from './magic-white.svg'
-import brain from './brain.svg'
-import message from './message.svg'
+import userAvatarBlack from './user-avatar-black.svg';
+import userAvatarWhite from './user-avatar-white.svg';
+import starsBlack from './stars-black.svg';
+import starsWhite from './stars-white.svg';
+import smileBlack from './smile-black.svg';
+import smileWhite from './smile-white.svg';
+import cameraBlack from './camera-black.svg';
+import cameraWhite from './camera-white.svg';
+import lighteningblack from './lightning-black.svg';
+import lighteningWhite from './lightning-white.svg';
+import magicBlack from './magic-black.svg';
+import magicWhite from './magic-white.svg';
+import brain from './brain.svg';
+import message from './message.svg';
+import bell from './bell.svg';
+import moon from './moon.svg';
+import speaker from './speaker.svg';
+import mobileVibration from './mobile-vibration.svg';
+import starRating from './star-rating.svg';
+import share from './share.svg';
+import lock from './lock.svg';
+import paper from './paper.svg';
+import help from './help.svg';
+import about from './about.svg';
+import userAvatarYellow from './user-avatar-yellow.svg';
+import arrowRight from './arrow-right.svg';
+import mind from './mind.svg';
+import goBack from './go-back.svg';
 
 export const SVG = {
+  mind,
+  goBack,
+  about,
+  arrowRight,
+  bell,
+  userAvatarYellow,
   brain,
   message,
+  starRating,
   userAvatarBlack,
+  moon,
+  share,
+  help,
   userAvatarWhite,
+  lock,
+  paper,
   starsBlack,
+  speaker,
+  mobileVibration,
   starsWhite,
   smileBlack,
   smileWhite,

@@ -42,6 +42,7 @@ export const COLORS = {
   pink: '#FF4D91',
   orange: '#FF7A59',
   green: '#3DDC97',
+  lightGreen: '#59ffb7',
   splashBg: '#6C63FF',
   primary: '#6C63FF',
   secondary: '#1E2340',
