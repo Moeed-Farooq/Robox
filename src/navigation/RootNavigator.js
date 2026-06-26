@@ -22,6 +22,7 @@ const RootNavigator = () => {
         <Stack.Screen name={SCREEN.ROBUX_CODES_SCREEN} component={ui.RobuxCodesScreen} />
         <Stack.Screen name={SCREEN.TERMS_AND_CONDITIONS_SCREEN} component={ui.TermsAndConditionsScreen} />
         <Stack.Screen name={SCREEN.PRIVACY_SCREEN} component={ui.PrivacyScreen} />
+        <Stack.Screen name={SCREEN.WORD_QUIZ_SCREEN} component={ui.WordQuizScreen} />
         
       </Stack.Navigator>
     </NavigationContainer>

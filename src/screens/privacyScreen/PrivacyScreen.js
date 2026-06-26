@@ -26,16 +26,11 @@ const PrivacyScreen = () => {
         >
           <SvgIcon icon={SVG.goBack} height={hp(3.5)} width={hp(3.5)} />
         </TouchableOpacity>
-
         <Label style={styles.titleText}>{en.privacyPolicy}</Label>
-
         <View style={styles.placeholder} />
       </View>
-
       <Label style={styles.introText}>{en.settingsintro}</Label>
-
       <View style={styles.divider} />
-
       {PRIVACY_DATA.map(section => (
         <View key={section.id} style={styles.sectionContainer}>
           <View style={styles.sectionHeader}>

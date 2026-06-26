@@ -8,6 +8,7 @@ import DailyRobuxQuiz from './dailyRobuxQuiz';
 import RobuxCodesScreen from './robuxCodesScreen'
 import TermsAndConditionsScreen from './termsAndConditionsScreen'
 import PrivacyScreen from './privacyScreen'
+import WordQuizScreen from './wordQuizScreen'
 
 export {
   HomeScreen,
@@ -19,5 +20,6 @@ export {
   DailyRobuxQuiz,
   RobuxCodesScreen,
   TermsAndConditionsScreen,
-  PrivacyScreen
+  PrivacyScreen,
+  WordQuizScreen
 };
