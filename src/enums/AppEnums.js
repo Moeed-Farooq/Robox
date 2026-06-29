@@ -10,6 +10,8 @@ export const SCREEN = {
   TERMS_AND_CONDITIONS_SCREEN: 'TermsAndConditionsScreen',
   PRIVACY_SCREEN: 'PrivacyScreen',
   WORD_QUIZ_SCREEN: 'WordQuizScreen',
+  RBX_CALCULATOR_SCREEN: 'RbxCalculatorScreen',
+  BLOCK_PUZZLE_SCREEN: 'BlockPuzzleScreen',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',

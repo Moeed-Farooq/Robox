@@ -9,6 +9,8 @@ import RobuxCodesScreen from './robuxCodesScreen'
 import TermsAndConditionsScreen from './termsAndConditionsScreen'
 import PrivacyScreen from './privacyScreen'
 import WordQuizScreen from './wordQuizScreen'
+import RbxCalculatorScreen from './rbxCalculatorScreen'
+import BlockPuzzleScreen from './blockPuzzleScreen'
 
 export {
   HomeScreen,
@@ -21,5 +23,7 @@ export {
   RobuxCodesScreen,
   TermsAndConditionsScreen,
   PrivacyScreen,
-  WordQuizScreen
+  WordQuizScreen,
+  RbxCalculatorScreen,
+  BlockPuzzleScreen
 };
