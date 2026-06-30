@@ -11,6 +11,7 @@ import PrivacyScreen from './privacyScreen'
 import WordQuizScreen from './wordQuizScreen'
 import RbxCalculatorScreen from './rbxCalculatorScreen'
 import BlockPuzzleScreen from './blockPuzzleScreen'
+import SpinWheelScreen from './spinWheelScreen'
 
 export {
   HomeScreen,
@@ -25,5 +26,6 @@ export {
   PrivacyScreen,
   WordQuizScreen,
   RbxCalculatorScreen,
-  BlockPuzzleScreen
+  BlockPuzzleScreen,
+  SpinWheelScreen
 };

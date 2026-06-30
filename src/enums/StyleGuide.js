@@ -61,19 +61,14 @@ export const COLORS = {
   mutedText: '#9AA4C7',
   darkWhite: '#ffffff',
   darkPurple:'#40304D',
-  // === NEW CONTRAST COLORS FOR THEME (Matching with #6C63FF) ===
-  contrastYellow: '#FFE600',       // High-contrast electric yellow (attention-grabbing alerts/badges)
-  contrastMint: '#26DF9C',         // Fresh mint green for success/positive actions against purple
-  contrastCoral: '#FF5A5F',        // Soft bright coral for warm highlights
-  contrastCyan: '#00F0FF',         // Cyberpunk style cyan/neon blue (perfect for secondary buttons/icons)
-  contrastOrange: '#FF9F43',       // Warm contrast orange
-  
-  // Muted/Pastel versions for backgrounds & cards
-  bgPurpleSoft: '#F0EFFF',         // Very light purple tint for light-mode cards
-  bgPurpleDark: '#13112E',         // Deep midnight purple for pure dark-mode app background
-  
-  // Text variations that pop on splashBg/Primary background
-  textOnPrimary: '#FFFFFF',        // Pure white for high legibility on primary buttons
+  contrastYellow: '#FFE600',       
+  contrastMint: '#26DF9C',        
+  contrastCoral: '#FF5A5F',       
+  contrastCyan: '#00F0FF',      
+  contrastOrange: '#FF9F43',      
+  bgPurpleSoft: '#F0EFFF',       
+  bgPurpleDark: '#13112E',
+  textOnPrimary: '#FFFFFF',       
   textOnPrimaryMuted: '#D1CFFF',
 };
 

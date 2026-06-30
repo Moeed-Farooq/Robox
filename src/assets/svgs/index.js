@@ -57,10 +57,32 @@ import heartBroken from './heart-broken.svg';
 import trophy from './trophy.svg';
 import bulb from './bulb.svg';
 import undo from './undo.svg';
-import restart from './restart.svg'
-import selected from './selected.svg'
+import restart from './restart.svg';
+import selected from './selected.svg';
+import shineWheel from './shineWheel.svg';
+import freeSpinWheel from './freeSpinWheel.svg';
+import starWheel from './starWheel.svg';
+import jackpotWheel from './jackpotWheel.svg';
+import megaWheel from './megaWheel.svg';
+import dollarWheel from './dollarWheel.svg';
+import rupeeWheel from './rupeeWheel.svg';
+import diamondWheel from './diamondWheel.svg';
+import spin from './spin.svg'
+import partyPopper from './party-popper.svg'
+import stats from './stats.svg'
 
 export const SVG = {
+  stats,
+  partyPopper,
+  spin,
+  shineWheel,
+  freeSpinWheel,
+  starWheel,
+  jackpotWheel,
+  megaWheel,
+  dollarWheel,
+  rupeeWheel,
+  diamondWheel,
   selected,
   restart,
   bulb,

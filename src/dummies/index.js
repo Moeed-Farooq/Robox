@@ -53,7 +53,7 @@ export const RobuxFeaturesData = [
   { id: 3, title: 'Wordy Robux', screen: SCREEN.WORD_QUIZ_SCREEN },
   { id: 4, title: 'RBX Calculator', screen: SCREEN.RBX_CALCULATOR_SCREEN },
   { id: 5, title: 'Block Puzzle', screen: SCREEN.BLOCK_PUZZLE_SCREEN },
-  { id: 6, title: 'Spin Wheel', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 6, title: 'Spin Wheel', screen: SCREEN.SPIN_WHEEL_SCREEN },
 ];
 
 export const GAMES_DATA = [
@@ -858,34 +858,98 @@ export const CONVERSION_TYPES = [
 
 export const BLOCK_SHAPES = [
   [[1]],
-
   [[1, 1]],
-
   [[1], [1]],
-
-  [
-    [1, 1],
-    [1, 1],
-  ],
-
+  [[1, 1], [1, 1]],
   [[1, 1, 1]],
-
   [[1], [1], [1]],
-
-  [
-    [1, 0],
-    [1, 1],
-  ],
-
-  [
-    [0, 1],
-    [1, 1],
-  ],
-
-  [
-    [1, 1, 1],
-    [0, 1, 0],
-  ],
+  [[1, 0], [1, 1]],
+  [[0, 1], [1, 1]],
+  [[1, 1], [1, 0]],
+  [[1, 1], [0, 1]],
+  [[1, 1, 1], [0, 1, 0]],
+  [[0, 1, 0], [1, 1, 1]],
 ];
 
-export const SHAPE_COLORS = ['#c9b8bc', '#FFBB00', '#dbedff', '#43bdf5', '#ff9557'];
+export const SHAPE_COLORS = [
+  '#c9b8bc',
+  '#FFBB00',
+  '#dbedff',
+  '#43bdf5',
+  '#ff9557',
+];
+
+export const SPIN_REWARDS = [
+  {
+    id: 1,
+    title: 'Jackpot',
+    icon: SVG.jackpotWheel,
+    color: '#E74C3C',
+    reward: 2500,
+    rewardType: 'Robux',
+    rarity: 'Rare',
+  },
+  {
+    id: 2,
+    title: '500',
+    icon: SVG.dollarWheel,
+    color:COLORS.accent,
+    reward: 1000,
+    rewardType: 'Robux',
+    rarity: 'Common',
+  },
+  {
+    id: 3,
+    title: '1000',
+    icon: SVG.diamondWheel,
+    color: '#D48A3A',
+    reward: 500,
+    rewardType: 'Robux',
+    rarity: 'Common',
+  },
+  {
+    id: 4,
+    title: '750',
+    icon: SVG.rupeeWheel,
+    color: '#4CAF50',
+    reward: 25000,
+    rewardType: 'Robux',
+    rarity: 'Rare',
+  },
+  {
+    id: 5,
+    title: '1500',
+    icon: SVG.shineWheel,
+    color: '#F39C12',
+    reward: 15000,
+    rewardType: 'Robux',
+    rarity: 'Epic',
+  },
+  {
+    id: 6,
+    title: 'Mega\nBonus',
+    icon: SVG.megaWheel,
+    color: '#1E88E5',
+    reward: 1500,
+    rewardType: 'Robux',
+    rarity: 'Common',
+  },
+  {
+    id: 7,
+    title: 'Free\nSpin',
+    icon: SVG.freeSpinWheel,
+    color: '#D4C000',
+    reward: 50000,
+    rewardType: 'Robux',
+    rarity: 'Legendary',
+  },
+  {
+    id: 8,
+    title: '2500',
+    icon:SVG.starWheel,
+    color: '#B23BD4',
+    reward: 750,
+    rewardType: 'Robux',
+    rarity: 'Common',
+  },
+];
