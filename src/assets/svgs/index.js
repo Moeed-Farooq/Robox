@@ -84,10 +84,26 @@ import target from './target.svg';
 import key from './key.svg';
 import car from './car.svg';
 import policeMan from './policeman.svg';
-import siren from './siren.svg'
-import door from './door.svg'
+import siren from './siren.svg';
+import door from './door.svg';
+import download from './download.svg';
+import tick from './tick.svg';
+import cross from './cross.svg';
+import search from './search.svg';
+import crossSmall from './cross-small.svg';
+import heartOutline from './heart-outline.svg';
+import heartFilled from './heart-filled.svg';
+import premium from './premium.svg'
 
 export const SVG = {
+  premium,
+  heartOutline,
+  heartFilled,
+  crossSmall,
+  search,
+  cross,
+  tick,
+  download,
   door,
   siren,
   car,

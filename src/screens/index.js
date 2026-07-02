@@ -5,15 +5,17 @@ import SettingsScreen from './settingsScreen';
 import SplashScreen from './splashScreen';
 import FreeDailyRobuxScreen from './freeDailyRobuxScreen';
 import DailyRobuxQuiz from './dailyRobuxQuiz';
-import RobuxCodesScreen from './robuxCodesScreen'
-import TermsAndConditionsScreen from './termsAndConditionsScreen'
-import PrivacyScreen from './privacyScreen'
-import WordQuizScreen from './wordQuizScreen'
-import RbxCalculatorScreen from './rbxCalculatorScreen'
-import BlockPuzzleScreen from './blockPuzzleScreen'
-import SpinWheelScreen from './spinWheelScreen'
-import BloxFruitsGame from './bloxFruitsGame'
-import JailBreakGame from './jailBreakGame'
+import RobuxCodesScreen from './robuxCodesScreen';
+import TermsAndConditionsScreen from './termsAndConditionsScreen';
+import PrivacyScreen from './privacyScreen';
+import WordQuizScreen from './wordQuizScreen';
+import RbxCalculatorScreen from './rbxCalculatorScreen';
+import BlockPuzzleScreen from './blockPuzzleScreen';
+import SpinWheelScreen from './spinWheelScreen';
+import BloxFruitsGame from './bloxFruitsGame';
+import JailBreakGame from './jailBreakGame';
+import FreeEmotesScreen from './freeEmotesScreen';
+import RobuxSkinsScreen from './robuxSkinsScreen'
 
 export {
   HomeScreen,
@@ -31,5 +33,7 @@ export {
   BlockPuzzleScreen,
   SpinWheelScreen,
   BloxFruitsGame,
-  JailBreakGame
+  JailBreakGame,
+  FreeEmotesScreen,
+  RobuxSkinsScreen
 };

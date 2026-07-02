@@ -43,13 +43,13 @@ export const DailyReward = [
     src: IMAGES.FREE_EMOTE,
     reward: 'Elite',
     color: COLORS.pink,
-    screen: '',
+    screen: SCREEN.FREE_EMOTES_SCREEN,
   },
 ];
 
 export const RobuxFeaturesData = [
   { id: 1, title: 'Robux Codes', screen: SCREEN.ROBUX_CODES_SCREEN },
-  { id: 2, title: 'Robux Skins', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 2, title: 'Robux Skins', screen: SCREEN.ROBUX_SKINS_SCREEN },
   { id: 3, title: 'Wordy Robux', screen: SCREEN.WORD_QUIZ_SCREEN },
   { id: 4, title: 'RBX Calculator', screen: SCREEN.RBX_CALCULATOR_SCREEN },
   { id: 5, title: 'Block Puzzle', screen: SCREEN.BLOCK_PUZZLE_SCREEN },
@@ -988,4 +988,106 @@ export const FRUITS_DATA = [
   { id: 6, name: 'Strawberry', icon: SVG.strawberry },
   { id: 7, name: 'Pineapple', icon: SVG.pineapple },
   { id: 8, name: 'Mango', icon: SVG.mango },
+];
+
+export const FREE_EMOTES_TABS = [
+  { id: '1', title: 'All', value: 'all' },
+  { id: '2', title: 'Aesthetic', value: 'aesthetic' },
+  { id: '3', title: 'Kawaii', value: 'kawaii' },
+  { id: '4', title: 'Emo', value: 'emo' },
+  { id: '5', title: 'Y2K', value: 'y2k' },
+  { id: '6', title: 'Gothic', value: 'gothic' },
+  { id: '7', title: 'Anime', value: 'anime' },
+  { id: '8', title: 'Cute', value: 'cute' },
+  { id: '9', title: 'Dark', value: 'dark' },
+  { id: '10', title: 'Pastel', value: 'pastel' },
+  { id: '11', title: 'Vintage', value: 'vintage' },
+  { id: '12', title: 'Modern', value: 'modern' },
+  { id: '13', title: 'Retro', value: 'retro' },
+  { id: '14', title: 'Fiber', value: 'fiber' },
+  { id: '15', title: 'Fantasy', value: 'fantasy' },
+];
+export const ROBUX_SKINS_SCREEN_TABS = [
+  { id: '1', title: 'All', value: 'all' },
+  { id: '2', title: 'Aesthetic', value: 'aesthetic' },
+  { id: '3', title: 'Kawaii', value: 'kawaii' },
+  { id: '4', title: 'Emo', value: 'emo' },
+  { id: '5', title: 'Y2K', value: 'y2k' },
+  { id: '6', title: 'Street', value: 'Street' },
+  { id: '7', title: 'Sporty', value: 'Sporty' },
+  { id: '8', title: 'Royal', value: 'Royal' },
+  { id: '9', title: 'Ninja', value: 'Ninja' },
+  { id: '10', title: 'Casual', value: 'Casual' },
+  { id: '11', title: 'Formal', value: 'Formal' },
+  { id: '12', title: 'Halloween', value: 'Halloween' },
+  { id: '13', title: 'Xmas', value: 'Xmas' },
+];
+
+export const ITEMS_DATA = [
+  {
+    id: '1',
+    title: 'Roblox Baseball Cap',
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=500&auto=format&fit=crop',
+  },
+  {
+    id: '2',
+    title: 'Medieval Hood of Mystery',
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?q=80&w=500&auto=format&fit=crop',
+  },
+  {
+    id: '3',
+    title: "ROBLOX 'R' Baseball Cap",
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop',
+  },
+  {
+    id: '4',
+    title: 'Robox Box Core',
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=500&auto=format&fit=crop',
+  },
+];
+export const SKINS_DATA = [
+  {
+    id: '1',
+    title: 'Roblox Baseball Cap',
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=500&auto=format&fit=crop',
+  },
+  {
+    id: '2',
+    title: 'Medieval Hood of Mystery',
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?q=80&w=500&auto=format&fit=crop',
+  },
+  {
+    id: '3',
+    title: "ROBLOX 'R' Baseball Cap",
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=500&auto=format&fit=crop',
+  },
+  {
+    id: '4',
+    title: 'Robox Box Core',
+    category: 'all',
+    price: '0',
+    image:
+      'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=500&auto=format&fit=crop',
+  },
 ];

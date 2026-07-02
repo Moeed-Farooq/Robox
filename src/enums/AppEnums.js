@@ -15,6 +15,8 @@ export const SCREEN = {
   SPIN_WHEEL_SCREEN: 'SpinWheelScreen',
   BLOX_FRUITS_GAME: 'BloxFruitsGame',
   JAIL_BREAK_GAME: 'JailBreakGame',
+  FREE_EMOTES_SCREEN: 'FreeEmotesScreen',
+  ROBUX_SKINS_SCREEN: 'RobuxSkinsScreen',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',

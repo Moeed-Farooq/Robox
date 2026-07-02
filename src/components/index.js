@@ -6,6 +6,9 @@ import SettingsItem from './settingsItem';
 import RobuxCodesCards from './robuxCodesCards';
 import ConversionCard from './conversionCard';
 import FruitCard from './fruitCard';
+import FreeEmotesCards from './freeEmotesCards';
+import RobuxSkinsCard from './robuxSkinsCard';
+import GeneratedAvatarCard from './generatedAvatarCard';
 
 export {
   DailyRewardsCards,
@@ -16,4 +19,7 @@ export {
   RobuxCodesCards,
   ConversionCard,
   FruitCard,
+  FreeEmotesCards,
+  RobuxSkinsCard,
+  GeneratedAvatarCard,
 };

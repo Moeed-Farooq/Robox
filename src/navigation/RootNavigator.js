@@ -28,6 +28,8 @@ const RootNavigator = () => {
         <Stack.Screen name={SCREEN.SPIN_WHEEL_SCREEN} component={ui.SpinWheelScreen} />
         <Stack.Screen name={SCREEN.BLOX_FRUITS_GAME} component={ui.BloxFruitsGame} />
         <Stack.Screen name={SCREEN.JAIL_BREAK_GAME} component={ui.JailBreakGame} />
+        <Stack.Screen name={SCREEN.FREE_EMOTES_SCREEN} component={ui.FreeEmotesScreen} />
+        <Stack.Screen name={SCREEN.ROBUX_SKINS_SCREEN} component={ui.RobuxSkinsScreen} />
         
       </Stack.Navigator>
     </NavigationContainer>
