@@ -12,6 +12,8 @@ import WordQuizScreen from './wordQuizScreen'
 import RbxCalculatorScreen from './rbxCalculatorScreen'
 import BlockPuzzleScreen from './blockPuzzleScreen'
 import SpinWheelScreen from './spinWheelScreen'
+import BloxFruitsGame from './bloxFruitsGame'
+import JailBreakGame from './jailBreakGame'
 
 export {
   HomeScreen,
@@ -27,5 +29,7 @@ export {
   WordQuizScreen,
   RbxCalculatorScreen,
   BlockPuzzleScreen,
-  SpinWheelScreen
+  SpinWheelScreen,
+  BloxFruitsGame,
+  JailBreakGame
 };

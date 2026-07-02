@@ -71,6 +71,7 @@ export const GAMES_DATA = [
         subDetail: 'Great for\nbeginners',
         bgcolor: '#4CAF50',
         icon: SVG.pirateFlag,
+        screen: SCREEN.BLOX_FRUITS_GAME,
       },
       {
         id: '2',
@@ -80,6 +81,7 @@ export const GAMES_DATA = [
         subDetail: 'Perfect\nfor families',
         bgcolor: '#e95889',
         icon: SVG.paw,
+        screen: SCREEN.BLOX_FRUITS_GAME,
       },
       {
         id: '3',
@@ -89,6 +91,7 @@ export const GAMES_DATA = [
         subDetail: 'Fun\nobstacles',
         bgcolor: '#FF5722',
         icon: SVG.tower,
+        screen: SCREEN.BLOX_FRUITS_GAME,
       },
     ],
   },
@@ -105,6 +108,7 @@ export const GAMES_DATA = [
         level: 'Medium',
         subDetail: 'Action-\npacked',
         bgcolor: '#2196F3',
+        screen: SCREEN.JAIL_BREAK_GAME,
         icon: SVG.policeCar,
       },
       {
@@ -860,15 +864,36 @@ export const BLOCK_SHAPES = [
   [[1]],
   [[1, 1]],
   [[1], [1]],
-  [[1, 1], [1, 1]],
+  [
+    [1, 1],
+    [1, 1],
+  ],
   [[1, 1, 1]],
   [[1], [1], [1]],
-  [[1, 0], [1, 1]],
-  [[0, 1], [1, 1]],
-  [[1, 1], [1, 0]],
-  [[1, 1], [0, 1]],
-  [[1, 1, 1], [0, 1, 0]],
-  [[0, 1, 0], [1, 1, 1]],
+  [
+    [1, 0],
+    [1, 1],
+  ],
+  [
+    [0, 1],
+    [1, 1],
+  ],
+  [
+    [1, 1],
+    [1, 0],
+  ],
+  [
+    [1, 1],
+    [0, 1],
+  ],
+  [
+    [1, 1, 1],
+    [0, 1, 0],
+  ],
+  [
+    [0, 1, 0],
+    [1, 1, 1],
+  ],
 ];
 
 export const SHAPE_COLORS = [
@@ -893,7 +918,7 @@ export const SPIN_REWARDS = [
     id: 2,
     title: '500',
     icon: SVG.dollarWheel,
-    color:COLORS.accent,
+    color: COLORS.accent,
     reward: 1000,
     rewardType: 'Robux',
     rarity: 'Common',
@@ -946,10 +971,21 @@ export const SPIN_REWARDS = [
   {
     id: 8,
     title: '2500',
-    icon:SVG.starWheel,
+    icon: SVG.starWheel,
     color: '#B23BD4',
     reward: 750,
     rewardType: 'Robux',
     rarity: 'Common',
   },
+];
+
+export const FRUITS_DATA = [
+  { id: 1, name: 'Apple', icon: SVG.apple },
+  { id: 2, name: 'Banana', icon: SVG.banana },
+  { id: 3, name: 'Orange', icon: SVG.orange },
+  { id: 4, name: 'Grapes', icon: SVG.grapes },
+  { id: 5, name: 'Watermelon', icon: SVG.watermelon },
+  { id: 6, name: 'Strawberry', icon: SVG.strawberry },
+  { id: 7, name: 'Pineapple', icon: SVG.pineapple },
+  { id: 8, name: 'Mango', icon: SVG.mango },
 ];

@@ -1,3 +1,5 @@
+import { FRUITS_DATA } from "../dummies";
+
 export const hexToRgba = (hex, opacity = 1) => {
   const cleanHex = hex.replace('#', '');
 
@@ -9,7 +11,6 @@ export const hexToRgba = (hex, opacity = 1) => {
 
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 };
-
 
 const ALPHABETS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -45,3 +46,14 @@ export const formatTime = seconds => {
   return `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
 };
 
+export const generateGameCards = () => {
+  const pairs = [...FRUITS_DATA, ...FRUITS_DATA];
+  return pairs
+    .map((fruit, index) => ({
+      ...fruit,
+      uniqueId: `${fruit.id}-${index}-${Math.random()}`, // Unique key for rendering
+      isFlipped: false,
+      isMatched: false,
+    }))
+    .sort(() => Math.random() - 0.5);
+};
