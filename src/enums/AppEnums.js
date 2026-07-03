@@ -12,6 +12,7 @@ export const SCREEN = {
   WORD_QUIZ_SCREEN: 'WordQuizScreen',
   RBX_CALCULATOR_SCREEN: 'RbxCalculatorScreen',
   BLOCK_PUZZLE_SCREEN: 'BlockPuzzleScreen',
+  SPIN_WHEEL_SCREEN: 'SpinWheelScreen',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',

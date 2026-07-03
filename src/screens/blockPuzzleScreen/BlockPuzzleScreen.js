@@ -11,7 +11,6 @@ import Label from '../../common';
 import { en } from '../../languages';
 import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
-import { BLOCK_SHAPES, SHAPE_COLORS } from '../../dummies';
 import { useNavigation } from '@react-navigation/native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -21,6 +20,7 @@ import Animated, {
   useAnimatedRef,
   runOnJS,
 } from 'react-native-reanimated';
+import { BLOCK_SHAPES, SHAPE_COLORS } from '../../dummies';
 
 const BlockPuzzleScreen = () => {
   const BOARD_SIZE = 8;
@@ -42,9 +42,7 @@ const BlockPuzzleScreen = () => {
   const getRandomShapes = () => {
     return Array.from({ length: 3 }, () => {
       const index = Math.floor(Math.random() * BLOCK_SHAPES.length);
-      const randomColor =
-        SHAPE_COLORS[Math.floor(Math.random() * SHAPE_COLORS.length)];
-
+      const randomColor = SHAPE_COLORS[Math.floor(Math.random() * SHAPE_COLORS.length)];
       return {
         matrix: BLOCK_SHAPES[index],
         color: randomColor,
@@ -52,7 +50,7 @@ const BlockPuzzleScreen = () => {
     });
   };
 
-  const generateNewShapes = boardToUse => {
+  const generateNewShapes = (boardToUse) => {
     const nextShapes = getRandomShapes();
     setCurrentShapes(nextShapes);
     checkGameOver(boardToUse, nextShapes);
@@ -63,39 +61,53 @@ const BlockPuzzleScreen = () => {
     const initialShapes = getRandomShapes();
     setPlacedBoard(initialBoard);
     setCurrentShapes(initialShapes);
-    checkGameOver(initialBoard, initialShapes);
+    setTimeout(() => {
+      checkGameOver(initialBoard, initialShapes);
+    }, 150);
   }, []);
 
-  const checkGameOver = (board, shapes) => {
-    const activeShapes = shapes.filter(Boolean);
+  // Strict Async-Safe Game Over Checker
+  const checkGameOver = (currentBoardState, shapesArray) => {
+    const activeShapes = shapesArray.filter(Boolean);
+    
     if (activeShapes.length === 0) return;
+
+    let atLeastOneShapeCanFit = false;
 
     for (let shapeData of activeShapes) {
       const shape = shapeData.matrix;
       const shapeRows = shape.length;
       const shapeCols = shape[0].length;
 
+      // Pure board par iteration
       for (let r = 0; r <= BOARD_SIZE - shapeRows; r++) {
         for (let c = 0; c <= BOARD_SIZE - shapeCols; c++) {
-          let canFit = true;
+          let canFitAtThisSpot = true;
 
           for (let sr = 0; sr < shapeRows; sr++) {
             for (let sc = 0; sc < shapeCols; sc++) {
-              if (shape[sr][sc] === 1 && board[r + sr][c + sc] === 1) {
-                canFit = false;
-                break;
+              if (shape[sr][sc] === 1) {
+                if (currentBoardState[r + sr][c + sc] !== 0) {
+                  canFitAtThisSpot = false;
+                  break;
+                }
               }
             }
-            if (!canFit) break;
+            if (!canFitAtThisSpot) break;
           }
 
-          if (canFit) {
-            return;
+          if (canFitAtThisSpot) {
+            atLeastOneShapeCanFit = true;
+            break;
           }
         }
+        if (atLeastOneShapeCanFit) break;
       }
     }
-    setIsGameOver(true);
+
+    if (!atLeastOneShapeCanFit) {
+      setIsGameOver(true);
+    }
   };
 
   const checkAndClearLines = currentBoard => {
@@ -103,7 +115,7 @@ const BlockPuzzleScreen = () => {
     let colsToClear = [];
 
     for (let r = 0; r < BOARD_SIZE; r++) {
-      if (currentBoard[r].every(cell => cell === 1)) {
+      if (currentBoard[r].every(cell => cell !== 0)) {
         rowsToClear.push(r);
       }
     }
@@ -111,7 +123,7 @@ const BlockPuzzleScreen = () => {
     for (let c = 0; c < BOARD_SIZE; c++) {
       let isColFull = true;
       for (let r = 0; r < BOARD_SIZE; r++) {
-        if (currentBoard[r][c] !== 1) {
+        if (currentBoard[r][c] === 0) {
           isColFull = false;
           break;
         }
@@ -132,7 +144,6 @@ const BlockPuzzleScreen = () => {
 
       const clearedLines = rowsToClear.length + colsToClear.length;
       setScore(prev => prev + clearedLines * 10);
-      setPlacedBoard(nextBoard);
     }
 
     return nextBoard;
@@ -165,9 +176,10 @@ const BlockPuzzleScreen = () => {
           targetRow >= BOARD_SIZE ||
           targetCol < 0 ||
           targetCol >= BOARD_SIZE ||
-          placedBoard[targetRow][targetCol] === 1
+          placedBoard[targetRow][targetCol] !== 0
         ) {
           canPlace = false;
+          return;
         }
       });
     });
@@ -177,7 +189,7 @@ const BlockPuzzleScreen = () => {
       shape.forEach((shapeRow, r) => {
         shapeRow.forEach((cell, c) => {
           if (!cell) return;
-          newBoard[row + r][col + c] = 1;
+          newBoard[row + r][col + c] = shapeData.color; 
         });
       });
 
@@ -185,17 +197,18 @@ const BlockPuzzleScreen = () => {
       setPlacedBoard(boardAfterClear);
       setScore(prev => prev + 10);
 
-      const updated = [...currentShapes];
-      updated[index] = null;
-      setCurrentShapes(updated);
+      // Cloned array for direct reference passing
+      const updatedShapes = [...currentShapes];
+      updatedShapes[index] = null;
+      setCurrentShapes(updatedShapes);
 
-      const remaining = updated.filter(Boolean);
+      const remaining = updatedShapes.filter(Boolean);
       if (remaining.length === 0) {
         setTimeout(() => {
           generateNewShapes(boardAfterClear);
         }, 250);
       } else {
-        checkGameOver(boardAfterClear, updated);
+        checkGameOver(boardAfterClear, updatedShapes);
       }
     }
   };
@@ -339,7 +352,7 @@ const BlockPuzzleScreen = () => {
                 key={colIndex}
                 style={[
                   styles.boardCell,
-                  cell === 1 && { backgroundColor: '#4CD964' },
+                  cell !== 0 && { backgroundColor: cell },
                 ]}
               />
             ))}
@@ -480,11 +493,12 @@ const styles = StyleSheet.create({
   },
   popupContainer: {
     width: wp(80),
-    backgroundColor: COLORS.black+HEX_OPACITY[22],
+    backgroundColor: '#332540',
     borderRadius: 24,
     padding: wp(6),
     alignItems: 'center',
     borderWidth: 2,
+    borderColor: '#574368',
   },
   popupTitle: {
     color: COLORS.red,
@@ -500,7 +514,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   popupScoreBox: {
-    backgroundColor: COLORS.black+HEX_OPACITY[22],
+    backgroundColor: '#261A30',
     width: '100%',
     borderRadius: 16,
     paddingVertical: hp(2),

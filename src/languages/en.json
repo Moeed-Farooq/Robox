@@ -1,5 +1,6 @@
 {
   "robuxPoints": "Robux Points",
+  "robux":"ROBUX",
   "welconeBack": "Welcome back!",
   "dailyRewards": "Daily Rewards",
   "robuxFeatures": "Robux Features",
@@ -47,5 +48,11 @@
   "finalScore":"FINAL SCORE",
   "level":"LEVEL",
   "block":"BLOCK",
-  "puzzle":"PUZZLE"
+  "puzzle":"PUZZLE",
+  "spin":"SPIN",
+  "wheel":"WHEEL",
+  "getPremiumRewards":"Get Premium Rewards",
+  "youWon":"YOU WON",
+  "spinAgain":"SPIN AGAIN",
+  "collectReward":"COLLECT REWARD"
 }
