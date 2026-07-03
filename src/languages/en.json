@@ -33,7 +33,30 @@
   "congratulations":"Congratulations",
   "gameCompleted":"You completed the game.",
   "livesLeft":"Lives Left",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   "playAgain":"Play Again",
+  "tryAgain":"Try Again",
+  "caught":"CAUGHT!",
+  "escaped":"ESCAPED!",
+  "jailBreak":"Jail Break",
+  "escapeFromPrison":"Escape from Prison",
+  "escapedSubtext":"You successfully broke out of prison!",
+  "caughtSubtext":"The guards caught you! Better luck next time.",
+
   "questions":"Questions",
   "copy":"Copy",
   "report":"Report",
@@ -54,5 +77,11 @@
   "getPremiumRewards":"Get Premium Rewards",
   "youWon":"YOU WON",
   "spinAgain":"SPIN AGAIN",
-  "collectReward":"COLLECT REWARD"
+  "collectReward":"COLLECT REWARD",
+  "foundAllFruits":"You found all the fruits!",
+  "moves":"Moves",
+  "close":"Close",
+  "victory":"VICTORY!",
+  "memoryChallenge":"Memory Challenge",
+  "bloxFruits":"Blox Fruits"
 }

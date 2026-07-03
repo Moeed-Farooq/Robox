@@ -5,6 +5,7 @@ import AvatarStyleCard from './avatarStyleCard';
 import SettingsItem from './settingsItem';
 import RobuxCodesCards from './robuxCodesCards';
 import ConversionCard from './conversionCard';
+import FruitCard from './fruitCard';
 
 export {
   DailyRewardsCards,
@@ -14,4 +15,5 @@ export {
   SettingsItem,
   RobuxCodesCards,
   ConversionCard,
+  FruitCard,
 };

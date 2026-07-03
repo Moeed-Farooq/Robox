@@ -1,11 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import {
-  Animated,
-  Easing,
-  FlatList,
-  StyleSheet,
-  View,
-} from 'react-native';
+import { Animated, Easing, FlatList, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
@@ -15,7 +9,9 @@ import { SVG } from '../../assets';
 import { DailyReward, RobuxFeaturesData } from '../../dummies';
 import { DailyRewardsCards, RobuxFeaturesCards } from '../../components';
 
-const AnimatedScrollView = Animated.createAnimatedComponent(Animated.ScrollView);
+const AnimatedScrollView = Animated.createAnimatedComponent(
+  Animated.ScrollView,
+);
 
 const HomeScreen = () => {
   const progress = useRef(new Animated.Value(0)).current;
@@ -48,12 +44,14 @@ const HomeScreen = () => {
     <AnimatedScrollView
       style={[styles.mainContainer, screenAnim]}
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.contentContainer}>
+      contentContainerStyle={styles.contentContainer}
+    >
       <LinearGradient
         colors={[COLORS.gradientStart, COLORS.gradientMid, COLORS.gradientEnd]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={styles.heroCard}>
+        style={styles.heroCard}
+      >
         <View style={styles.heroTopRow}>
           <View style={styles.textColumn}>
             <Label style={styles.robuxText}>{en.robuxPoints}</Label>
@@ -61,11 +59,13 @@ const HomeScreen = () => {
           </View>
 
           <View style={styles.controller}>
-            <SvgIcon icon={SVG.gameControllerWhite} width={hp(4)} height={hp(4)} />
+            <SvgIcon
+              icon={SVG.gameControllerWhite}
+              width={hp(4)}
+              height={hp(4)}
+            />
           </View>
         </View>
-
-       
       </LinearGradient>
 
       <View style={styles.sectionWrap}>

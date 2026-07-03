@@ -13,6 +13,8 @@ export const SCREEN = {
   RBX_CALCULATOR_SCREEN: 'RbxCalculatorScreen',
   BLOCK_PUZZLE_SCREEN: 'BlockPuzzleScreen',
   SPIN_WHEEL_SCREEN: 'SpinWheelScreen',
+  BLOX_FRUITS_GAME: 'BloxFruitsGame',
+  JAIL_BREAK_GAME: 'JailBreakGame',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',

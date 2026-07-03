@@ -26,6 +26,8 @@ const RootNavigator = () => {
         <Stack.Screen name={SCREEN.RBX_CALCULATOR_SCREEN} component={ui.RbxCalculatorScreen} />
         <Stack.Screen name={SCREEN.BLOCK_PUZZLE_SCREEN} component={ui.BlockPuzzleScreen} />
         <Stack.Screen name={SCREEN.SPIN_WHEEL_SCREEN} component={ui.SpinWheelScreen} />
+        <Stack.Screen name={SCREEN.BLOX_FRUITS_GAME} component={ui.BloxFruitsGame} />
+        <Stack.Screen name={SCREEN.JAIL_BREAK_GAME} component={ui.JailBreakGame} />
         
       </Stack.Navigator>
     </NavigationContainer>

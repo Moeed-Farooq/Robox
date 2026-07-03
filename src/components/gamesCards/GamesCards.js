@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { use } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
+import { useNavigation } from '@react-navigation/native';
 
 const GamesCards = ({ item }) => {
   const levelColors = {
@@ -22,6 +23,7 @@ const GamesCards = ({ item }) => {
   };
 
   const currentLevelColor = levelColors[item.level];
+  const navigation = useNavigation();
   return (
     <View style={styles.card}>
       <View style={[styles.iconContainer, { backgroundColor: item.bgcolor }]}>
@@ -49,7 +51,7 @@ const GamesCards = ({ item }) => {
         </View>
       </View>
 
-      <TouchableOpacity activeOpacity={0.8} style={styles.playButton}>
+      <TouchableOpacity activeOpacity={0.8} style={styles.playButton} onPress={() => navigation.navigate(item.screen)}>
         <SvgIcon icon={SVG.play} width={hp(1.8)} height={hp(1.8)} />
       </TouchableOpacity>
     </View>

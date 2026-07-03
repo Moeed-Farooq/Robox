@@ -67,11 +67,43 @@ import megaWheel from './megaWheel.svg';
 import dollarWheel from './dollarWheel.svg';
 import rupeeWheel from './rupeeWheel.svg';
 import diamondWheel from './diamondWheel.svg';
-import spin from './spin.svg'
-import partyPopper from './party-popper.svg'
-import stats from './stats.svg'
+import spin from './spin.svg';
+import partyPopper from './party-popper.svg';
+import stats from './stats.svg';
+import apple from './apple.svg';
+import mango from './mango.svg';
+import pineapple from './pineapple.svg';
+import watermelon from './watermelon.svg';
+import banana from './banana.svg';
+import orange from './orange.svg';
+import grapes from './grapes.svg';
+import strawberry from './strawberry.svg';
+import locked from './locked.svg';
+import moves from './moves.svg';
+import target from './target.svg';
+import key from './key.svg';
+import car from './car.svg';
+import policeMan from './policeman.svg';
+import siren from './siren.svg'
+import door from './door.svg'
 
 export const SVG = {
+  door,
+  siren,
+  car,
+  policeMan,
+  key,
+  target,
+  moves,
+  locked,
+  apple,
+  mango,
+  pineapple,
+  watermelon,
+  banana,
+  orange,
+  grapes,
+  strawberry,
   stats,
   partyPopper,
   spin,
