@@ -68,19 +68,20 @@ const BottomNavigator = () => {
           marginHorizontal: wp(5),
           height: hp(12),
           borderRadius: wp(8),
-          overflow: 'hidden',
           backgroundColor: 'transparent',
-          paddingBottom: hp(1.2),
-          elevation: 0,
           borderWidth: wp(0.6),
           borderColor: COLORS.lightYellow + HEX_OPACITY[29],
+          elevation: 0,
         },
         tabBarBackground: () => (
           <LinearGradient
             colors={[COLORS.Purple, COLORS.surfaceAlt]}
-            start={{ x: 0, y: 0 }}
+            start={{ x: 1, y: 0 }}
             end={{ x: 1, y: 1 }}
-            style={StyleSheet.absoluteFill}
+            style={[
+              StyleSheet.absoluteFill,
+              { borderRadius: wp(8), overflow: 'hidden' },
+            ]}
           />
         ),
       })}

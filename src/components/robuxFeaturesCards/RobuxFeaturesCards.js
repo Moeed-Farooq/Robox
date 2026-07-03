@@ -2,14 +2,17 @@ import React from 'react';
 import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import Label from '../../common';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
-import { IMAGES } from '../../assets/images';
 import { useNavigation } from '@react-navigation/native';
 
 const RobuxFeaturesCards = ({ item }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity style={styles.card} activeOpacity={0.5} onPress={()=>navigation.navigate(item.screen)} >
-      <Image source={IMAGES.DAILY_ROBUX} style={styles.image} resizeMode="contain" />
+    <TouchableOpacity
+      style={styles.card}
+      activeOpacity={0.5}
+      onPress={() => navigation.navigate(item.screen)}
+    >
+      <Image source={item.src} style={styles.image} resizeMode="cover" />
       <Label style={styles.title}>{item.title}</Label>
     </TouchableOpacity>
   );
@@ -28,10 +31,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp(2),
   },
   image: {
-    width: hp(8),
-    height: hp(8),
-    resizeMode: 'contain',
-    borderRadius: hp(4),
+    width: hp(9),
+    height: hp(9),
+    borderRadius: hp(2.2),
+    overflow: 'hidden',
   },
   title: {
     color: COLORS.white,

@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(5),
-    paddingTop: hp(2),
+    paddingTop: hp(6),
     paddingBottom: hp(2),
   },
   title: {

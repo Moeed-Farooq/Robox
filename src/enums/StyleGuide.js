@@ -70,6 +70,16 @@ export const COLORS = {
   bgPurpleDark: '#13112E',
   textOnPrimary: '#FFFFFF',       
   textOnPrimaryMuted: '#D1CFFF',
+  transparent: 'transparent',
+  creamWhite: '#FFFDF0',
+  wheelGlowBg: 'rgba(255,255,255,0.06)',
+  whiteBorderFaint: 'rgba(255,255,255,0.1)',
+  whiteBorderLight: 'rgba(255,255,255,0.15)',
+  hubOrange: '#F39C12',
+  hubOrangeOverlay: 'rgba(243, 156, 18, 0.2)',
+  spinBlue: '#244D73',
+  modalOverlayDark: 'rgba(0,0,0,0.85)',
+  silverGrey: '#BDC3C7',
 };
 
 export const FONT = {

@@ -4,6 +4,8 @@ import { COLORS } from './src/enums/StyleGuide';
 import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { anonymousLogin, ensureFirestoreUserDocument, getCurrentUser } from './src/services';
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const App = () => {
   const [authLoading, setAuthLoading] = useState(true);
@@ -48,7 +50,7 @@ const App = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} pointerEvents={authLoading ? 'none' : 'auto'}>
       <StatusBar backgroundColor={COLORS.splashBg} barStyle={'light-content'} />
-      <RootNavigator />
+        <RootNavigator />
     </GestureHandlerRootView>
   );
 };

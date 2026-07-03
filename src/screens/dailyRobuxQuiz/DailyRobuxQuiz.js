@@ -1,20 +1,19 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  StyleSheet,
-  View,
-  SectionList,
-  TouchableOpacity,
   Animated,
+  StyleSheet,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { SVG } from '../../assets';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
-import { SVG } from '../../assets';
+import { QUIZ_DATA } from '../../dummies';
+import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
+import { isIOS } from '../../helpers';
 import { en } from '../../languages';
-import { QUIZ_DATA, SETTINGS_SECTIONS } from '../../dummies';
-import { SettingsItem } from '../../components';
-import Button from '../../common/Button';
-import { useNavigation } from '@react-navigation/native';
 
 const DailyRobuxQuiz = () => {
   const navigation = useNavigation();
@@ -79,21 +78,21 @@ const DailyRobuxQuiz = () => {
   }, []);
 
   useEffect(() => {
-  if (timer <= 10) {
-    Animated.sequence([
-      Animated.timing(scaleAnim, {
-        toValue: 1.3,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(scaleAnim, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }
-}, [timer]);
+    if (timer <= 10) {
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 1.3,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [timer]);
 
   const handleAnswer = answer => {
     if (selectedAnswer) return;
@@ -111,7 +110,7 @@ const DailyRobuxQuiz = () => {
   };
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
       <View style={styles.HeaderRow}>
         <TouchableOpacity
           style={styles.iconContainer}
@@ -131,7 +130,6 @@ const DailyRobuxQuiz = () => {
           />
         </View>
       </View>
-      {/* eeweww */}
 
       <View style={styles.statsRow}>
         <Label style={styles.questionCountText}>
@@ -154,7 +152,6 @@ const DailyRobuxQuiz = () => {
         </View>
       </View>
 
-      {/* ewfwwwwf */}
 
       {!quizFinished ? (
         <View style={styles.questionCard}>
@@ -202,7 +199,7 @@ const DailyRobuxQuiz = () => {
           </Label>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -213,7 +210,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(6),
-    paddingVertical: wp(10),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
 
   HeaderRow: {
@@ -286,7 +283,7 @@ const styles = StyleSheet.create({
   },
 
   questionText: {
-    color: COLORS.black ,
+    color: COLORS.black,
     fontSize: hp(3),
     textAlign: 'center',
     fontFamily: FONT.bold,

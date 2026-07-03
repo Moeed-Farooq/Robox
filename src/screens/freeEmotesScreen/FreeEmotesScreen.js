@@ -5,18 +5,17 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View,
-  Keyboard,
-  TouchableWithoutFeedback,
+  View
 } from 'react-native';
-import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
-import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
-import { FREE_EMOTES_TABS } from '../../dummies';
+import Label from '../../common';
+import SvgIcon from '../../common/SvgIcon';
 import { FreeEmotesCards } from '../../components';
+import { FREE_EMOTES_TABS } from '../../dummies';
+import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { en } from '../../languages';
 import { fetchRobloxEmotesPageByTab } from '../../services';
-import Label from '../../common';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ListHeader = ({
   navigation,
@@ -74,7 +73,7 @@ const ListHeader = ({
       <TextInput
         style={styles.searchInput}
         placeholder="search item..."
-        placeholderTextColor={COLORS.newlightWhite}
+        placeholderTextColor={COLORS.grey}
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
@@ -242,10 +241,7 @@ const FreeEmotesScreen = ({ navigation }) => {
     if (isLoading) {
       return (
         <View style={styles.feedbackContainer}>
-          <ActivityIndicator size="large" color={COLORS.yellow} />
-          <Label style={styles.feedbackText}>
-            {en.loadingEmotes || 'Loading Emotes...'}
-          </Label>
+          <ActivityIndicator color={COLORS.yellow} />
         </View>
       );
     }
@@ -294,34 +290,34 @@ const FreeEmotesScreen = ({ navigation }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.mainContainer}>
-        <FlatList
-          data={filteredData}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          columnWrapperStyle={styles.row}
-          ListHeaderComponent={
-            <ListHeader
-              navigation={navigation}
-              selectedTab={selectedTab}
-              onSelectTab={handleTabPress}
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              tabsDisabled={isLoading}
-            />
-          }
-          renderItem={({ item }) => <FreeEmotesCards item={item} />}
-          ListEmptyComponent={renderEmptyState}
-          ListFooterComponent={renderFooter}
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          onEndReached={loadMoreEmotes}
-          onEndReachedThreshold={0.35}
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
+      <View style={styles.stickyHeader}>
+        <ListHeader
+          navigation={navigation}
+          selectedTab={selectedTab}
+          onSelectTab={handleTabPress}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          tabsDisabled={isLoading}
         />
       </View>
-    </TouchableWithoutFeedback>
+
+      <FlatList
+        data={filteredData}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        style={styles.list}
+        renderItem={({ item }) => <FreeEmotesCards item={item} />}
+        ListEmptyComponent={renderEmptyState}
+        ListFooterComponent={renderFooter}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        onEndReached={loadMoreEmotes}
+        onEndReachedThreshold={0.35}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -330,13 +326,19 @@ export default FreeEmotesScreen;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(2),
+  },
+  stickyHeader: {
+    paddingHorizontal: wp(4),
+    zIndex: 1,
+  },
+  list: {
+    flex: 1,
   },
   contentContainer: {
     paddingHorizontal: wp(4),
-    paddingTop: hp(2),
     paddingBottom: hp(4),
+    flexGrow: 1,
   },
   headerRow: {
     flexDirection: 'row',
@@ -366,7 +368,6 @@ const styles = StyleSheet.create({
   },
   tabsContainer: {
     marginBottom: hp(2.5),
-    paddingVertical: hp(0.5),
   },
   tabItem: {
     backgroundColor: COLORS.surfaceElevated,
@@ -388,7 +389,7 @@ const styles = StyleSheet.create({
     fontFamily: FONT.semiBold,
   },
   searchBarContainer: {
-    backgroundColor: '#1E1E1E',
+    backgroundColor: COLORS.darkBlue,
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: wp(4),
@@ -411,10 +412,8 @@ const styles = StyleSheet.create({
   },
   feedbackContainer: {
     width: '100%',
-    minHeight: hp(28),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: hp(20),
   },
   feedbackText: {
     color: COLORS.white,

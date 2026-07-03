@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = props => {
     <Pressable
       onPress={onPress}
       disabled={isLoading}
-      style={{ ...styles.container, ...style }}>
+      style={[styles.container, style]}>
 
       <If
         condition={!isLoading}

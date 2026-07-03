@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, SectionList, TouchableOpacity } from 'react-native';
-import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
-import Label from '../../common';
-import SvgIcon from '../../common/SvgIcon';
-import { SVG } from '../../assets';
-import { en } from '../../languages';
-import { SETTINGS_SECTIONS } from '../../dummies';
-import { SettingsItem } from '../../components';
-import Button from '../../common/Button';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { SVG } from '../../assets';
+import Label from '../../common';
+import Button from '../../common/Button';
+import SvgIcon from '../../common/SvgIcon';
 import { SCREEN } from '../../enums';
+import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
+import { en } from '../../languages';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { isIOS } from '../../helpers';
 
 const FreeDailyRobuxScreen = () => {
   const navigation = useNavigation();
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
       <View style={styles.HeaderRow}>
         <TouchableOpacity
           style={styles.iconContainer}
@@ -43,27 +43,31 @@ const FreeDailyRobuxScreen = () => {
       <Label style={styles.dailyNewRobuxText}>{en.dailyNewRobux}</Label>
       <Label style={styles.testYourKnowledgeText}>{en.testYourKnowledge}</Label>
       <View style={styles.btnRow}>
-        <Button
-          icon={<SvgIcon icon={SVG.play} width={hp(2)} height={hp(2)} />}
-          text={en.startRobux}
-          textStyle={styles.startBtnText}
-          style={styles.startBtn}
-          onPress={() => navigation.navigate(SCREEN.DAILY_ROBUX_QUIZ)}
-        />
-        <Button
-          icon={
-            <SvgIcon
-              icon={SVG.gameControllerColorful}
-              width={hp(2)}
-              height={hp(2)}
-            />
-          }
-          text={en.playRobuxBlast}
-          textStyle={styles.playBtnText}
-          style={styles.playBtn}
-        />
+        <View style={styles.btnWrap}>
+          <Button
+            icon={<SvgIcon icon={SVG.play} width={hp(2)} height={hp(2)} />}
+            text={en.startRobux}
+            textStyle={styles.startBtnText}
+            style={styles.startBtn}
+            onPress={() => navigation.navigate(SCREEN.DAILY_ROBUX_QUIZ)}
+          />
+        </View>
+        <View style={styles.btnWrap}>
+          <Button
+            icon={
+              <SvgIcon
+                icon={SVG.gameControllerColorful}
+                width={hp(2)}
+                height={hp(2)}
+              />
+            }
+            text={en.playRobuxBlast}
+            textStyle={styles.playBtnText}
+            style={styles.playBtn}
+          />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(6),
-    paddingVertical: wp(10),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
 
   HeaderRow: {
@@ -84,9 +88,14 @@ const styles = StyleSheet.create({
   },
   btnRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: hp(5),
+    gap: wp(3),
+    width: '100%',
+  },
+  btnWrap: {
+    flex: 1,
+    flexBasis: 0,
   },
   iconContainer: {
     backgroundColor: COLORS.lightYellow,
@@ -127,6 +136,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   startBtn: {
+    width: '100%',
+    marginVertical: 0,
     backgroundColor: COLORS.green,
     justifyContent: 'center',
     alignItems: 'center',
@@ -139,6 +150,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   playBtn: {
+    width: '100%',
+    marginVertical: 0,
     backgroundColor: COLORS.lightYellow,
     justifyContent: 'center',
     alignItems: 'center',

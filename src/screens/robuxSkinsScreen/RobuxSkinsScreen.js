@@ -4,18 +4,17 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
-  View,
-  Keyboard,
-  TouchableWithoutFeedback,
+  View
 } from 'react-native';
-import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
-import SvgIcon from '../../common/SvgIcon';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { SVG } from '../../assets';
-import { ROBUX_SKINS_SCREEN_TABS } from '../../dummies';
-import { en } from '../../languages';
-import { RobuxSkinsCard } from '../../components';
-import { fetchRobuxSkinsPageByTab } from '../../services';
 import Label from '../../common';
+import SvgIcon from '../../common/SvgIcon';
+import { RobuxSkinsCard } from '../../components';
+import { ROBUX_SKINS_SCREEN_TABS } from '../../dummies';
+import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
+import { en } from '../../languages';
+import { fetchRobuxSkinsPageByTab } from '../../services';
 
 const ListHeader = ({ navigation, selectedTab, onSelectTab, tabsDisabled }) => (
   <View>
@@ -26,11 +25,9 @@ const ListHeader = ({ navigation, selectedTab, onSelectTab, tabsDisabled }) => (
       >
         <SvgIcon icon={SVG.goBack} height={hp(2.5)} width={hp(2.5)} />
       </TouchableOpacity>
-      <View style={styles.titleContainer}>
         <Label style={styles.headerTitle}>
           {en.robuxSkins || 'Robux Skins'}
         </Label>
-      </View>
       <View style={{ width: wp(10) }} />
     </View>
 
@@ -209,8 +206,7 @@ const RobuxSkinsScreen = ({ navigation }) => {
     if (isLoading) {
       return (
         <View style={styles.feedbackContainer}>
-          <ActivityIndicator size="large" color={COLORS.yellow} />
-          <Label style={styles.feedbackText}>{en.loadingSkins}</Label>
+          <ActivityIndicator color={COLORS.yellow} />
         </View>
       );
     }
@@ -251,32 +247,32 @@ const RobuxSkinsScreen = ({ navigation }) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View style={styles.mainContainer}>
-        <FlatList
-          data={skinsData}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          columnWrapperStyle={styles.row}
-          ListHeaderComponent={
-            <ListHeader
-              navigation={navigation}
-              selectedTab={selectedTab}
-              onSelectTab={handleTabPress}
-              tabsDisabled={isLoading}
-            />
-          }
-          renderItem={({ item }) => <RobuxSkinsCard item={item} />}
-          ListEmptyComponent={renderEmptyState}
-          ListFooterComponent={renderFooter}
-          contentContainerStyle={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          onEndReached={loadMoreSkins}
-          onEndReachedThreshold={0.35}
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
+      <View style={styles.stickyHeader}>
+        <ListHeader
+          navigation={navigation}
+          selectedTab={selectedTab}
+          onSelectTab={handleTabPress}
+          tabsDisabled={isLoading}
         />
       </View>
-    </TouchableWithoutFeedback>
+
+      <FlatList
+        data={skinsData}
+        keyExtractor={item => item.id}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        style={styles.list}
+        renderItem={({ item }) => <RobuxSkinsCard item={item} />}
+        ListEmptyComponent={renderEmptyState}
+        ListFooterComponent={renderFooter}
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        onEndReached={loadMoreSkins}
+        onEndReachedThreshold={0.35}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -287,16 +283,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
   },
+  stickyHeader: {
+    paddingHorizontal: wp(4),
+    backgroundColor: COLORS.splashBg,
+    zIndex: 1,
+  },
+  list: {
+    flex: 1,
+  },
   contentContainer: {
     paddingHorizontal: wp(4),
-    paddingTop: hp(2),
     paddingBottom: hp(4),
+    flexGrow: 1,
   },
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: hp(2),
+    marginTop: hp(1),
     marginBottom: hp(3),
   },
   backButton: {
@@ -343,10 +347,8 @@ const styles = StyleSheet.create({
   },
   feedbackContainer: {
     width: '100%',
-    minHeight: hp(28),
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop:hp(20)
   },
   feedbackText: {
     color: COLORS.white,

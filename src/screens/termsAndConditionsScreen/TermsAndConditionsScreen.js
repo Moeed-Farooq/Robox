@@ -1,21 +1,23 @@
-import React from 'react';
-import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
 
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { SVG } from '../../assets';
-import { PRIVACY_DATA, TERMS_DATA } from '../../dummies';
-import { en } from '../../languages';
+import { TERMS_DATA } from '../../dummies';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
+import { isIOS } from '../../helpers';
+import { en } from '../../languages';
 
 const TermsAndConditionsScreen = () => {
   const navigation = useNavigation();
 
   return (
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>  
     <ScrollView
-      style={styles.mainContainer}
       contentContainerStyle={styles.scrollContainer}
       showsVerticalScrollIndicator={false}
     >
@@ -63,6 +65,7 @@ const TermsAndConditionsScreen = () => {
         </View>
       ))}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -70,12 +73,10 @@ export default TermsAndConditionsScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
-    backgroundColor: COLORS.splashBg,
+  paddingVertical: isIOS() ? wp(1) : hp(2),
   },
 
   scrollContainer: {
-    paddingTop: hp(2),
     paddingHorizontal: wp(5),
     paddingBottom: hp(5),
     flexGrow: 1,

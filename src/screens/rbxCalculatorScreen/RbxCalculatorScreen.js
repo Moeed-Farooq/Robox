@@ -1,23 +1,24 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useMemo, useState } from 'react';
 import {
   FlatList,
   Keyboard,
-  SafeAreaView,
+  TouchableWithoutFeedback,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
+  View
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { SVG } from '../../assets';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
-import { SVG } from '../../assets';
-import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
-import { en } from '../../languages';
 import { ConversionCard } from '../../components';
 import { CONVERSION_TYPES } from '../../dummies';
-import { useNavigation } from '@react-navigation/native';
+import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
+import { isIOS } from '../../helpers';
+import { en } from '../../languages';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const RbxCalculatorScreen = () => {
   const navigation = useNavigation();
@@ -46,11 +47,10 @@ const RbxCalculatorScreen = () => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={styles.container}>
-        {/* Header */}
-
-        <View style={styles.header}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.container]}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.content}>
+          <View style={styles.header}>
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.circleBtn1}
@@ -70,16 +70,19 @@ const RbxCalculatorScreen = () => {
 
         {/* Hero */}
 
-        <LinearGradient
-          colors={[COLORS.yellow, COLORS.accent]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={styles.heroCard}
-        >
-          <Label style={styles.heroTitle}>{en.RobuxCalculator}</Label>
+        <View style={styles.heroShell}>
+          <LinearGradient
+            colors={[COLORS.yellow, COLORS.accent]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={StyleSheet.absoluteFill}
+          />
 
-          <Label style={styles.heroSub}>{en.premiumConversionsAwait}</Label>
-        </LinearGradient>
+          <View style={styles.heroContent}>
+            <Label style={styles.heroTitle}>{en.RobuxCalculator}</Label>
+            <Label style={styles.heroSub}>{en.premiumConversionsAwait}</Label>
+          </View>
+        </View>
 
         {/* Amount */}
 
@@ -108,6 +111,7 @@ const RbxCalculatorScreen = () => {
             renderItem={renderItem}
             keyExtractor={item => item.id.toString()}
             numColumns={2}
+            bounces={false}
             columnWrapperStyle={styles.column}
             showsVerticalScrollIndicator={false}
           />
@@ -126,8 +130,9 @@ const RbxCalculatorScreen = () => {
             <Label style={styles.resultValue}>{result}</Label>
           </View>
         </View>
+        </View>
+      </TouchableWithoutFeedback>
       </SafeAreaView>
-    </TouchableWithoutFeedback>
   );
 };
 
@@ -138,7 +143,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(5),
-    paddingVertical: wp(8),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
+  },
+  content: {
+    flex: 1,
   },
 
   header: {
@@ -171,11 +179,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  heroCard: {
+  heroShell: {
     borderRadius: wp(5),
-    paddingVertical: hp(2.4),
-    alignItems: 'center',
     marginBottom: hp(3),
+    overflow: 'hidden',
+  },
+  heroContent: {
+    paddingVertical: hp(2.4),
+    paddingHorizontal: wp(4),
+    alignItems: 'center',
   },
 
   heroTitle: {

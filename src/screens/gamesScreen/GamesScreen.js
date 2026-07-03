@@ -7,6 +7,7 @@ import SvgIcon from '../../common/SvgIcon';
 import { en } from '../../languages';
 import { GAMES_DATA } from '../../dummies';
 import { GamesCards } from '../../components';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const GamesScreen = () => {
   const renderItem = ({ item }) => <GamesCards item={item} />;
@@ -46,7 +47,7 @@ const GamesScreen = () => {
   );
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.splashBg }}>
       <SectionList
         sections={GAMES_DATA}
         renderItem={renderItem}
@@ -57,7 +58,7 @@ const GamesScreen = () => {
         stickySectionHeadersEnabled={false}
         contentContainerStyle={styles.listContent}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

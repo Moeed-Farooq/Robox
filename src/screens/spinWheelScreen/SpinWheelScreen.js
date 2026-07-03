@@ -1,21 +1,23 @@
-import React, { useState, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useRef, useState } from 'react';
 import {
   Animated,
   Easing,
-  StyleSheet,
-  View,
-  TouchableOpacity,
   Modal,
   StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import Svg, { G, Path, G as SvgG } from 'react-native-svg'; // SVG components import karein
-import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
+import Svg, { G, Path } from 'react-native-svg'; // SVG components import karein
+import { SVG } from '../../assets';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
-import { SVG } from '../../assets';
 import { SPIN_REWARDS } from '../../dummies';
+import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { en } from '../../languages';
-import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { isIOS } from '../../helpers';
 
 const SpinWheelScreen = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -85,7 +87,7 @@ const SpinWheelScreen = () => {
   });
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
       <View style={styles.headerRow}>
         <TouchableOpacity style={styles.iconButton}>
           <SvgIcon
@@ -105,7 +107,7 @@ const SpinWheelScreen = () => {
           <Label style={[styles.titleText, { color: COLORS.white }]}>
             {en.spin}{' '}
           </Label>
-          <Label style={[styles.titleText, { color: '#F39C12' }]}>
+          <Label style={[styles.titleText, { color: COLORS.yellow }]}>
             {en.wheel}
           </Label>
         </View>
@@ -222,7 +224,7 @@ const SpinWheelScreen = () => {
               <View
                 style={[
                   styles.rarityBadge,
-                  { backgroundColor: 'rgba(243, 156, 18, 0.2)' },
+                  { backgroundColor: COLORS.hubOrangeOverlay },
                 ]}
               >
                 <Label style={styles.rarityText}>
@@ -248,7 +250,7 @@ const SpinWheelScreen = () => {
           </View>
         </Modal>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -259,13 +261,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
     alignItems: 'center',
-    paddingVertical: hp(3),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: wp(90),
-    marginTop: hp(2),
   },
   iconButton: {
     backgroundColor: COLORS.yellow,
@@ -300,25 +301,25 @@ const styles = StyleSheet.create({
   indicatorTriangle: {
     width: 0,
     height: 0,
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.transparent,
     borderStyle: 'solid',
     borderLeftWidth: wp(3.5),
     borderRightWidth: wp(3.5),
     borderBottomWidth: hp(2.5),
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: '#FFFDF0',
+    borderLeftColor: COLORS.transparent,
+    borderRightColor: COLORS.transparent,
+    borderBottomColor: COLORS.creamWhite,
     transform: [{ rotate: '180deg' }],
   },
   outerGlow: {
     width: wp(82),
     height: wp(82),
     borderRadius: wp(41),
-    backgroundColor: 'rgba(255,255,255,0.06)',
+    backgroundColor: COLORS.wheelGlowBg,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 5,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderColor: COLORS.whiteBorderFaint,
   },
   wheelContainer: {
     width: wp(76),
@@ -344,19 +345,19 @@ const styles = StyleSheet.create({
     width: wp(18),
     height: wp(18),
     borderRadius: wp(9),
-    backgroundColor: '#F39C12',
+    backgroundColor: COLORS.hubOrange,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#FFF',
+    borderColor: COLORS.darkWhite,
     elevation: 8,
-    shadowColor: '#000',
+    shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
   },
   spinButton: {
-    backgroundColor: '#244D73',
+    backgroundColor: COLORS.spinBlue,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -366,7 +367,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: hp(6),
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.15)',
+    borderColor: COLORS.whiteBorderLight,
   },
   spinButtonText: {
     color: COLORS.white,
@@ -375,7 +376,7 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.85)',
+    backgroundColor: COLORS.modalOverlayDark,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -386,7 +387,7 @@ const styles = StyleSheet.create({
     padding: hp(3),
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
+    borderColor: COLORS.whiteBorderFaint,
   },
   modalConfetti: {
     marginBottom: hp(1),
@@ -398,7 +399,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   modalYouWon: {
-    color: '#BDC3C7',
+    color: COLORS.silverGrey,
     fontSize: hp(1.6),
     fontFamily: FONT.regular,
     marginTop: hp(0.5),

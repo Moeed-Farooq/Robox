@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet,
-  View,
   Image,
-  TouchableOpacity,
   Modal,
   StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
-import SvgIcon from '../../common/SvgIcon';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { SVG } from '../../assets';
-import { handleImageDownload } from '../../helpers';
 import Label from '../../common';
+import SvgIcon from '../../common/SvgIcon';
+import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
+import { handleImageDownload } from '../../helpers';
 import { en } from '../../languages';
 
 const FreeEmotesCards = ({ item }) => {
@@ -46,7 +47,8 @@ const FreeEmotesCards = ({ item }) => {
         <Image
           source={{ uri: item.image }}
           style={styles.cardImage}
-          resizeMode="cover"
+          resizeMode="contain"
+         
         />
       </View>
       <Label style={styles.cardTitle} numberOfLines={2}>
@@ -70,42 +72,47 @@ const FreeEmotesCards = ({ item }) => {
         transparent
         visible={modalVisible}
         animationType="fade"
+        presentationStyle="overFullScreen"
+        statusBarTranslucent
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <StatusBar
-              backgroundColor={COLORS.surfaceElevated}
-              barStyle={'light-content'}
-            />
+          <StatusBar
+            backgroundColor="rgba(0, 0, 0, 0.75)"
+            barStyle="light-content"
+            translucent
+          />
 
-            <View
-              style={[
-                styles.modalIconContainer,
-                { backgroundColor: isSuccess ? COLORS.darkGreen : COLORS.darkRed },
-              ]}
-            >
-              <SvgIcon
-                icon={isSuccess ? SVG.tick : SVG.cross}
-                height={hp(3.5)}
-                width={hp(3.5)}
-              />
+          <SafeAreaView style={styles.modalSafeArea}>
+            <View style={styles.modalContainer}>
+              <View
+                style={[
+                  styles.modalIconContainer,
+                  { backgroundColor: isSuccess ? COLORS.darkGreen : COLORS.darkRed },
+                ]}
+              >
+                <SvgIcon
+                  icon={isSuccess ? SVG.tick : SVG.cross}
+                  height={hp(3.5)}
+                  width={hp(3.5)}
+                />
+              </View>
+
+              <Label style={styles.modalTitleText}>{modalTitle}</Label>
+              <Label style={styles.modalMessageText}>{modalMessage}</Label>
+
+              <TouchableOpacity
+                style={[
+                  styles.modalActionButton,
+                  { backgroundColor: isSuccess ? COLORS.blue : COLORS.darkRed },
+                ]}
+                activeOpacity={0.8}
+                onPress={() => setModalVisible(false)}
+              >
+                <Label style={styles.modalButtonText}>{en.ok}</Label>
+              </TouchableOpacity>
             </View>
-
-            <Label style={styles.modalTitleText}>{modalTitle}</Label>
-            <Label style={styles.modalMessageText}>{modalMessage}</Label>
-
-            <TouchableOpacity
-              style={[
-                styles.modalActionButton,
-                { backgroundColor: isSuccess ? COLORS.blue : COLORS.darkRed },
-              ]}
-              activeOpacity={0.8}
-              onPress={() => setModalVisible(false)}
-            >
-              <Label style={styles.modalButtonText}>{en.ok}</Label>
-            </TouchableOpacity>
-          </View>
+          </SafeAreaView>
         </View>
       </Modal>
     </View>
@@ -179,8 +186,11 @@ const styles = StyleSheet.create({
   },
 
   modalOverlay: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
+  },
+  modalSafeArea: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
