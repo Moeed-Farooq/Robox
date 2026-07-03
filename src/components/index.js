@@ -9,6 +9,7 @@ import FruitCard from './fruitCard';
 import FreeEmotesCards from './freeEmotesCards';
 import RobuxSkinsCard from './robuxSkinsCard';
 import GeneratedAvatarCard from './generatedAvatarCard';
+import HomeHeroBanner from './homeHeroBanner';
 
 export {
   DailyRewardsCards,
@@ -22,4 +23,5 @@ export {
   FreeEmotesCards,
   RobuxSkinsCard,
   GeneratedAvatarCard,
+  HomeHeroBanner,
 };

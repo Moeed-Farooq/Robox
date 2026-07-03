@@ -8,6 +8,7 @@ import { en } from '../../languages';
 import { SETTINGS_SECTIONS } from '../../dummies';
 import { SettingsItem } from '../../components';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const SettingsScreen = () => {
   const [sections, setSections] = useState(SETTINGS_SECTIONS);
@@ -54,7 +55,7 @@ const SettingsScreen = () => {
   );
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.splashBg }}>
       <SectionList
         sections={sections}
         keyExtractor={item => item.id}
@@ -65,7 +66,7 @@ const SettingsScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    paddingTop: wp(8),
+    paddingTop: wp(2),
     paddingHorizontal: wp(5),
     paddingBottom: hp(15),
   },

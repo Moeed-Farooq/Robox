@@ -5,23 +5,21 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
 import { useNavigation } from '@react-navigation/native';
-
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
-
 import { SVG } from '../../assets';
-import { en } from '../../languages';
+import { RobuxCodesCards } from '../../components';
 import { ROBUX_CODES } from '../../dummies';
 import {
   COLORS,
   FONT,
-  HEX_OPACITY,
   hp,
-  wp,
+  wp
 } from '../../enums/StyleGuide';
-import { RobuxCodesCards } from '../../components';
+import { en } from '../../languages';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { isIOS } from '../../helpers';
 
 const RobuxCodesScreen = () => {
   const navigation = useNavigation();
@@ -53,6 +51,7 @@ const RobuxCodesScreen = () => {
   );
 
   return (
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
     <FlatList
       data={ROBUX_CODES}
       renderItem={renderItem}
@@ -61,15 +60,19 @@ const RobuxCodesScreen = () => {
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.listContainer}
     />
+    </SafeAreaView>
   );
 };
 
 export default RobuxCodesScreen;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+  },
   listContainer: {
     backgroundColor: COLORS.splashBg,
-    paddingVertical: wp(8),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
     paddingHorizontal: wp(5),
   },
 

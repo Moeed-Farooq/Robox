@@ -9,13 +9,15 @@ import { SVG } from '../../assets';
 import { PRIVACY_DATA } from '../../dummies';
 import { en } from '../../languages';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { isIOS } from '../../helpers';
 
 const PrivacyScreen = () => {
   const navigation = useNavigation();
 
   return (
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>  
     <ScrollView
-      style={styles.mainContainer}
       contentContainerStyle={styles.scrollContainer}
       showsVerticalScrollIndicator={false}
     >
@@ -57,6 +59,7 @@ const PrivacyScreen = () => {
         </View>
       ))}
     </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -64,12 +67,10 @@ export default PrivacyScreen;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    flex: 1,
-    backgroundColor: COLORS.splashBg,
+  paddingVertical: isIOS() ? wp(1) : hp(2),
   },
 
   scrollContainer: {
-    paddingTop: hp(2),
     paddingHorizontal: wp(5),
     paddingBottom: hp(5),
     flexGrow: 1,

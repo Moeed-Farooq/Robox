@@ -17,6 +17,7 @@ import { SVG } from '../../assets';
 import { AvatarStyleCard, GeneratedAvatarCard } from '../../components';
 import { AVATAR_STYLES } from '../../dummies';
 import { getAvatarStyleName, generateUniqueId } from '../../helpers';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const AvatarScreen = () => {
   const [prompt, setPrompt] = useState('');
@@ -175,7 +176,7 @@ const AvatarScreen = () => {
   }, [prompt, isLoading, selectedId, generatedAvatars.length, renderStyleItem]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.splashBg }}>
       <FlatList
         data={generatedAvatars}
         keyExtractor={item => item.id}
@@ -228,7 +229,7 @@ const AvatarScreen = () => {
           </View>
         </TouchableOpacity>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 

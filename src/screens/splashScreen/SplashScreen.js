@@ -1,197 +1,87 @@
-import React, { useEffect, useRef } from 'react';
-import {
-  StyleSheet,
-  View,
-  Animated,
-  StatusBar,
-} from 'react-native';
+import React, { useCallback } from 'react';
+import { Animated, StatusBar, StyleSheet, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
 import { en } from '../../languages';
 import { TAB } from '../../enums';
-import { COLORS, HEX_OPACITY, wp, hp, FONT } from '../../enums/StyleGuide';
+import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
 import { SVG } from '../../assets';
+import useSplashAnimation from '../../hooks/useSplashAnimation';
 
 const SplashScreen = ({ navigation }) => {
-  const progressAnim = useRef(new Animated.Value(0)).current;
-  const logoScale = useRef(new Animated.Value(0.8)).current;
-  const circle1 = useRef(new Animated.Value(0)).current;
-  const circle2 = useRef(new Animated.Value(0)).current;
+  const handleComplete = useCallback(() => {
+    navigation.replace(TAB.BOTTOM);
+  }, [navigation]);
 
-  const particles = useRef(
-    [...Array(50)].map(() => ({
-      anim: new Animated.Value(0),
-      left: wp(Math.random() * 100),
-      size: wp(Math.random() * 2 + 1),
-      duration: 3000 + Math.random() * 3000,
-      color: [
-        'rgba(255,255,255,0.4)',
-        'rgba(255,255,255,0.2)',
-        'rgba(0,255,128,0.25)',
-        'rgba(0,255,128,0.15)',
-      ][Math.floor(Math.random() * 4)],
-    })),
-  ).current;
-
-  useEffect(() => {
-    Animated.timing(progressAnim, {
-      toValue: 100,
-      duration: 3000,
-      useNativeDriver: false,
-    }).start(() => {
-      navigation.replace(TAB.BOTTOM);
-    });
-
-    Animated.spring(logoScale, {
-      toValue: 1,
-      friction: 5,
-      useNativeDriver: true,
-    }).start();
-
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(circle1, {
-          toValue: 1,
-          duration: 3000,
-          useNativeDriver: true,
-        }),
-        Animated.timing(circle1, {
-          toValue: 0,
-          duration: 3000,
-          useNativeDriver: true,
-        }),
-      ]),
-    ).start();
-
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(circle2, {
-          toValue: 1,
-          duration: 4000,
-          useNativeDriver: true,
-        }),
-        Animated.timing(circle2, {
-          toValue: 0,
-          duration: 4000,
-          useNativeDriver: true,
-        }),
-      ]),
-    ).start();
-
-    particles.forEach(particle => {
-      Animated.loop(
-        Animated.timing(particle.anim, {
-          toValue: 1,
-          duration: particle.duration,
-          useNativeDriver: true,
-        }),
-      ).start();
-    });
-  }, []);
+  const {
+    particles,
+    getParticleStyle,
+    orbAStyle,
+    orbBStyle,
+    orbCStyle,
+    logoWrapStyle,
+    logoRingStyle,
+    fadeUp,
+    progressWidth,
+  } = useSplashAnimation(handleComplete);
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={COLORS.splashBg} barStyle="light-content" />
 
-      {/* Particles */}
+      <LinearGradient
+        colors={[COLORS.splashBg, COLORS.gradientMid, COLORS.bgPurpleDark]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={StyleSheet.absoluteFill}
+      />
+
       {particles.map((particle, index) => (
         <Animated.View
           key={index}
-          style={[
-            styles.particle,
-            {
-              width: particle.size,
-              height: particle.size,
-              left: particle.left,
-              backgroundColor: particle.color,
-              transform: [
-                {
-                  translateY: particle.anim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [hp(100), -hp(20)],
-                  }),
-                },
-              ],
-              opacity: particle.anim.interpolate({
-                inputRange: [0, 0.2, 0.8, 1],
-                outputRange: [0, 1, 1, 0],
-              }),
-            },
-          ]}
+          style={[styles.particle, getParticleStyle(particle)]}
         />
       ))}
 
-      {/* Background blobs */}
-      <Animated.View
-        style={[
-          styles.circle1,
-          {
-            transform: [
-              {
-                translateY: circle1.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [-30, 30],
-                }),
-              },
-            ],
-          },
-        ]}
-      />
+      <Animated.View style={[styles.orb, styles.orbGold, orbAStyle]} />
+      <Animated.View style={[styles.orb, styles.orbMint, orbBStyle]} />
+      <Animated.View style={[styles.orb, styles.orbPurple, orbCStyle]} />
 
-      <Animated.View
-        style={[
-          styles.circle2,
-          {
-            transform: [
-              {
-                translateY: circle2.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [30, -30],
-                }),
-              },
-            ],
-          },
-        ]}
-      />
+      <View style={styles.centerContent}>
+        <Animated.View style={[styles.logoWrap, logoWrapStyle]}>
+          <Animated.View style={[styles.logoRing, logoRingStyle]} />
+          <View style={styles.logoGlow}>
+            <View style={styles.logoContainer}>
+              <SVG.logo width="100%" height="100%" />
+            </View>
+          </View>
+        </Animated.View>
 
-      {/* Top Section */}
-      <View style={styles.topSection}>
-        <Animated.View
-          style={[
-            styles.logoContainer,
-            {
-              transform: [{ scale: logoScale }],
-            },
-          ]}>
-          <SVG.logo width="100%" height="100%" />
+        <Animated.View style={[styles.titleBlock, fadeUp(0.3)]}>
+          <Label style={styles.titleMain} color={COLORS.white}>
+            {en.robuxPoints}
+          </Label>
+        </Animated.View>
+
+        <Animated.View style={fadeUp(0.5)}>
+          <Label style={styles.subtitle}>{en.getPremiumRewards}</Label>
         </Animated.View>
       </View>
 
-      {/* Bottom Section */}
-      <View style={styles.bottomSection}>
-        <Label style={styles.titleText}>{en.robuxPoints}</Label>
-
-        <View style={styles.progressBarBg}>
-          <Animated.View
-            style={[
-              styles.progressFillContainer,
-              {
-                width: progressAnim.interpolate({
-                  inputRange: [0, 100],
-                  outputRange: ['0%', '100%'],
-                }),
-              },
-            ]}>
-            <LinearGradient
-              colors={[COLORS.orange, COLORS.Purple]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.gradientFill}
-            />
-          </Animated.View>
+      <Animated.View style={[styles.bottomSection, fadeUp(0.65)]}>
+        <View style={styles.progressShell}>
+          <View style={styles.progressBarBg}>
+            <Animated.View style={[styles.progressFillWrap, { width: progressWidth }]}>
+              <LinearGradient
+                colors={[COLORS.yellow, COLORS.accent, COLORS.Purple]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.gradientFill}
+              />
+            </Animated.View>
+          </View>
         </View>
-      </View>
+      </Animated.View>
     </View>
   );
 };
@@ -204,70 +94,120 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.splashBg,
     overflow: 'hidden',
   },
-
   particle: {
     position: 'absolute',
-    borderRadius: 100,
+    borderRadius: 999,
   },
-
-  circle1: {
+  orb: {
     position: 'absolute',
-    width: wp(60),
-    height: wp(60),
-    borderRadius: wp(30),
-    backgroundColor: 'rgba(255,215,0,0.12)',
-    top: hp(8),
-    left: -wp(15),
+    borderRadius: 999,
   },
-
-  circle2: {
-    position: 'absolute',
-    width: wp(70),
-    height: wp(70),
-    borderRadius: wp(35),
-    backgroundColor: 'rgba(0,255,128,0.10)',
-    bottom: hp(10),
-    right: -wp(20),
+  orbGold: {
+    width: wp(65),
+    height: wp(65),
+    top: hp(6),
+    left: -wp(18),
+    backgroundColor: COLORS.yellow + HEX_OPACITY[12],
   },
-
-  topSection: {
-    alignItems: 'center',
-    marginTop: hp(10),
+  orbMint: {
+    width: wp(55),
+    height: wp(55),
+    bottom: hp(18),
+    right: -wp(14),
+    backgroundColor: COLORS.lightestGreen + HEX_OPACITY[10],
   },
-
-  logoContainer: {
-    width: wp(42),
-    height: wp(42),
+  orbPurple: {
+    width: wp(40),
+    height: wp(40),
+    top: hp(32),
+    right: wp(8),
+    backgroundColor: COLORS.Purple + HEX_OPACITY[18],
   },
-
-  bottomSection: {
+  centerContent: {
     flex: 1,
-    marginTop:hp(20),
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: hp(10),
+    paddingTop: hp(4),
   },
-
-  titleText: {
-    color: COLORS.white,
-    fontSize: hp(3),
-    fontFamily: FONT.extraBold,
+  logoWrap: {
+    width: wp(44),
+    height: wp(44),
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: hp(3),
-    textAlign: 'center',
   },
-
+  logoRing: {
+    position: 'absolute',
+    width: wp(44),
+    height: wp(44),
+    borderRadius: wp(22),
+    borderWidth: 1.5,
+    borderColor: COLORS.yellow,
+  },
+  logoGlow: {
+    width: wp(42),
+    height: wp(42),
+    borderRadius: wp(21),
+    backgroundColor: COLORS.darkWhite + HEX_OPACITY[12],
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: COLORS.darkWhite + HEX_OPACITY[25],
+    shadowColor: COLORS.yellow,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.45,
+    shadowRadius: 20,
+    elevation: 12,
+  },
+  logoContainer: {
+    width: wp(30),
+    height: wp(30),
+  },
+  titleBlock: {
+    alignItems: 'center',
+    marginBottom: hp(0.8),
+  },
+  titleMain: {
+    fontSize: hp(2.8),
+    fontFamily: FONT.extraBold,
+    letterSpacing: 0.5,
+    textAlign: 'center',
+    paddingHorizontal: wp(6),
+  },
+  subtitle: {
+    color: COLORS.lightWhite,
+    fontSize: hp(1.6),
+    fontFamily: FONT.medium,
+    opacity: 0.9,
+    letterSpacing: 0.4,
+    textAlign: 'center',
+    paddingHorizontal: wp(8),
+  },
+  bottomSection: {
+    alignItems: 'center',
+    paddingBottom: hp(8),
+    paddingHorizontal: wp(12),
+  },
+  progressShell: {
+    width: '100%',
+    shadowColor: COLORS.yellow,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+    elevation: 4,
+  },
   progressBarBg: {
-    width: wp(70),
-    height: hp(0.8),
-    backgroundColor: COLORS.white + HEX_OPACITY[2],
+    width: '100%',
+    height: hp(0.9),
+    backgroundColor: COLORS.darkWhite + HEX_OPACITY[10],
     borderRadius: hp(2),
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: COLORS.darkWhite + HEX_OPACITY[15],
   },
-
-  progressFillContainer: {
+  progressFillWrap: {
     height: '100%',
   },
-
   gradientFill: {
     flex: 1,
     borderRadius: hp(2),

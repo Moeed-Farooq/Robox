@@ -21,6 +21,8 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import { BLOCK_SHAPES, SHAPE_COLORS } from '../../dummies';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { isIOS } from '../../helpers';
 
 const BlockPuzzleScreen = () => {
   const BOARD_SIZE = 8;
@@ -302,7 +304,7 @@ const BlockPuzzleScreen = () => {
   };
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
       <View style={styles.topRow}>
         <TouchableOpacity
           style={styles.circleButton}
@@ -390,7 +392,7 @@ const BlockPuzzleScreen = () => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -399,9 +401,8 @@ export default BlockPuzzleScreen;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(5),
-    paddingBottom: hp(4),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
   board: {
     alignSelf: 'center',
@@ -434,7 +435,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: hp(2),
   },
   circleButton: {
     width: wp(14),

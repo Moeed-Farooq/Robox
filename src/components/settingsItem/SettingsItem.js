@@ -23,19 +23,21 @@ const SettingsItem = ({ item, type, onPress, onToggle }) => {
         </View>
       </View>
 
-      {type === 'toggle' ? (
-        <Switch
-          value={item.value}
-          onValueChange={onToggle}
-          trackColor={{
-            false: '#6e7288',
-            true: '#e7a311',
-          }}
-          thumbColor={item.value ? '#FFF8E1' : '#9797be'}
-        />
-      ) : (
-        <SvgIcon icon={SVG.arrowRight} width={hp(3)} height={hp(3)} />
-      )}
+      <View style={styles.rightContainer}>
+        {type === 'toggle' ? (
+          <Switch
+            value={item.value}
+            onValueChange={onToggle}
+            trackColor={{
+              false: '#6e7288',
+              true: '#e7a311',
+            }}
+            thumbColor={item.value ? '#FFF8E1' : '#9797be'}
+          />
+        ) : (
+          <SvgIcon icon={SVG.arrowRight} width={hp(3)} height={hp(3)} />
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -55,8 +57,15 @@ const styles = StyleSheet.create({
   },
 
   leftContainer: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  rightContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
   },
 
   textContainer: {

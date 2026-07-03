@@ -8,6 +8,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
@@ -87,40 +88,49 @@ const RobuxSkinsCard = ({ item }) => {
         transparent
         visible={modalVisible}
         animationType="fade"
+        presentationStyle="overFullScreen"
+        statusBarTranslucent
         onRequestClose={() => setModalVisible(false)}
       >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <StatusBar backgroundColor={COLORS.surfaceElevated} barStyle={'light-content'} />
-            <View
-              style={[
-                styles.modalIconContainer,
-                {
-                  backgroundColor: isSuccess
-                    ? COLORS.darkGreen
-                    : COLORS.darkRed,
-                },
-              ]}
-            >
-              <SvgIcon
-                icon={isSuccess ? SVG.tick : SVG.cross}
-                height={hp(3.5)}
-                width={hp(3.5)}
-              />
+          <StatusBar
+            backgroundColor="rgba(0, 0, 0, 0.8)"
+            barStyle="light-content"
+            translucent
+          />
+
+          <SafeAreaView style={styles.modalSafeArea}>
+            <View style={styles.modalContainer}>
+              <View
+                style={[
+                  styles.modalIconContainer,
+                  {
+                    backgroundColor: isSuccess
+                      ? COLORS.darkGreen
+                      : COLORS.darkRed,
+                  },
+                ]}
+              >
+                <SvgIcon
+                  icon={isSuccess ? SVG.tick : SVG.cross}
+                  height={hp(3.5)}
+                  width={hp(3.5)}
+                />
+              </View>
+              <Label style={styles.modalTitleText}>{modalTitle}</Label>
+              <Label style={styles.modalMessageText}>{modalMessage}</Label>
+              <TouchableOpacity
+                style={[
+                  styles.modalActionButton,
+                  { backgroundColor: isSuccess ? COLORS.darkGreen : COLORS.red },
+                ]}
+                activeOpacity={0.8}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.modalButtonText}>{en.ok}</Text>
+              </TouchableOpacity>
             </View>
-            <Label style={styles.modalTitleText}>{modalTitle}</Label>
-            <Label style={styles.modalMessageText}>{modalMessage}</Label>
-            <TouchableOpacity
-              style={[
-                styles.modalActionButton,
-                { backgroundColor: isSuccess ? COLORS.darkGreen : COLORS.red },
-              ]}
-              activeOpacity={0.8}
-              onPress={() => setModalVisible(false)}
-            >
-              <Text style={styles.modalButtonText}>{en.ok}</Text>
-            </TouchableOpacity>
-          </View>
+          </SafeAreaView>
         </View>
       </Modal>
     </View>
@@ -191,8 +201,11 @@ const styles = StyleSheet.create({
     marginLeft: wp(2),
   },
   modalOverlay: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  modalSafeArea: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

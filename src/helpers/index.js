@@ -152,3 +152,5 @@ export const shareAvatar = async (promptText, styleName) => {
     console.log('Sharing error: ', error.message);
   }
 };
+
+export const isIOS = () => Platform.OS === 'ios';

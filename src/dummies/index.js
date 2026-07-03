@@ -48,12 +48,12 @@ export const DailyReward = [
 ];
 
 export const RobuxFeaturesData = [
-  { id: 1, title: 'Robux Codes', screen: SCREEN.ROBUX_CODES_SCREEN },
-  { id: 2, title: 'Robux Skins', screen: SCREEN.ROBUX_SKINS_SCREEN },
-  { id: 3, title: 'Wordy Robux', screen: SCREEN.WORD_QUIZ_SCREEN },
-  { id: 4, title: 'RBX Calculator', screen: SCREEN.RBX_CALCULATOR_SCREEN },
-  { id: 5, title: 'Block Puzzle', screen: SCREEN.BLOCK_PUZZLE_SCREEN },
-  { id: 6, title: 'Spin Wheel', screen: SCREEN.SPIN_WHEEL_SCREEN },
+  { id: 1, title: 'Robux Codes', screen: SCREEN.ROBUX_CODES_SCREEN, src: IMAGES.ROBUX_CODES },
+  { id: 2, title: 'Robux Skins', screen: SCREEN.ROBUX_SKINS_SCREEN, src: IMAGES.ROBUX_SKINS },
+  { id: 3, title: 'Wordy Robux', screen: SCREEN.WORD_QUIZ_SCREEN, src: IMAGES.WORDY_ROBUX },
+  { id: 4, title: 'RBX Calculator', screen: SCREEN.RBX_CALCULATOR_SCREEN, src: IMAGES.RBX_CALCULATOR },
+  { id: 5, title: 'Block Puzzle', screen: SCREEN.BLOCK_PUZZLE_SCREEN, src: IMAGES.BLOCK_PUZZLE },
+  { id: 6, title: 'Spin Wheel', screen: SCREEN.SPIN_WHEEL_SCREEN, src: IMAGES.SPIN_WHEEL },
 ];
 
 export const GAMES_DATA = [
@@ -228,13 +228,6 @@ export const SETTINGS_SECTIONS = [
         title: 'Notifications',
         subtitle: 'Receive\ngame alerts',
         icon: SVG.bell,
-        value: true,
-      },
-      {
-        id: '2',
-        title: 'Dark Mode',
-        subtitle: 'Use dark theme',
-        icon: SVG.moon,
         value: true,
       },
       {

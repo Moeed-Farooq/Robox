@@ -12,7 +12,7 @@ const DailyRewardsCards = ({ item }) => {
     onPress={()=>navigation.navigate(item.screen)}
      style={styles.card}>
       <View style={styles.imageContainer}>
-        <Image source={item.src} style={styles.image} resizeMode="contain" />
+        <Image source={item.src} style={styles.image} resizeMode="cover" />
       </View>
 
       <View style={styles.textContainer}>
@@ -56,7 +56,6 @@ imageContainer: {
 image: {
   width: '100%',
   height: '100%',
-  resizeMode: 'stretch',
 },
   textContainer: {
     flex: 1,
