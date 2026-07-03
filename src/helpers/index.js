@@ -1,5 +1,5 @@
 import { FRUITS_DATA } from '../dummies';
-import { Alert, Platform, PermissionsAndroid } from 'react-native';
+import { Alert, Platform, PermissionsAndroid ,Share } from 'react-native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 
@@ -139,3 +139,16 @@ export const getAvatarStyleName = (stylesList, selectedId) => {
 };
 
 export const generateUniqueId = () => Date.now().toString();
+
+
+export const shareAvatar = async (promptText, styleName) => {
+  try {
+    const message = `Check out my AI avatar: "${promptText}" - Style: ${styleName || 'Robux Avatar'} - Created with Robox App! 🎮✨`;
+    
+    await Share.share({
+      message: message,
+    });
+  } catch (error) {
+    console.log('Sharing error: ', error.message);
+  }
+};

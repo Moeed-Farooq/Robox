@@ -30,7 +30,13 @@ const RootNavigator = () => {
         <Stack.Screen name={SCREEN.JAIL_BREAK_GAME} component={ui.JailBreakGame} />
         <Stack.Screen name={SCREEN.FREE_EMOTES_SCREEN} component={ui.FreeEmotesScreen} />
         <Stack.Screen name={SCREEN.ROBUX_SKINS_SCREEN} component={ui.RobuxSkinsScreen} />
-        
+        <Stack.Screen name={SCREEN.ADOPT_ME_GAME} component={ui.AdoptMeGame} />
+        <Stack.Screen name={SCREEN.TOWER_HELL_GAME} component={ui.TowerHellGame} />
+        <Stack.Screen name={SCREEN.MURDER_MYSTERY_GAME} component={ui.MurderMysteryGame} />
+        <Stack.Screen name={SCREEN.ARSENAL_GAME} component={ui.ArsenalGame} />
+        <Stack.Screen name={SCREEN.PHANTOM_FORCES_GAME} component={ui.PhantomForcesGame} />
+        <Stack.Screen name={SCREEN.ROYALE_HIGH_GAME} component={ui.RoyaleHighGame} />
+        <Stack.Screen name={SCREEN.FLEE_THE_FACILITY_GAME} component={ui.FleeTheFacilityGame} />
       </Stack.Navigator>
     </NavigationContainer>
   );

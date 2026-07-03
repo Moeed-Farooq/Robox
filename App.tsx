@@ -1,12 +1,52 @@
-import { StatusBar, View } from 'react-native';
-import React from 'react';
+import { StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { COLORS } from './src/enums/StyleGuide';
 import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { anonymousLogin, ensureFirestoreUserDocument, getCurrentUser } from './src/services';
 
 const App = () => {
+  const [authLoading, setAuthLoading] = useState(true);
+  const [authError, setAuthError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const initializeAnonymousAuth = async () => {
+      try {
+        const existingUser = getCurrentUser();
+
+        if (existingUser) {
+          await ensureFirestoreUserDocument(existingUser);
+        } else {
+          await anonymousLogin();
+        }
+      } catch (error) {
+        if (isMounted) {
+          setAuthError(error instanceof Error ? error : new Error('Anonymous authentication failed.'));
+        }
+      } finally {
+        if (isMounted) {
+          setAuthLoading(false);
+        }
+      }
+    };
+
+    initializeAnonymousAuth();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (__DEV__ && authError) {
+      console.warn('Anonymous auth initialization failed:', authError.message);
+    }
+  }, [authError]);
+
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1 }} pointerEvents={authLoading ? 'none' : 'auto'}>
       <StatusBar backgroundColor={COLORS.splashBg} barStyle={'light-content'} />
       <RootNavigator />
     </GestureHandlerRootView>

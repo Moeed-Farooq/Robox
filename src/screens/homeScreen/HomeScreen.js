@@ -8,6 +8,9 @@ import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
 import { DailyReward, RobuxFeaturesData } from '../../dummies';
 import { DailyRewardsCards, RobuxFeaturesCards } from '../../components';
+import Pressable from '../../common/Pressable';
+import { useNavigation } from '@react-navigation/native';
+import { SCREEN } from '../../enums';
 
 const AnimatedScrollView = Animated.createAnimatedComponent(
   Animated.ScrollView,
@@ -15,6 +18,7 @@ const AnimatedScrollView = Animated.createAnimatedComponent(
 
 const HomeScreen = () => {
   const progress = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation();
 
   useEffect(() => {
     Animated.timing(progress, {
@@ -58,13 +62,16 @@ const HomeScreen = () => {
             <Label style={styles.welcomeText}>{en.welconeBack}</Label>
           </View>
 
-          <View style={styles.controller}>
+          <Pressable
+            style={styles.controller}
+            onPress={() => navigation.navigate(SCREEN.GAMES_SCREEN)}
+          >
             <SvgIcon
               icon={SVG.gameControllerWhite}
               width={hp(4)}
               height={hp(4)}
             />
-          </View>
+          </Pressable>
         </View>
       </LinearGradient>
 

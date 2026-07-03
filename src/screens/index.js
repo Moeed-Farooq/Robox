@@ -15,7 +15,14 @@ import SpinWheelScreen from './spinWheelScreen';
 import BloxFruitsGame from './bloxFruitsGame';
 import JailBreakGame from './jailBreakGame';
 import FreeEmotesScreen from './freeEmotesScreen';
-import RobuxSkinsScreen from './robuxSkinsScreen'
+import RobuxSkinsScreen from './robuxSkinsScreen';
+import AdoptMeGame from './adoptMeGame';
+import TowerHellGame from './towerHellGame';
+import MurderMysteryGame from './murderMysteryGame';
+import ArsenalGame from './arsenalGame';
+import PhantomForcesGame from './phantomForcesGame';
+import RoyaleHighGame from './royaleHighGame';
+import FleeTheFacilityGame from './fleeTheFacilityGame';
 
 export {
   HomeScreen,
@@ -35,5 +42,12 @@ export {
   BloxFruitsGame,
   JailBreakGame,
   FreeEmotesScreen,
-  RobuxSkinsScreen
+  RobuxSkinsScreen,
+  AdoptMeGame,
+  TowerHellGame,
+  MurderMysteryGame,
+  ArsenalGame,
+  PhantomForcesGame,
+  RoyaleHighGame,
+  FleeTheFacilityGame,
 };

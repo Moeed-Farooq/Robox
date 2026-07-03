@@ -20,6 +20,7 @@ const RobuxSkinsCard = ({ item }) => {
   const [modalType, setModalType] = useState('success');
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModalMessage] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const triggerDownload = () => {
     handleImageDownload(
@@ -54,8 +55,16 @@ const RobuxSkinsCard = ({ item }) => {
           <SvgIcon icon={SVG.premium} height={hp(3)} width={hp(3)} />
         </View>
 
-        <TouchableOpacity style={styles.favoriteBadge} activeOpacity={0.7}>
-          <SvgIcon icon={SVG.heart} height={hp(2.5)} width={hp(2.5)} />
+        <TouchableOpacity
+          style={styles.favoriteBadge}
+          activeOpacity={0.7}
+          onPress={() => setIsFavorite(prev => !prev)}
+        >
+          <SvgIcon
+            icon={isFavorite ? SVG.heartFilled : SVG.heartOutline}
+            height={hp(2.5)}
+            width={hp(2.5)}
+          />
         </TouchableOpacity>
       </View>
 

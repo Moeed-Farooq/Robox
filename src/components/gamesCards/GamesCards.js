@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
 
   title: {
     color: COLORS.white,
-    fontSize: hp(1.9),
+    fontSize: hp(1.8),
     fontFamily: FONT.semiBold,
   },
 
