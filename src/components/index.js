@@ -4,6 +4,7 @@ import GamesCards from './gamesCards';
 import AvatarStyleCard from './avatarStyleCard';
 import SettingsItem from './settingsItem';
 import RobuxCodesCards from './robuxCodesCards';
+import ConversionCard from './conversionCard';
 
 export {
   DailyRewardsCards,
@@ -12,4 +13,5 @@ export {
   AvatarStyleCard,
   SettingsItem,
   RobuxCodesCards,
+  ConversionCard,
 };

@@ -36,5 +36,16 @@
   "questions":"Questions",
   "copy":"Copy",
   "report":"Report",
-  "howToUseCode":"How to use code"
+  "howToUseCode":"How to use code",
+  "conversionResult":"Conversion Result",
+  "selectConversionType":"Select Conversion Type",
+  "enterAmount":"Enter Amount",
+  "premiumConversionsAwait":"Premium Conversions Await",
+  "RobuxCalculator":"ROBUX CALCULATOR",
+  "gameOver":"GAME OVER",
+  "noSpace":"You ran out of space !",
+  "finalScore":"FINAL SCORE",
+  "level":"LEVEL",
+  "block":"BLOCK",
+  "puzzle":"PUZZLE"
 }

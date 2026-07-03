@@ -57,8 +57,12 @@ import heartBroken from './heart-broken.svg';
 import trophy from './trophy.svg';
 import bulb from './bulb.svg';
 import undo from './undo.svg';
+import restart from './restart.svg'
+import selected from './selected.svg'
 
 export const SVG = {
+  selected,
+  restart,
   bulb,
   undo,
   report,

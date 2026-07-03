@@ -35,6 +35,7 @@ export const COLORS = {
   lightRed: '#FF8AA3',
   blue: '#5B7CFF',
   darkBlue: '#161D3C',
+  lightestBlue: '#a8b8ff',
   lightdarkBlue: '#2C3867',
   newBlue: '#3246A5',
   newLightBlue: '#5169D4',
@@ -45,6 +46,7 @@ export const COLORS = {
   green: '#3DDC97',
   darkGreen: '#138a03',
   lightGreen: '#59ffb7',
+  lightestGreen: '#17da48',
   splashBg: '#6C63FF',
   primary: '#6C63FF',
   secondary: '#1E2340',
@@ -58,6 +60,21 @@ export const COLORS = {
   gradientMid: '#4E5BFF',
   mutedText: '#9AA4C7',
   darkWhite: '#ffffff',
+  darkPurple:'#40304D',
+  // === NEW CONTRAST COLORS FOR THEME (Matching with #6C63FF) ===
+  contrastYellow: '#FFE600',       // High-contrast electric yellow (attention-grabbing alerts/badges)
+  contrastMint: '#26DF9C',         // Fresh mint green for success/positive actions against purple
+  contrastCoral: '#FF5A5F',        // Soft bright coral for warm highlights
+  contrastCyan: '#00F0FF',         // Cyberpunk style cyan/neon blue (perfect for secondary buttons/icons)
+  contrastOrange: '#FF9F43',       // Warm contrast orange
+  
+  // Muted/Pastel versions for backgrounds & cards
+  bgPurpleSoft: '#F0EFFF',         // Very light purple tint for light-mode cards
+  bgPurpleDark: '#13112E',         // Deep midnight purple for pure dark-mode app background
+  
+  // Text variations that pop on splashBg/Primary background
+  textOnPrimary: '#FFFFFF',        // Pure white for high legibility on primary buttons
+  textOnPrimaryMuted: '#D1CFFF',
 };
 
 export const FONT = {

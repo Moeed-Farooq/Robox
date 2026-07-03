@@ -23,6 +23,8 @@ const RootNavigator = () => {
         <Stack.Screen name={SCREEN.TERMS_AND_CONDITIONS_SCREEN} component={ui.TermsAndConditionsScreen} />
         <Stack.Screen name={SCREEN.PRIVACY_SCREEN} component={ui.PrivacyScreen} />
         <Stack.Screen name={SCREEN.WORD_QUIZ_SCREEN} component={ui.WordQuizScreen} />
+        <Stack.Screen name={SCREEN.RBX_CALCULATOR_SCREEN} component={ui.RbxCalculatorScreen} />
+        <Stack.Screen name={SCREEN.BLOCK_PUZZLE_SCREEN} component={ui.BlockPuzzleScreen} />
         
       </Stack.Navigator>
     </NavigationContainer>
