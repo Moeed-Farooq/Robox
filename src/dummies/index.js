@@ -81,7 +81,7 @@ export const GAMES_DATA = [
         subDetail: 'Perfect\nfor families',
         bgcolor: '#e95889',
         icon: SVG.paw,
-        screen: SCREEN.BLOX_FRUITS_GAME,
+        screen: SCREEN.ADOPT_ME_GAME,
       },
       {
         id: '3',
@@ -91,7 +91,7 @@ export const GAMES_DATA = [
         subDetail: 'Fun\nobstacles',
         bgcolor: '#FF5722',
         icon: SVG.tower,
-        screen: SCREEN.BLOX_FRUITS_GAME,
+        screen: SCREEN.TOWER_HELL_GAME,
       },
     ],
   },
@@ -118,16 +118,18 @@ export const GAMES_DATA = [
         level: 'Medium',
         subDetail: 'Strategy\ngameplay',
         bgcolor: '#ba09f0',
+        screen: SCREEN.MURDER_MYSTERY_GAME,
         icon: SVG.knife,
       },
       {
         id: '6',
-        name: 'Arsenel',
+        name: 'Arsenal',
         detail: 'Fast-paced\nFPS action',
         level: 'Medium',
         subDetail: 'Competitive\nshooter',
         bgcolor: '#FF5722',
         icon: SVG.dart,
+        screen: SCREEN.ARSENAL_GAME,
       },
     ],
   },
@@ -139,12 +141,13 @@ export const GAMES_DATA = [
     data: [
       {
         id: '7',
-        name: 'Fantom for...',
-        detail: 'Tactical shooter with\nrealistic machenics',
+        name: 'Phantom For...',
+        detail: 'Tactical shooter\nwith realistic mechanics',
         level: 'Hard',
         subDetail: 'Advaced\ntectics',
         bgcolor: '#2a3a52',
         icon: SVG.croessSwords,
+        screen: SCREEN.PHANTOM_FORCES_GAME,
       },
       {
         id: '8',
@@ -154,6 +157,7 @@ export const GAMES_DATA = [
         subDetail: 'IntenseNSurvival',
         bgcolor: '#7add5c',
         icon: SVG.manRunnung,
+        screen: SCREEN.FLEE_THE_FACILITY_GAME,
       },
       {
         id: '9',
@@ -163,6 +167,7 @@ export const GAMES_DATA = [
         subDetail: 'Complex\nMachenics',
         bgcolor: '#f436ab',
         icon: SVG.crown,
+        screen: SCREEN.ROYALE_HIGH_GAME,
       },
     ],
   },
@@ -1057,6 +1062,7 @@ export const ITEMS_DATA = [
       'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=500&auto=format&fit=crop',
   },
 ];
+
 export const SKINS_DATA = [
   {
     id: '1',

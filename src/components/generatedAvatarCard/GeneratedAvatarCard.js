@@ -5,8 +5,10 @@ import SvgIcon from '../../common/SvgIcon';
 import Label from '../../common';
 import { SVG } from '../../assets';
 import { hp, wp } from '../../enums/StyleGuide';
+import { shareAvatar } from '../../helpers';
 
 const GeneratedAvatarCard = ({ item, onToggleFavorite }) => {
+
   return (
     <View style={styles.generatedCardWrapper}>
       <LinearGradient
@@ -23,11 +25,14 @@ const GeneratedAvatarCard = ({ item, onToggleFavorite }) => {
       </LinearGradient>
 
       <View style={styles.actionRow}>
-        <TouchableOpacity style={styles.actionBtn}>
+        <TouchableOpacity 
+          style={styles.actionBtn} 
+          onPress={shareAvatar}
+          activeOpacity={0.7}
+        >
           <SvgIcon icon={SVG.share || SVG.brain} width={hp(2)} height={hp(2)} />
         </TouchableOpacity>
         
-        {/* Heart/Favorite Button */}
         <TouchableOpacity 
           style={styles.actionBtn} 
           onPress={() => onToggleFavorite(item.id)}
@@ -80,7 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: hp(2),
   },
   styleBadgeText: {
-    color: '#FFFFFF', // Fallback color agar COLORS import nahi karna to
+    color: '#FFFFFF',
     fontSize: hp(1.4),
     fontWeight: '500',
   },

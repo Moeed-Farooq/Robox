@@ -17,6 +17,13 @@ export const SCREEN = {
   JAIL_BREAK_GAME: 'JailBreakGame',
   FREE_EMOTES_SCREEN: 'FreeEmotesScreen',
   ROBUX_SKINS_SCREEN: 'RobuxSkinsScreen',
+  ADOPT_ME_GAME: 'AdoptMeGame',
+  ARSENAL_GAME: 'ArsenalGame',
+  FLEE_THE_FACILITY_GAME: 'FleeTheFacilityGame',
+  MURDER_MYSTERY_GAME: 'MurderMysteryGame',
+  PHANTOM_FORCES_GAME: 'PhantomForcesGame',
+  ROYALE_HIGH_GAME: 'RoyaleHighGame',
+  TOWER_HELL_GAME: 'TowerHellGame',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',
