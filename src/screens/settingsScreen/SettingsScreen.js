@@ -7,9 +7,11 @@ import { SVG } from '../../assets';
 import { en } from '../../languages';
 import { SETTINGS_SECTIONS } from '../../dummies';
 import { SettingsItem } from '../../components';
+import { useNavigation } from '@react-navigation/native';
 
 const SettingsScreen = () => {
   const [sections, setSections] = useState(SETTINGS_SECTIONS);
+  const navigation = useNavigation();
 
   const handleToggle = (sectionTitle, itemId, value) => {
     setSections(prevSections =>
@@ -35,6 +37,11 @@ const SettingsScreen = () => {
       item={item}
       type={section.type}
       onToggle={value => handleToggle(section.title, item.id, value)}
+      onPress={() => {
+        if (item?.screen) {
+          navigation.navigate(item.screen);
+        }
+      }}
     />
   );
 
@@ -42,11 +49,7 @@ const SettingsScreen = () => {
     <View style={styles.HeaderRow}>
       <Label style={styles.settingsText}>{en.settings}</Label>
 
-      <SvgIcon
-        icon={SVG.userAvatarYellow}
-        width={hp(3)}
-        height={hp(3)}
-      />
+      <SvgIcon icon={SVG.userAvatarYellow} width={hp(3)} height={hp(3)} />
     </View>
   );
 

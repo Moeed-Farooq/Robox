@@ -48,9 +48,18 @@ import userAvatarYellow from './user-avatar-yellow.svg';
 import arrowRight from './arrow-right.svg';
 import mind from './mind.svg';
 import goBack from './go-back.svg';
+import stopWatch from './stopwatch.svg'
+import eye from './eye.svg'
+import crossButton from './crossBtn.svg'
+import report from './report.svg'
+
 
 export const SVG = {
+  report,
+  crossButton,
   mind,
+  eye,
+  stopWatch,
   goBack,
   about,
   arrowRight,

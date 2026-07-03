@@ -26,7 +26,6 @@ export const bottomIcons = {
   },
 };
 
-
 export const DailyReward = [
   {
     id: 1,
@@ -35,7 +34,7 @@ export const DailyReward = [
     src: IMAGES.DAILY_ROBUX,
     reward: '2,500',
     color: COLORS.yellow,
-    screen:SCREEN.FREE_DAILY_ROBUX_SCREEN
+    screen: SCREEN.FREE_DAILY_ROBUX_SCREEN,
   },
   {
     id: 2,
@@ -44,57 +43,126 @@ export const DailyReward = [
     src: IMAGES.FREE_EMOTE,
     reward: 'Elite',
     color: COLORS.pink,
-    screen:""
+    screen: '',
   },
 ];
 
 export const RobuxFeaturesData = [
-  { id: 1, title: 'Robux Codes' },
-  { id: 2, title: 'Robux Skins' },
-  { id: 3, title: 'Wordy Robux' },
-  { id: 4, title: 'RBX Calculator' },
-  { id: 5, title: 'Block Puzzle' },
-  { id: 6, title: 'Spin Wheel' },
+  { id: 1, title: 'Robux Codes', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 2, title: 'Robux Skins', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 3, title: 'Wordy Robux', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 4, title: 'RBX Calculator', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 5, title: 'Block Puzzle', screen: SCREEN.ROBUX_CODES_SCREEN },
+  { id: 6, title: 'Spin Wheel', screen: SCREEN.ROBUX_CODES_SCREEN },
 ];
-
 
 export const GAMES_DATA = [
   {
-    title: "Easy Games",
-    detail:"Perfect for beginners",
+    title: 'Easy Games',
+    detail: 'Perfect for beginners',
     bgcolor: COLORS.splashBg,
     icon: SVG.dart,
     data: [
-      { id: "1", name: "Blox Fruits", detail: "Puzzle your way\nthrough Blox Fruits!", level: "Easy", subDetail: "Great for\nbeginners", bgcolor: "#4CAF50", icon: SVG.pirateFlag },
-      { id: "2", name: "Adopt Me", detail: "Raise magical pets\nand build your drea...", level: "Easy", subDetail: "Perfect\nfor families", bgcolor: "#e95889", icon: SVG.paw },
-      { id: "3", name: "Tower of Hell", detail: "Climb the ultimate\ntower challenge", level: "Easy", subDetail: "Fun\nobstacles", bgcolor: "#FF5722", icon: SVG.tower },
+      {
+        id: '1',
+        name: 'Blox Fruits',
+        detail: 'Puzzle your way\nthrough Blox Fruits!',
+        level: 'Easy',
+        subDetail: 'Great for\nbeginners',
+        bgcolor: '#4CAF50',
+        icon: SVG.pirateFlag,
+      },
+      {
+        id: '2',
+        name: 'Adopt Me',
+        detail: 'Raise magical pets\nand build your drea...',
+        level: 'Easy',
+        subDetail: 'Perfect\nfor families',
+        bgcolor: '#e95889',
+        icon: SVG.paw,
+      },
+      {
+        id: '3',
+        name: 'Tower of Hell',
+        detail: 'Climb the ultimate\ntower challenge',
+        level: 'Easy',
+        subDetail: 'Fun\nobstacles',
+        bgcolor: '#FF5722',
+        icon: SVG.tower,
+      },
     ],
   },
   {
-    title: "Medium Games",
-    detail:"Fun challenges for developing skills",
-    bgcolor: "#b3a3ee",
+    title: 'Medium Games',
+    detail: 'Fun challenges for developing skills',
+    bgcolor: '#b3a3ee',
     icon: SVG.gameControllerColorful,
     data: [
-      { id: "4", name: "Jailreak", detail: "Escape prison or\nbeacome a cop!", level: "Medium", subDetail: "Action-\npacked", bgcolor: "#2196F3", icon:SVG.policeCar },
-      { id: "5", name: "Murder Mystery", detail: "Find the murderer\nbefore its too late", level: "Medium", subDetail: "Strategy\ngameplay", bgcolor: "#ba09f0", icon:SVG.knife},
-      { id: "6", name: "Arsenel", detail: "Fast-paced\nFPS action", level: "Medium", subDetail: "Competitive\nshooter", bgcolor: "#FF5722", icon: SVG.dart },
+      {
+        id: '4',
+        name: 'Jailreak',
+        detail: 'Escape prison or\nbeacome a cop!',
+        level: 'Medium',
+        subDetail: 'Action-\npacked',
+        bgcolor: '#2196F3',
+        icon: SVG.policeCar,
+      },
+      {
+        id: '5',
+        name: 'Murder Mystery',
+        detail: 'Find the murderer\nbefore its too late',
+        level: 'Medium',
+        subDetail: 'Strategy\ngameplay',
+        bgcolor: '#ba09f0',
+        icon: SVG.knife,
+      },
+      {
+        id: '6',
+        name: 'Arsenel',
+        detail: 'Fast-paced\nFPS action',
+        level: 'Medium',
+        subDetail: 'Competitive\nshooter',
+        bgcolor: '#FF5722',
+        icon: SVG.dart,
+      },
     ],
   },
   {
-    title: "Hard Games",
-    detail:"Ultmate challenges for experts",
-    bgcolor: "#bd1f13",
+    title: 'Hard Games',
+    detail: 'Ultmate challenges for experts',
+    bgcolor: '#bd1f13',
     icon: SVG.fire,
     data: [
-      { id: "7", name: "Fantom for...", detail: "Tactical shooter with\nrealistic machenics", level: "Hard", subDetail: "Advaced\ntectics", bgcolor: "#2a3a52", icon: SVG.croessSwords },
-      { id: "8", name: "Flee the facili...", detail: "Survive the beast\nand escape", level: "Hard", subDetail: "Intense\NSurvival", bgcolor: "#7add5c", icon: SVG.manRunnung },
-      { id: "9", name: "Royale High", detail: "Live your fantasy\nlife in style", level: "Hard", subDetail: "Complex\nMachenics", bgcolor: "#f436ab", icon: SVG.crown },
+      {
+        id: '7',
+        name: 'Fantom for...',
+        detail: 'Tactical shooter with\nrealistic machenics',
+        level: 'Hard',
+        subDetail: 'Advaced\ntectics',
+        bgcolor: '#2a3a52',
+        icon: SVG.croessSwords,
+      },
+      {
+        id: '8',
+        name: 'Flee the facili...',
+        detail: 'Survive the beast\nand escape',
+        level: 'Hard',
+        subDetail: 'IntenseNSurvival',
+        bgcolor: '#7add5c',
+        icon: SVG.manRunnung,
+      },
+      {
+        id: '9',
+        name: 'Royale High',
+        detail: 'Live your fantasy\nlife in style',
+        level: 'Hard',
+        subDetail: 'Complex\nMachenics',
+        bgcolor: '#f436ab',
+        icon: SVG.crown,
+      },
     ],
   },
 ];
-
-
 
 export const AVATAR_STYLES = [
   {
@@ -140,7 +208,6 @@ export const AVATAR_STYLES = [
     activeIcon: SVG.magicBlack,
   },
 ];
-
 
 export const SETTINGS_SECTIONS = [
   {
@@ -198,6 +265,7 @@ export const SETTINGS_SECTIONS = [
         title: 'Terms And Conditions',
         subtitle: 'Read our terms',
         icon: SVG.paper,
+        screen: SCREEN.TERMS_AND_CONDITIONS_SCREEN,
       },
       {
         id: '8',
@@ -209,7 +277,8 @@ export const SETTINGS_SECTIONS = [
         id: '9',
         title: 'Privacy',
         subtitle: 'Manage your privacy',
-        icon: SVG.lock,
+        icon:SVG.lock,
+        screen:SCREEN.PRIVACY_SCREEN,
       },
       {
         id: '10',
@@ -219,4 +288,335 @@ export const SETTINGS_SECTIONS = [
       },
     ],
   },
+];
+
+export const QUIZ_DATA = [
+  {
+    id: 1,
+    question: 'What is the official currency used in Roblox?',
+    options: ['Robux', 'RoboCoins', 'Tickets', 'BloxBucks'],
+    correctAnswer: 'Robux',
+  },
+  {
+    id: 2,
+    question: 'Who created Roblox?',
+    options: ['David Baszucki', 'Elon Musk', 'Bill Gates', 'Mark Zuckerberg'],
+    correctAnswer: 'David Baszucki',
+  },
+  {
+    id: 3,
+    question: 'Which programming language is used in Roblox Studio?',
+    options: ['Python', 'JavaScript', 'Lua', 'C++'],
+    correctAnswer: 'Lua',
+  },
+  {
+    id: 4,
+    question: 'What is the name of the software used to make Roblox games?',
+    options: [
+      'Roblox Creator',
+      'Roblox Studio',
+      'Roblox Engine',
+      'Roblox Build',
+    ],
+    correctAnswer: 'Roblox Studio',
+  },
+  {
+    id: 5,
+    question: 'What is the default name given to any new Roblox user?',
+    options: ['Player', 'Robloxian', 'Guest', 'Noob'],
+    correctAnswer: 'Player',
+  },
+  {
+    id: 6,
+    question:
+      'In which popular Roblox game can you adopt pets and build houses?',
+    options: ['Blox Fruits', 'Brookhaven', 'Adopt Me!', 'Piggy'],
+    correctAnswer: 'Adopt Me!',
+  },
+  {
+    id: 7,
+    question: "What does 'Obby' stand for in Roblox?",
+    options: [
+      'Object Building',
+      'Obstacle Course',
+      'Obvious Way',
+      'Online Battle',
+    ],
+    correctAnswer: 'Obstacle Course',
+  },
+  {
+    id: 8,
+    question: 'What year was Roblox officially released?',
+    options: ['2004', '2006', '2010', '2015'],
+    correctAnswer: '2006',
+  },
+  {
+    id: 9,
+    question:
+      'What is the name of the character customization model in Roblox?',
+    options: ['Player', 'Avatar', 'Skin', 'Actor'],
+    correctAnswer: 'Avatar',
+  },
+  {
+    id: 10,
+    question:
+      'Which Roblox game is focused on living and roleplaying in a big city?',
+    options: ['Brookhaven RP', 'Murder Mystery 2', 'BedWars', 'Arsenal'],
+    correctAnswer: 'Brookhaven RP',
+  },
+  {
+    id: 11,
+    question: 'What icon is famously used as the logo of Roblox?',
+    options: [
+      'A red square with a hole',
+      'A blue circle',
+      'A yellow star',
+      'A green triangle',
+    ],
+    correctAnswer: 'A red square with a hole',
+  },
+  {
+    id: 12,
+    question: "What color is the standard Roblox 'Noob' character's torso?",
+    options: ['Green', 'Blue', 'Yellow', 'Red'],
+    correctAnswer: 'Blue',
+  },
+  {
+    id: 13,
+    question: 'Can you play Roblox on mobile phones?',
+    options: ['Yes, Android & iOS', 'Only iOS', 'Only Android', 'No'],
+    correctAnswer: 'Yes, Android & iOS',
+  },
+  {
+    id: 14,
+    question:
+      'What are items that give you special perks inside a specific Roblox game called?',
+    options: ['Gamepasses', 'Robux Premium', 'Badges', 'Admin Tools'],
+    correctAnswer: 'Gamepasses',
+  },
+  {
+    id: 15,
+    question:
+      "What was Roblox's original name during its early development stage?",
+    options: ['BlockWorld', 'DynaBlocks', 'BuildCraft', 'LegoSim'],
+    correctAnswer: 'DynaBlocks',
+  },
+];
+
+export const ROBUX_CODES = [
+  {
+    id: '1',
+    provider: 'elite',
+    views: '62',
+    time: '2 days ago',
+    code: 'ELITE-DEAL-2026-X',
+  },
+  {
+    id: '2',
+    provider: 'admin',
+    views: '39',
+    time: '1 hour ago',
+    code: 'ADMIN-PROMO-99X',
+  },
+  {
+    id: '3',
+    provider: 'premium',
+    views: '120',
+    time: '5 mins ago',
+    code: 'PREMIUM-DISC-50',
+  },
+  {
+    id: '4',
+    provider: 'user_zone',
+    views: '15',
+    time: '3 hours ago',
+    code: 'ZONE-FREE-TRIAL',
+  },
+];
+
+export const PRIVACY_DATA = [
+  {
+    id: '1',
+    number: '1',
+    title: 'Information We Collect',
+    description: 'We may collect the following information:',
+    points: [
+      'Personal Information: such as your name, email address, or profile information (only if you choose to provide it or connect through third-party services like Google or Apple).',
+      'Usage Data: including your gameplay activity, scores, and in-app interactions.',
+      'Device Information: such as device type, operating system, language, and app version.',
+      'Advertising and Analytics Data: collected through third-party tools (e.g., Google AdMob, Firebase) for analytics and ad personalization.',
+    ],
+    footerText: '',
+  },
+  {
+    id: '2',
+    number: '2',
+    title: 'How We Use Your Information',
+    description: 'We use the collected data to:',
+    points: [
+      'Provide and improve the App experience.',
+      'Personalize your gameplay and rewards.',
+      'Show relevant ads and measure their performance.',
+      'Analyze usage and fix technical issues.',
+      'Communicate with you (e.g., updates, customer support).',
+    ],
+    footerText: '',
+  },
+  {
+    id: '3',
+    number: '3',
+    title: 'Third-Party Services',
+    description:
+      'Our App may include integrations with third-party services such as:',
+    points: ['Google AdMob (for ads)', 'Firebase Analytics (for analytics)'],
+    footerText:
+      'These services may collect information in accordance with their own privacy policies.',
+  },
+  {
+    id: '4',
+    number: '4',
+    title: 'Data Retention',
+    description:
+      'We keep your information only as long as necessary for the purposes described in this Privacy Policy. You can request deletion of your data by contacting us at bloxiapps224@support.com.',
+    points: [], // Iska direct description text hai, points nahi hain
+    footerText: '',
+  },
+  {
+    id: '5',
+    number: '5',
+    title: "Children's Privacy",
+    description:
+      'Robux Points is intended for users aged 13 and older.\nWe do not knowingly collect personal data from children under 13. If you believe your child has provided personal data, please contact us.',
+    points: [],
+    footerText: '',
+  },
+  {
+    id: '6',
+    number: '6',
+    title: 'Data Security',
+    description:
+      'We implement industry-standard measures to protect your data from unauthorized access, disclosure, or alteration.',
+    points: [],
+    footerText: '',
+  },
+  {
+    id: '7',
+    number: '7',
+    title: 'Your Rights',
+    description: 'You can:',
+    points: [
+      'Request access, correction, or deletion of your personal data.',
+      'Opt out of analytics or personalized advertising (depending on your device settings).',
+    ],
+    footerText: '',
+  },
+  {
+    id: '8',
+    number: '8',
+    title: 'Changes to This Policy',
+    description:
+      'We may update this Privacy Policy from time to time. The updated version will be posted within the App with the new effective date.',
+    points: [],
+    footerText: '',
+  },
+  {
+    id: '9',
+    number: '9',
+    title: 'Contact Us',
+    description:
+      'If you have any questions about this Privacy Policy, contact us.',
+    points: [],
+    footerText: '',
+  },
+];
+
+export const TERMS_DATA = [
+  {
+    id: '1',
+    number: '1',
+    title: 'Acceptance of Terms',
+    description: 'By accessing or using the App, you agree to be bound by these Terms. If you do not agree, do not use the App.',
+    points: []
+  },
+  {
+    id: '2',
+    number: '2',
+    title: 'Use of the App',
+    description: '',
+    points: [
+      'You must be at least 13 years old to use this App.',
+      'You agree to use the App only for lawful purposes and in accordance with these Terms.',
+      'You may not attempt to hack, reverse-engineer, or misuse the App.'
+    ]
+  },
+  {
+    id: '3',
+    number: '3',
+    title: 'User Accounts',
+    description: 'Some features may require you to create an account. You are responsible for:',
+    points: [
+      'Keeping your login details secure.',
+      'All activities that occur under your account.'
+    ]
+  },
+  {
+    id: '4',
+    number: '4',
+    title: 'Intellectual Property',
+    description: 'All content, trademarks, graphics, and code within the App are owned by Robux Points or its licensors. You may not copy, distribute, or modify any part of the App without written permission.',
+    points: []
+  },
+  {
+    id: '5',
+    number: '5',
+    title: 'In-App Purchases & Rewards',
+    description: '',
+    points: [
+      'Robux Points may offer in-app purchases, virtual rewards, or points.',
+      'These items have no real-world monetary value and cannot be exchanged for cash.',
+      'We reserve the right to modify or remove these features at any time.'
+    ]
+  },
+  {
+    id: '6',
+    number: '6',
+    title: 'Termination',
+    description: 'We may suspend or terminate your access to the App at any time if you violate these Terms or for any reason deemed necessary.',
+    points: []
+  },
+  {
+    id: '7',
+    number: '7',
+    title: 'Disclaimer of Warranties',
+    description: 'The App is provided "as is" and "as available." We make no guarantees regarding uninterrupted service, accuracy, or reliability.',
+    points: []
+  },
+  {
+    id: '8',
+    number: '8',
+    title: 'Limitation of Liability',
+    description: 'We are not responsible for any damages arising from your use or inability to use the App, including data loss or system errors.',
+    points: []
+  },
+  {
+    id: '9',
+    number: '9',
+    title: 'Updates and Modifications',
+    description: 'We may update the App or these Terms from time to time. Continued use of the App after such updates constitutes acceptance of the new Terms.',
+    points: []
+  },
+  {
+    id: '10',
+    number: '10',
+    title: 'Governing Law',
+    description: 'These Terms are governed by the laws of your country of residence, without regard to conflict of law principles.',
+    points: []
+  },
+  {
+    id: '11',
+    number: '11',
+    title: 'Contact Us',
+    description: 'For questions or support, contact us.',
+    points: []
+  }
 ];

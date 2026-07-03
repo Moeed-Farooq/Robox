@@ -31,6 +31,7 @@ export const COLORS = {
   newlightWhite: '#DCE4FF',
   shadow: '#1A1F3A',
   red: '#FF5E7A',
+  darkRed: '#f80029',
   lightRed: '#FF8AA3',
   blue: '#5B7CFF',
   darkBlue: '#161D3C',
@@ -42,6 +43,7 @@ export const COLORS = {
   pink: '#FF4D91',
   orange: '#FF7A59',
   green: '#3DDC97',
+  darkGreen: '#138a03',
   lightGreen: '#59ffb7',
   splashBg: '#6C63FF',
   primary: '#6C63FF',
@@ -55,6 +57,7 @@ export const COLORS = {
   gradientEnd: '#FF7A59',
   gradientMid: '#4E5BFF',
   mutedText: '#9AA4C7',
+  darkWhite: '#ffffff',
 };
 
 export const FONT = {

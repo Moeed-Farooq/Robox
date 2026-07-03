@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, SectionList } from 'react-native';
+import { StyleSheet, View, SectionList, TouchableOpacity } from 'react-native';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
@@ -16,9 +16,12 @@ const FreeDailyRobuxScreen = () => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.HeaderRow}>
-        <View style={styles.iconContainer}>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.goBack()}
+        >
           <SvgIcon icon={SVG.goBack} height={hp(4)} width={hp(4)} />
-        </View>
+        </TouchableOpacity>
         <View>
           <Label style={styles.dailyRobuxText}>{en.dailyRobux}</Label>
           <Label style={styles.eliteChallengeText}>{en.eliteChallenge}</Label>
@@ -31,7 +34,6 @@ const FreeDailyRobuxScreen = () => {
           />
         </View>
       </View>
-
       <View style={styles.mindIconContainer}>
         <View style={styles.insideMindContainer}>
           <SvgIcon icon={SVG.mind} width={hp(4)} height={hp(4)} />
@@ -40,20 +42,27 @@ const FreeDailyRobuxScreen = () => {
 
       <Label style={styles.dailyNewRobuxText}>{en.dailyNewRobux}</Label>
       <Label style={styles.testYourKnowledgeText}>{en.testYourKnowledge}</Label>
-      <Button
-        icon={<SvgIcon icon={SVG.play} width={hp(2)} height={hp(2)} />}
-        text={en.startRobux}
-        textStyle={styles.startBtnText}
-        style={styles.startBtn}
-        onPress={()=>navigation.navigate(SCREEN.DAILY_ROBUX_QUIZ)}
-        
-      />
-      <Button
-        icon={<SvgIcon icon={SVG.gameControllerColorful} width={hp(2)} height={hp(2)} />}
-        text={en.playRobuxBlast}
-        textStyle={styles.playBtnText}
-        style={styles.playBtn}
-      />
+      <View style={styles.btnRow}>
+        <Button
+          icon={<SvgIcon icon={SVG.play} width={hp(2)} height={hp(2)} />}
+          text={en.startRobux}
+          textStyle={styles.startBtnText}
+          style={styles.startBtn}
+          onPress={() => navigation.navigate(SCREEN.DAILY_ROBUX_QUIZ)}
+        />
+        <Button
+          icon={
+            <SvgIcon
+              icon={SVG.gameControllerColorful}
+              width={hp(2)}
+              height={hp(2)}
+            />
+          }
+          text={en.playRobuxBlast}
+          textStyle={styles.playBtnText}
+          style={styles.playBtn}
+        />
+      </View>
     </View>
   );
 };
@@ -72,6 +81,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  btnRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: hp(5),
   },
   iconContainer: {
     backgroundColor: COLORS.lightYellow,
@@ -117,7 +132,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: hp(1.3),
     borderRadius: hp(2),
-    marginTop: hp(4),
   },
   playBtnText: {
     color: COLORS.black,
@@ -130,7 +144,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: hp(1.3),
     borderRadius: hp(2),
-    marginTop: hp(1),
   },
   controller: {
     backgroundColor: 'rgba(255,255,255,0.2)',
