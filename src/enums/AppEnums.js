@@ -7,8 +7,9 @@ export const SCREEN = {
   FREE_DAILY_ROBUX_SCREEN: 'FreeDailyRobuxScreen',
   DAILY_ROBUX_QUIZ: 'DailyRobuxQuiz',
   ROBUX_CODES_SCREEN: 'RobuxCodesScreen',
-  TERMS_AND_CONDITIONS_SCREEN:"TermsAndConditionsScreen",
-  PRIVACY_SCREEN:"PrivacyScreen"
+  TERMS_AND_CONDITIONS_SCREEN: 'TermsAndConditionsScreen',
+  PRIVACY_SCREEN: 'PrivacyScreen',
+  WORD_QUIZ_SCREEN: 'WordQuizScreen',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',

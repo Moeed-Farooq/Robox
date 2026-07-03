@@ -48,14 +48,22 @@ import userAvatarYellow from './user-avatar-yellow.svg';
 import arrowRight from './arrow-right.svg';
 import mind from './mind.svg';
 import goBack from './go-back.svg';
-import stopWatch from './stopwatch.svg'
-import eye from './eye.svg'
-import crossButton from './crossBtn.svg'
-import report from './report.svg'
-
+import stopWatch from './stopwatch.svg';
+import eye from './eye.svg';
+import crossButton from './crossBtn.svg';
+import report from './report.svg';
+import heart from './heart.svg';
+import heartBroken from './heart-broken.svg';
+import trophy from './trophy.svg';
+import bulb from './bulb.svg';
+import undo from './undo.svg';
 
 export const SVG = {
+  bulb,
+  undo,
   report,
+  heart,
+  heartBroken,
   crossButton,
   mind,
   eye,
@@ -99,7 +107,7 @@ export const SVG = {
   croessSwords,
   manRunnung,
   crown,
-
+  trophy,
   settings,
   settingsActive,
   avatar,

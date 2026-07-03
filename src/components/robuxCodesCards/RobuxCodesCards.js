@@ -4,6 +4,7 @@ import Label from '../../common';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { SVG } from '../../assets';
 import SvgIcon from '../../common/SvgIcon';
+import { en } from '../../languages';
 
 const RobuxCodesCards = ({ item }) => {
   const handleCopy = () => {
@@ -40,18 +41,18 @@ const RobuxCodesCards = ({ item }) => {
         activeOpacity={0.8}
         onPress={handleCopy}
       >
-        <Label style={styles.copyButtonText}>Copy</Label>
+        <Label style={styles.copyButtonText}>{en.copy}</Label>
       </TouchableOpacity>
 
       <View style={styles.footerRow}>
         <TouchableOpacity style={styles.reportButton}>
           <SvgIcon icon={SVG.report} width={hp(1.8)} height={hp(1.8)} />
 
-          <Label style={styles.reportText}>Report</Label>
+          <Label style={styles.reportText}>{en.report}</Label>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.howToUseButton}>
-          <Label style={styles.howToUseText}>How to use code</Label>
+          <Label style={styles.howToUseText}>{en.howToUseCode}</Label>
         </TouchableOpacity>
 
         <TouchableOpacity>
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
   },
 
   copyButton: {
-    backgroundColor: COLORS.darkGreen,
+    backgroundColor: COLORS.accent,
     borderRadius: hp(2),
     paddingVertical: hp(1.8),
     justifyContent: 'center',
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
   },
 
   howToUseText: {
-    color: COLORS.white,
+    color: COLORS.darkGreen,
     fontSize: hp(1.3),
     fontFamily: FONT.semiBold,
   },
