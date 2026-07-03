@@ -33,21 +33,6 @@
   "congratulations":"Congratulations",
   "gameCompleted":"You completed the game.",
   "livesLeft":"Lives Left",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   "playAgain":"Play Again",
   "tryAgain":"Try Again",
   "caught":"CAUGHT!",
@@ -56,7 +41,6 @@
   "escapeFromPrison":"Escape from Prison",
   "escapedSubtext":"You successfully broke out of prison!",
   "caughtSubtext":"The guards caught you! Better luck next time.",
-
   "questions":"Questions",
   "copy":"Copy",
   "report":"Report",
@@ -83,5 +67,14 @@
   "close":"Close",
   "victory":"VICTORY!",
   "memoryChallenge":"Memory Challenge",
-  "bloxFruits":"Blox Fruits"
+  "bloxFruits":"Blox Fruits",
+  "save":"Save",
+  "newFree":"NEW FREE",
+  "emotesRobolx":"Emotes! Robux",
+  "robuxSkins":"Robux Skins",
+  "ok":"Ok",
+  "chooseASignatureLook":"Choose a Signature Look",
+  "emptyPromptDescription":"Please type or describe what kind of avatar you want to generate first.",
+  "gotIt":"Got it",
+  "emptyPrompt":"Empty Prompt"
 }
