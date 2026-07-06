@@ -8,6 +8,7 @@ import { en } from '../../languages';
 import { DailyReward, RobuxFeaturesData } from '../../dummies';
 import { DailyRewardsCards, HomeHeroBanner, RobuxFeaturesCards } from '../../components';
 import useHomeScreenAnimation from '../../hooks/useHomeScreenAnimation';
+import useTotalPoints from '../../hooks/useTotalPoints';
 
 const AnimatedScrollView = Animated.createAnimatedComponent(
   Animated.ScrollView,
@@ -16,6 +17,7 @@ const AnimatedScrollView = Animated.createAnimatedComponent(
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { screenAnim } = useHomeScreenAnimation();
+  const { totalPoints, loading } = useTotalPoints();
 
   const renderDailyRewards = ({ item }) => <DailyRewardsCards item={item} />;
   const renderRobuxFeatures = ({ item }) => <RobuxFeaturesCards item={item} />;
@@ -27,7 +29,11 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
       >
-        <HomeHeroBanner navigation={navigation} />
+        <HomeHeroBanner
+          navigation={navigation}
+          totalPoints={totalPoints}
+          totalPointsLoading={loading}
+        />
 
         <View style={styles.sectionWrap}>
           <View style={styles.sectionHeader}>

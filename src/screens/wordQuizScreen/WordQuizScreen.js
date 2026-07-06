@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -13,6 +13,7 @@ import { en } from '../../languages';
 import { WORD_QUIZ_DATA } from '../../dummies';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { generateLetters, formatTime, TOTAL_TIME } from '../../helpers';
+import useTotalPoints from '../../hooks/useTotalPoints';
 
 const WordQuizScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,6 +23,8 @@ const WordQuizScreen = () => {
   const [lives, setLives] = useState(3);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const pointsAwardedRef = useRef(false);
+  const { addPoints } = useTotalPoints();
 
   const currentQuestion = WORD_QUIZ_DATA[currentIndex];
   const currentAnswer = currentQuestion.rightAnswer
@@ -44,12 +47,27 @@ const WordQuizScreen = () => {
   };
 
   const restartGame = () => {
+    pointsAwardedRef.current = false;
     setCurrentIndex(0);
     setScore(0);
     setLives(3);
     setTimeLeft(TOTAL_TIME);
     setShowResult(false);
   };
+
+  useEffect(() => {
+    if (!showResult || pointsAwardedRef.current || score <= 0) {
+      return;
+    }
+
+    pointsAwardedRef.current = true;
+
+    addPoints(score).catch(error => {
+      // Allow retry if write fails.
+      pointsAwardedRef.current = false;
+      console.warn('Failed to save Word Quiz score:', error?.message || error);
+    });
+  }, [addPoints, score, showResult]);
 
   useEffect(() => {
     resetCurrentQuestion();

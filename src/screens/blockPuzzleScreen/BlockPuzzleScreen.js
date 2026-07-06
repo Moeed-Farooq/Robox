@@ -23,6 +23,7 @@ import Animated, {
 import { BLOCK_SHAPES, SHAPE_COLORS } from '../../dummies';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
+import useTotalPoints from '../../hooks/useTotalPoints';
 
 const BlockPuzzleScreen = () => {
   const BOARD_SIZE = 8;
@@ -37,6 +38,8 @@ const BlockPuzzleScreen = () => {
   const [draggingIndex, setDraggingIndex] = useState(null);
   const [currentShapes, setCurrentShapes] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
+  const pointsAwardedRef = useRef(false);
+  const { addPoints } = useTotalPoints();
 
   const boardRef = useAnimatedRef();
   const boardPosition = useRef({ x: 0, y: 0 });
@@ -216,12 +219,27 @@ const BlockPuzzleScreen = () => {
   };
 
   const handleRestart = () => {
+    pointsAwardedRef.current = false;
     const freshBoard = createBoard();
     setPlacedBoard(freshBoard);
     setScore(0);
     setIsGameOver(false);
     generateNewShapes(freshBoard);
   };
+
+  useEffect(() => {
+    if (!isGameOver || pointsAwardedRef.current || score <= 0) {
+      return;
+    }
+
+    pointsAwardedRef.current = true;
+
+    addPoints(score).catch(error => {
+      // Allow retry if write fails.
+      pointsAwardedRef.current = false;
+      console.warn('Failed to save Block Puzzle score:', error?.message || error);
+    });
+  }, [addPoints, isGameOver, score]);
 
   const DraggableShape = ({ shapeData, index }) => {
     if (!shapeData || !shapeData.matrix) return null;

@@ -16,6 +16,7 @@ import { generateGameCards } from '../../helpers';
 import { useNavigation } from '@react-navigation/native';
 import { FruitCard } from '../../components';
 import { en } from '../../languages';
+import useTotalPoints from '../../hooks/useTotalPoints';
 
 const BloxFruitsGame = () => {
   const [cards, setCards] = useState([]);
@@ -25,8 +26,10 @@ const BloxFruitsGame = () => {
   const [timeLeft, setTimeLeft] = useState(120);
   const [isVictory, setIsVictory] = useState(false);
   const navigation = useNavigation();
+  const { addPoints } = useTotalPoints();
 
   const timerRef = useRef(null);
+  const pointsAwardedRef = useRef(false);
   
   // Animation value initialization
   const timerScale = useRef(new Animated.Value(1)).current;
@@ -64,6 +67,7 @@ const BloxFruitsGame = () => {
   }, [timeLeft, isVictory]);
 
   const setupGame = () => {
+    pointsAwardedRef.current = false;
     setCards(generateGameCards());
     setSelectedCards([]);
     setScore(0);
@@ -72,6 +76,20 @@ const BloxFruitsGame = () => {
     setIsVictory(false);
     timerScale.setValue(1); // Scale reset
   };
+
+  useEffect(() => {
+    if (!isVictory || pointsAwardedRef.current || score <= 0) {
+      return;
+    }
+
+    pointsAwardedRef.current = true;
+
+    addPoints(score).catch(error => {
+      // Allow retry if write fails.
+      pointsAwardedRef.current = false;
+      console.warn('Failed to save Blox Fruits score:', error?.message || error);
+    });
+  }, [addPoints, isVictory, score]);
 
   const handleCardTap = useCallback(
     index => {
