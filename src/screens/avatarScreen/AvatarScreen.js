@@ -18,6 +18,7 @@ import { AvatarStyleCard, GeneratedAvatarCard } from '../../components';
 import { AVATAR_STYLES } from '../../dummies';
 import { getAvatarStyleName, generateUniqueId } from '../../helpers';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { showRewardedAdForAction } from '../../services/ads';
 
 const AvatarScreen = () => {
   const [prompt, setPrompt] = useState('');
@@ -28,7 +29,7 @@ const AvatarScreen = () => {
 
   const isPromptEmpty = !prompt.trim();
 
-  const handleGenerateAvatar = () => {
+  const generateAvatar = () => {
     if (isPromptEmpty) {
       setModalVisible(true);
       return;
@@ -50,6 +51,17 @@ const AvatarScreen = () => {
       setPrompt('');
       setIsLoading(false);
     }, 2500);
+  };
+
+  const handleGenerateAvatar = async () => {
+    if (isPromptEmpty) {
+      setModalVisible(true);
+      return;
+    }
+
+    await showRewardedAdForAction(() => {
+      generateAvatar();
+    });
   };
 
   const toggleFavorite = useCallback(id => {

@@ -9,12 +9,13 @@ import { SETTINGS_SECTIONS } from '../../dummies';
 import { SettingsItem } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { preloadInterstitialAd, showInterstitialIfAvailable } from '../../services/ads';
 
 const SettingsScreen = () => {
   const [sections, setSections] = useState(SETTINGS_SECTIONS);
   const navigation = useNavigation();
 
-  const handleToggle = (sectionTitle, itemId, value) => {
+  const handleToggle = (sectionTitle, itemId, itemTitle, value) => {
     setSections(prevSections =>
       prevSections.map(section => {
         if (section.title !== sectionTitle) return section;
@@ -27,6 +28,20 @@ const SettingsScreen = () => {
         };
       }),
     );
+
+    const normalizedTitle = String(itemTitle || '').toLowerCase();
+    const shouldShowInterstitial =
+      normalizedTitle === 'notifications' ||
+      normalizedTitle === 'sound effects' ||
+      normalizedTitle === 'haptics feedback';
+
+    if (shouldShowInterstitial) {
+      const shown = showInterstitialIfAvailable();
+
+      if (!shown) {
+        preloadInterstitialAd();
+      }
+    }
   };
 
   const renderSectionHeader = ({ section }) => (
@@ -37,7 +52,7 @@ const SettingsScreen = () => {
     <SettingsItem
       item={item}
       type={section.type}
-      onToggle={value => handleToggle(section.title, item.id, value)}
+      onToggle={value => handleToggle(section.title, item.id, item.title, value)}
       onPress={() => {
         if (item?.screen) {
           navigation.navigate(item.screen);

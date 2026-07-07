@@ -24,6 +24,7 @@ import { BLOCK_SHAPES, SHAPE_COLORS } from '../../dummies';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
+import { AppBannerAd, showRewardedAdForAction } from '../../services/ads';
 
 const BlockPuzzleScreen = () => {
   const BOARD_SIZE = 8;
@@ -39,6 +40,7 @@ const BlockPuzzleScreen = () => {
   const [currentShapes, setCurrentShapes] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
   const pointsAwardedRef = useRef(false);
+  const [isRestartAdInProgress, setIsRestartAdInProgress] = useState(false);
   const { addPoints } = useTotalPoints();
 
   const boardRef = useAnimatedRef();
@@ -218,13 +220,29 @@ const BlockPuzzleScreen = () => {
     }
   };
 
-  const handleRestart = () => {
+  const restartGame = () => {
     pointsAwardedRef.current = false;
     const freshBoard = createBoard();
     setPlacedBoard(freshBoard);
     setScore(0);
     setIsGameOver(false);
     generateNewShapes(freshBoard);
+  };
+
+  const handleRestart = async () => {
+    if (isRestartAdInProgress) {
+      return;
+    }
+
+    setIsRestartAdInProgress(true);
+
+    try {
+      await showRewardedAdForAction(() => {
+        restartGame();
+      });
+    } finally {
+      setIsRestartAdInProgress(false);
+    }
   };
 
   useEffect(() => {
@@ -331,7 +349,11 @@ const BlockPuzzleScreen = () => {
           <SvgIcon icon={SVG.goBack} height={hp(2.5)} width={hp(2.5)} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.circleButton} onPress={handleRestart}>
+        <TouchableOpacity
+          style={styles.circleButton}
+          onPress={handleRestart}
+          disabled={isRestartAdInProgress}
+        >
           <SvgIcon icon={SVG.restart} height={hp(2.8)} width={hp(2.8)} />
         </TouchableOpacity>
       </View>
@@ -389,6 +411,10 @@ const BlockPuzzleScreen = () => {
         })}
       </View>
 
+      <View style={styles.bannerContainer}>
+        <AppBannerAd />
+      </View>
+
       <Modal visible={isGameOver} transparent={true} animationType="fade">
         <View style={styles.modalOverlay}>
           <StatusBar
@@ -404,7 +430,7 @@ const BlockPuzzleScreen = () => {
               <Label style={styles.popupScoreValue}>{score}</Label>
             </View>
 
-            <TouchableOpacity style={styles.popupBtn} onPress={handleRestart}>
+            <TouchableOpacity style={styles.popupBtn} onPress={restartGame}>
               <Label style={styles.popupBtnText}>{en.playAgain}</Label>
             </TouchableOpacity>
           </View>
@@ -561,5 +587,10 @@ const styles = StyleSheet.create({
     color: COLORS.splashBg,
     fontFamily: FONT.bold,
     fontSize: hp(2),
+  },
+  bannerContainer: {
+    marginTop: hp(1.5),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

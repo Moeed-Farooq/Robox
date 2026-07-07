@@ -7,4 +7,5 @@ export const IMAGES = {
   RBX_CALCULATOR: require('./rbxCalculator.png'),
   BLOCK_PUZZLE: require('./blockPuzzle.png'),
   SPIN_WHEEL: require('./spinWheel.png'),
+  LOGO: require('./logo.png'),
 };

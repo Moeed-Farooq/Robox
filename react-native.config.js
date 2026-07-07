@@ -1,7 +1,9 @@
 module.exports = {
     project: {
         ios: {},
-        android: {},
+        android: {
+            packageName: 'robuxskin.getskin.com',
+        },
     },
     assets: ['./src/assets/fonts']
 };

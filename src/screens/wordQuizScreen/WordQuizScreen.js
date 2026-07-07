@@ -14,6 +14,7 @@ import { WORD_QUIZ_DATA } from '../../dummies';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { generateLetters, formatTime, TOTAL_TIME } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
+import { showRewardedAdForAction } from '../../services/ads';
 
 const WordQuizScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -137,7 +138,7 @@ const WordQuizScreen = () => {
     );
   };
 
-  const handleHint = () => {
+  const applyHint = () => {
     const correctAnswer = WORD_QUIZ_DATA[currentIndex].rightAnswer
       .replace(/\s/g, '')
       .toUpperCase();
@@ -168,6 +169,20 @@ const WordQuizScreen = () => {
         }
       }, 300);
     }
+  };
+
+  const handleHint = async () => {
+    const correctAnswer = WORD_QUIZ_DATA[currentIndex].rightAnswer
+      .replace(/\s/g, '')
+      .toUpperCase();
+
+    if (selectedAnswer.length >= correctAnswer.length) {
+      return;
+    }
+
+    await showRewardedAdForAction(() => {
+      applyHint();
+    });
   };
 
   return (
