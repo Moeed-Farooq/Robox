@@ -5,7 +5,6 @@ import { en } from '../../languages';
 import { TAB } from '../../enums';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
-import { SVG } from '../../assets';
 import useSplashAnimation from '../../hooks/useSplashAnimation';
 import Image from '../../common/Image';
 import { IMAGES } from '../../assets/images';
@@ -142,14 +141,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: wp(44),
     height: wp(44),
-    borderRadius: wp(2),
+    borderRadius: wp(8),
     borderWidth: 1.5,
     borderColor: COLORS.yellow,
   },
   logoGlow: {
     width: wp(42),
     height: wp(42),
-    borderRadius: wp(2),
+    borderRadius: wp(8),
     backgroundColor: COLORS.darkWhite + HEX_OPACITY[12],
     justifyContent: 'center',
     alignItems: 'center',
@@ -162,8 +161,7 @@ const styles = StyleSheet.create({
   },
   logoImage: {
     width: wp(30),
-    height: wp(30),
-    borderRadius: wp(2),
+    height: wp(30)
   },
   titleBlock: {
     alignItems: 'center',

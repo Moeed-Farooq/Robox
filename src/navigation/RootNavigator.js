@@ -4,12 +4,13 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 import * as ui from '../screens';
 import { COLORS } from '../enums/StyleGuide';
-import { SCREEN, TAB } from '../enums';
+import { INTERSTITIAL_ADS_SCREENS, SCREEN, TAB } from '../enums';
 import BottomNavigator from './BottomNavigator';
 import { preloadInterstitialAd, showInterstitialIfAvailable } from '../services/ads';
 
 const Stack = createNativeStackNavigator();
 const navigationRef = createNavigationContainerRef();
+const NAVIGATION_INTERSTITIAL_SCREENS = new Set(INTERSTITIAL_ADS_SCREENS);
 
 const getActiveRouteName = state => {
   if (!state || typeof state.index !== 'number') {
@@ -27,6 +28,17 @@ const getActiveRouteName = state => {
   }
 
   return route.name;
+};
+
+const shouldShowNavigationInterstitial = (previousRouteName, currentRouteName) => {
+  if (!previousRouteName || previousRouteName === currentRouteName) {
+    return false;
+  }
+
+  return (
+    NAVIGATION_INTERSTITIAL_SCREENS.has(previousRouteName) ||
+    NAVIGATION_INTERSTITIAL_SCREENS.has(currentRouteName)
+  );
 };
 
 const RootNavigator = () => {
@@ -47,7 +59,7 @@ const RootNavigator = () => {
 
     const previousRouteName = previousRouteNameRef.current;
 
-    if (previousRouteName && previousRouteName !== currentRouteName) {
+    if (shouldShowNavigationInterstitial(previousRouteName, currentRouteName)) {
       if (!hasSkippedInitialNavigationAdRef.current) {
         hasSkippedInitialNavigationAdRef.current = true;
         previousRouteNameRef.current = currentRouteName;

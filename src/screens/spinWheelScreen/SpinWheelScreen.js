@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
 import {
+  Alert,
   Animated,
   Easing,
   Modal,
@@ -19,21 +20,28 @@ import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
-import { showRewardedAdForAction } from '../../services/ads';
+import { preloadRewardedAd, showRewardedAdForAction } from '../../services/ads';
 
 const SpinWheelScreen = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
   const [isSpinning, setIsSpinning] = useState(false);
   const [winnerModalVisible, setWinnerModalVisible] = useState(false);
   const [selectedReward, setSelectedReward] = useState(null);
-  const [isSpinAgainAdInProgress, setIsSpinAgainAdInProgress] = useState(false);
+  const [isAdFlowInProgress, setIsAdFlowInProgress] = useState(false);
   const navigation = useNavigation();
   const { addPoints } = useTotalPoints();
+  const spinRewardGrantingRef = useRef(false);
+  const spinStartLockRef = useRef(false);
+  const rewardedShowInFlightRef = useRef(false);
 
   const totalSegments = SPIN_REWARDS.length;
   const degreesPerSegment = 360 / totalSegments;
   const wheelSize = wp(76);
   const radius = wheelSize / 2;
+
+  React.useEffect(() => {
+    preloadRewardedAd();
+  }, []);
 
   const getCoordinatesForPercent = percent => {
     const x = Math.cos(2 * Math.PI * percent);
@@ -61,7 +69,11 @@ const SpinWheelScreen = () => {
   };
 
   const startSpin = () => {
-    if (isSpinning) return;
+    if (isSpinning || spinStartLockRef.current || rewardedShowInFlightRef.current) {
+      return;
+    }
+
+    spinStartLockRef.current = true;
 
     setIsSpinning(true);
     const randomIndex = Math.floor(Math.random() * totalSegments);
@@ -78,14 +90,50 @@ const SpinWheelScreen = () => {
       duration: 4000,
       easing: Easing.out(Easing.quad),
       useNativeDriver: true,
-    }).start(() => {
-      setSelectedReward(targetReward);
-      setWinnerModalVisible(true);
-      setIsSpinning(false);
+    }).start(async () => {
+      if (rewardedShowInFlightRef.current) {
+        setIsSpinning(false);
+        spinStartLockRef.current = false;
+        return;
+      }
 
-      addPoints(targetReward?.reward || 0).catch(error => {
-        console.warn('Failed to save Spin Wheel reward:', error?.message || error);
-      });
+      setSelectedReward(targetReward);
+      setIsSpinning(false);
+      setIsAdFlowInProgress(true);
+      rewardedShowInFlightRef.current = true;
+
+      spinRewardGrantingRef.current = false;
+
+      try {
+        const result = await showRewardedAdForAction(async () => {
+          if (spinRewardGrantingRef.current) {
+            return;
+          }
+
+          spinRewardGrantingRef.current = true;
+          await addPoints(targetReward?.reward || 0);
+        });
+
+        if (result?.completed) {
+          setWinnerModalVisible(true);
+        } else if (result?.reason === 'action_failed') {
+          setSelectedReward(null);
+          Alert.alert(
+            'Reward Error',
+            'Ad completed but reward could not be granted right now. Please try again.',
+          );
+        } else {
+          setSelectedReward(null);
+          Alert.alert(
+            'Reward Not Granted',
+            'Watch the full rewarded ad to claim your spin reward.',
+          );
+        }
+      } finally {
+        rewardedShowInFlightRef.current = false;
+        spinStartLockRef.current = false;
+        setIsAdFlowInProgress(false);
+      }
     });
   };
 
@@ -95,20 +143,12 @@ const SpinWheelScreen = () => {
   });
 
   const handleSpinAgainWithRewardAd = async () => {
-    if (isSpinAgainAdInProgress) {
+    if (isAdFlowInProgress) {
       return;
     }
 
-    setIsSpinAgainAdInProgress(true);
-
-    try {
-      await showRewardedAdForAction(() => {
-        setWinnerModalVisible(false);
-        startSpin();
-      });
-    } finally {
-      setIsSpinAgainAdInProgress(false);
-    }
+    setWinnerModalVisible(false);
+    startSpin();
   };
 
   return (
@@ -217,8 +257,8 @@ const SpinWheelScreen = () => {
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={startSpin}
-        disabled={isSpinning}
-        style={[styles.spinButton, isSpinning && { opacity: 0.6 }]}
+        disabled={isSpinning || isAdFlowInProgress}
+        style={[styles.spinButton, (isSpinning || isAdFlowInProgress) && { opacity: 0.6 }]}
       >
         <SvgIcon
           icon={SVG.spin}
@@ -259,7 +299,7 @@ const SpinWheelScreen = () => {
               <TouchableOpacity
                 style={styles.spinAgainBtn}
                 onPress={handleSpinAgainWithRewardAd}
-                disabled={isSpinAgainAdInProgress}
+                disabled={isAdFlowInProgress}
               >
                 <Label style={styles.btnTextActive}>{en.spinAgain}</Label>
               </TouchableOpacity>

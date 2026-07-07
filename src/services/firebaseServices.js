@@ -1,9 +1,8 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { FIREBASE_COLLECTIONS } from '../enums';
 
-const USERS_COLLECTION = 'users';
-
-const getUserRefByUid = uid => firestore().collection(USERS_COLLECTION).doc(uid);
+const getUserRefByUid = uid => firestore().collection(FIREBASE_COLLECTIONS.USERS_COLLECTION).doc(uid);
 
 const sanitizePoints = points => {
   const numericPoints = Number(points);

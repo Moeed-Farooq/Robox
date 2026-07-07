@@ -4,6 +4,11 @@ import {
   RewardedAdEventType,
 } from 'react-native-google-mobile-ads';
 import { getAdUnitId } from './AdConfig';
+import {
+  areAdsEnabled,
+  initializeAdsSettings,
+  isAdsConfigLoaded,
+} from './AdsSettingsService';
 
 let rewardedAd = null;
 let rewardedLoaded = false;
@@ -47,6 +52,15 @@ const ensureRewardedInstance = () => {
 };
 
 export const preloadRewardedAd = () => {
+  if (!isAdsConfigLoaded()) {
+    initializeAdsSettings().catch(() => {});
+    return;
+  }
+
+  if (!areAdsEnabled()) {
+    return;
+  }
+
   if (rewardedLoaded || rewardedLoading) {
     return;
   }
@@ -69,6 +83,52 @@ export const isRewardedAdReady = () => rewardedLoaded;
 
 export const showRewardedAdForAction = action => {
   return new Promise(resolve => {
+    const completeWithoutAd = async reason => {
+      try {
+        if (typeof action === 'function') {
+          await action();
+        }
+
+        resolve({
+          completed: true,
+          reason,
+        });
+      } catch (error) {
+        console.warn('Reward action execution failed:', error?.message || error);
+        resolve({
+          completed: false,
+          reason: 'action_failed',
+        });
+      }
+    };
+
+    if (!isAdsConfigLoaded()) {
+      initializeAdsSettings()
+        .then(() => {
+          if (!areAdsEnabled()) {
+            completeWithoutAd('ads_disabled');
+            return;
+          }
+
+          resolve({
+            completed: false,
+            reason: 'ad_not_ready',
+          });
+        })
+        .catch(() => {
+          resolve({
+            completed: false,
+            reason: 'ad_not_ready',
+          });
+        });
+      return;
+    }
+
+    if (!areAdsEnabled()) {
+      completeWithoutAd('ads_disabled');
+      return;
+    }
+
     try {
       const ad = ensureRewardedInstance();
 
