@@ -10,9 +10,11 @@ import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
+import useTotalPoints from '../../hooks/useTotalPoints';
 
 const FreeDailyRobuxScreen = () => {
   const navigation = useNavigation();
+  const { totalPoints, loading } = useTotalPoints();
   return (
     <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
       <View style={styles.HeaderRow}>
@@ -42,6 +44,9 @@ const FreeDailyRobuxScreen = () => {
 
       <Label style={styles.dailyNewRobuxText}>{en.dailyNewRobux}</Label>
       <Label style={styles.testYourKnowledgeText}>{en.testYourKnowledge}</Label>
+      <Label style={styles.totalPointsText}>
+        {en.totalPoints}: {loading ? '--' : Number(totalPoints).toLocaleString()}
+      </Label>
       <View style={styles.btnRow}>
         <View style={styles.btnWrap}>
           <Button
@@ -129,6 +134,13 @@ const styles = StyleSheet.create({
     fontSize: hp(1.4),
     fontFamily: FONT.medium,
     textAlign: 'center',
+  },
+  totalPointsText: {
+    color: COLORS.lightYellow,
+    fontSize: hp(1.8),
+    fontFamily: FONT.semiBold,
+    textAlign: 'center',
+    marginTop: hp(1.2),
   },
   startBtnText: {
     color: COLORS.white,

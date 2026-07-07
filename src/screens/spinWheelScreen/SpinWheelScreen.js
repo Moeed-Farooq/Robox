@@ -18,6 +18,7 @@ import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
+import useTotalPoints from '../../hooks/useTotalPoints';
 
 const SpinWheelScreen = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -25,6 +26,7 @@ const SpinWheelScreen = () => {
   const [winnerModalVisible, setWinnerModalVisible] = useState(false);
   const [selectedReward, setSelectedReward] = useState(null);
   const navigation = useNavigation();
+  const { addPoints } = useTotalPoints();
 
   const totalSegments = SPIN_REWARDS.length;
   const degreesPerSegment = 360 / totalSegments;
@@ -78,6 +80,10 @@ const SpinWheelScreen = () => {
       setSelectedReward(targetReward);
       setWinnerModalVisible(true);
       setIsSpinning(false);
+
+      addPoints(targetReward?.reward || 0).catch(error => {
+        console.warn('Failed to save Spin Wheel reward:', error?.message || error);
+      });
     });
   };
 

@@ -10,7 +10,7 @@ import Pressable from '../../common/Pressable';
 import { SCREEN } from '../../enums';
 import useHomeHeroAnimation from '../../hooks/useHomeHeroAnimation';
 
-const HomeHeroBanner = ({ navigation }) => {
+const HomeHeroBanner = ({ navigation, totalPoints = 0, totalPointsLoading = false }) => {
   const {
     cardEnter,
     fadeUp,
@@ -56,6 +56,12 @@ const HomeHeroBanner = ({ navigation }) => {
             <Animated.View style={fadeUp(0.55)}>
               <Label style={styles.welcomeText} color={COLORS.lightWhite}>
                 {en.welconeBack}
+              </Label>
+            </Animated.View>
+
+            <Animated.View style={fadeUp(0.65)}>
+              <Label style={styles.totalPointsText}>
+                {en.totalPoints}: {totalPointsLoading ? '--' : Number(totalPoints).toLocaleString()}
               </Label>
             </Animated.View>
           </View>
@@ -171,6 +177,12 @@ const styles = StyleSheet.create({
     marginTop: hp(0.5),
     fontFamily: FONT.regular,
     opacity: 0.95,
+  },
+  totalPointsText: {
+    color: COLORS.yellow,
+    fontSize: hp(1.9),
+    marginTop: hp(0.8),
+    fontFamily: FONT.semiBold,
   },
   robuxText: {
     fontSize: hp(3.2),
