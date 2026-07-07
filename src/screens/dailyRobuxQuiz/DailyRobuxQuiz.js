@@ -14,6 +14,10 @@ import { QUIZ_DATA } from '../../dummies';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { isIOS } from '../../helpers';
 import { en } from '../../languages';
+import {
+  preloadInterstitialAd,
+  showInterstitialIfAvailable,
+} from '../../services/ads';
 
 const DailyRobuxQuiz = () => {
   const navigation = useNavigation();
@@ -25,6 +29,35 @@ const DailyRobuxQuiz = () => {
   const question = QUIZ_DATA[currentQuestion];
   const [quizFinished, setQuizFinished] = useState(false);
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const isShowingInterstitialRef = useRef(false);
+  const nextQuestionTimeoutRef = useRef(null);
+
+  const clearPendingNextQuestion = () => {
+    if (nextQuestionTimeoutRef.current) {
+      clearTimeout(nextQuestionTimeoutRef.current);
+      nextQuestionTimeoutRef.current = null;
+    }
+  };
+
+  const scheduleNextQuestion = () => {
+    clearPendingNextQuestion();
+
+    nextQuestionTimeoutRef.current = setTimeout(() => {
+      nextQuestionTimeoutRef.current = null;
+      nextQuestion();
+    }, 1500);
+  };
+
+  const continueAnswerFlow = answer => {
+    isShowingInterstitialRef.current = false;
+    setShowAnswer(true);
+
+    if (answer === question.correctAnswer) {
+      setScore(prev => prev + 10);
+    }
+
+    scheduleNextQuestion();
+  };
 
   const nextQuestion = () => {
     if (currentQuestion === QUIZ_DATA.length - 1) {
@@ -40,15 +73,12 @@ const DailyRobuxQuiz = () => {
   };
 
   useEffect(() => {
-    if (showAnswer) return;
+    if (showAnswer || selectedAnswer) return;
 
     if (timer === 0) {
       // correct answer highlight karo
       setShowAnswer(true);
-
-      setTimeout(() => {
-        nextQuestion();
-      }, 1500);
+      scheduleNextQuestion();
 
       return;
     }
@@ -58,7 +88,7 @@ const DailyRobuxQuiz = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [timer, showAnswer]);
+  }, [timer, showAnswer, selectedAnswer]);
 
   useEffect(() => {
     Animated.loop(
@@ -94,19 +124,40 @@ const DailyRobuxQuiz = () => {
     }
   }, [timer]);
 
+  useEffect(() => {
+    preloadInterstitialAd();
+
+    return () => {
+      clearPendingNextQuestion();
+    };
+  }, []);
+
   const handleAnswer = answer => {
-    if (selectedAnswer) return;
+    if (selectedAnswer || isShowingInterstitialRef.current) return;
 
     setSelectedAnswer(answer);
-    setShowAnswer(true);
+    isShowingInterstitialRef.current = true;
 
-    if (answer === question.correctAnswer) {
-      setScore(prev => prev + 10);
+    let hasContinued = false;
+
+    const continueOnce = () => {
+      if (hasContinued) {
+        return;
+      }
+
+      hasContinued = true;
+      continueAnswerFlow(answer);
+    };
+
+    const shown = showInterstitialIfAvailable({
+      onClosed: continueOnce,
+      onError: continueOnce,
+    });
+
+    if (!shown) {
+      continueOnce();
+      preloadInterstitialAd();
     }
-
-    setTimeout(() => {
-      nextQuestion();
-    }, 1500);
   };
 
   return (
@@ -174,7 +225,7 @@ const DailyRobuxQuiz = () => {
             return (
               <TouchableOpacity
                 key={index}
-                disabled={showAnswer}
+                disabled={showAnswer || selectedAnswer !== null}
                 onPress={() => handleAnswer(item)}
                 style={[
                   styles.optionContainer,

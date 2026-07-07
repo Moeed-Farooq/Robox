@@ -14,6 +14,8 @@ import { preloadInterstitialAd, showInterstitialIfAvailable } from '../../servic
 const SettingsScreen = () => {
   const [sections, setSections] = useState(SETTINGS_SECTIONS);
   const navigation = useNavigation();
+  const visibleSections = sections.filter(section => section.title !== 'Preferences');
+  // const visibleSections = sections;
 
   const handleToggle = (sectionTitle, itemId, itemTitle, value) => {
     setSections(prevSections =>
@@ -72,7 +74,7 @@ const SettingsScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.splashBg }}>
       <SectionList
-        sections={sections}
+        sections={visibleSections}
         keyExtractor={item => item.id}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}

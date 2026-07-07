@@ -14,7 +14,11 @@ import { WORD_QUIZ_DATA } from '../../dummies';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { generateLetters, formatTime, TOTAL_TIME } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
-import { showRewardedAdForAction } from '../../services/ads';
+import {
+  preloadInterstitialAd,
+  showInterstitialIfAvailable,
+  showRewardedAdForAction,
+} from '../../services/ads';
 
 const WordQuizScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -25,6 +29,8 @@ const WordQuizScreen = () => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const pointsAwardedRef = useRef(false);
+  const isShowingInterstitialRef = useRef(false);
+  const validationTimeoutRef = useRef(null);
   const { addPoints } = useTotalPoints();
 
   const currentQuestion = WORD_QUIZ_DATA[currentIndex];
@@ -35,6 +41,59 @@ const WordQuizScreen = () => {
   const resetCurrentQuestion = () => {
     setSelectedAnswer([]);
     setLetters(generateLetters(currentAnswer));
+  };
+
+  const clearPendingValidation = () => {
+    if (validationTimeoutRef.current) {
+      clearTimeout(validationTimeoutRef.current);
+      validationTimeoutRef.current = null;
+    }
+  };
+
+  const validateFilledAnswer = (userAnswer, correctAnswer) => {
+    clearPendingValidation();
+
+    validationTimeoutRef.current = setTimeout(() => {
+      validationTimeoutRef.current = null;
+
+      if (userAnswer === correctAnswer) {
+        setScore(prev => prev + 10);
+        goToNextQuestion();
+      } else {
+        loseLife();
+      }
+    }, 300);
+  };
+
+  const handleCompletedAnswer = (updatedAnswer, correctAnswer) => {
+    const userAnswer = updatedAnswer.map(i => i.letter).join('');
+
+    if (isShowingInterstitialRef.current) {
+      return;
+    }
+
+    isShowingInterstitialRef.current = true;
+    let hasContinued = false;
+
+    const continueValidation = () => {
+      if (hasContinued) {
+        return;
+      }
+
+      hasContinued = true;
+      isShowingInterstitialRef.current = false;
+      validateFilledAnswer(userAnswer, correctAnswer);
+    };
+
+    const shown = showInterstitialIfAvailable({
+      onClosed: continueValidation,
+      onError: continueValidation,
+    });
+
+    if (!shown) {
+      continueValidation();
+      preloadInterstitialAd();
+    }
   };
 
   const goToNextQuestion = () => {
@@ -71,6 +130,14 @@ const WordQuizScreen = () => {
   }, [addPoints, score, showResult]);
 
   useEffect(() => {
+    preloadInterstitialAd();
+
+    return () => {
+      clearPendingValidation();
+    };
+  }, []);
+
+  useEffect(() => {
     resetCurrentQuestion();
   }, [currentIndex]);
 
@@ -87,15 +154,7 @@ const WordQuizScreen = () => {
 
     const correctAnswer = currentAnswer;
     if (updatedAnswer.length === correctAnswer.length) {
-      const userAnswer = updatedAnswer.map(i => i.letter).join('');
-      setTimeout(() => {
-        if (userAnswer === correctAnswer) {
-          setScore(prev => prev + 10);
-          goToNextQuestion();
-        } else {
-          loseLife();
-        }
-      }, 300);
+      handleCompletedAnswer(updatedAnswer, correctAnswer);
     }
   };
 
@@ -159,15 +218,7 @@ const WordQuizScreen = () => {
     setSelectedAnswer(updatedAnswer);
 
     if (updatedAnswer.length === correctAnswer.length) {
-      const userAnswer = updatedAnswer.map(i => i.letter).join('');
-      setTimeout(() => {
-        if (userAnswer === correctAnswer) {
-          setScore(prev => prev + 10);
-          goToNextQuestion();
-        } else {
-          loseLife();
-        }
-      }, 300);
+      handleCompletedAnswer(updatedAnswer, correctAnswer);
     }
   };
 

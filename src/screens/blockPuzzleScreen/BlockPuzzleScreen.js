@@ -24,7 +24,12 @@ import { BLOCK_SHAPES, SHAPE_COLORS } from '../../dummies';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
-import { AppBannerAd, showRewardedAdForAction } from '../../services/ads';
+import {
+  AppBannerAd,
+  preloadInterstitialAd,
+  showInterstitialIfAvailable,
+  showRewardedAdForAction,
+} from '../../services/ads';
 
 const BlockPuzzleScreen = () => {
   const BOARD_SIZE = 8;
@@ -42,6 +47,8 @@ const BlockPuzzleScreen = () => {
   const pointsAwardedRef = useRef(false);
   const [isRestartAdInProgress, setIsRestartAdInProgress] = useState(false);
   const { addPoints } = useTotalPoints();
+  const successfulPlacementsCountRef = useRef(0);
+  const isShowingInterstitialRef = useRef(false);
 
   const boardRef = useAnimatedRef();
   const boardPosition = useRef({ x: 0, y: 0 });
@@ -68,10 +75,39 @@ const BlockPuzzleScreen = () => {
     const initialShapes = getRandomShapes();
     setPlacedBoard(initialBoard);
     setCurrentShapes(initialShapes);
+    preloadInterstitialAd();
     setTimeout(() => {
       checkGameOver(initialBoard, initialShapes);
     }, 150);
   }, []);
+
+  const trackSuccessfulPlacement = () => {
+    successfulPlacementsCountRef.current += 1;
+
+    if (
+      successfulPlacementsCountRef.current < 3 ||
+      isShowingInterstitialRef.current
+    ) {
+      return;
+    }
+
+    successfulPlacementsCountRef.current = 0;
+    isShowingInterstitialRef.current = true;
+
+    const resetInterstitialGuard = () => {
+      isShowingInterstitialRef.current = false;
+    };
+
+    const shown = showInterstitialIfAvailable({
+      onClosed: resetInterstitialGuard,
+      onError: resetInterstitialGuard,
+    });
+
+    if (!shown) {
+      resetInterstitialGuard();
+      preloadInterstitialAd();
+    }
+  };
 
   // Strict Async-Safe Game Over Checker
   const checkGameOver = (currentBoardState, shapesArray) => {
@@ -208,6 +244,7 @@ const BlockPuzzleScreen = () => {
       const updatedShapes = [...currentShapes];
       updatedShapes[index] = null;
       setCurrentShapes(updatedShapes);
+      trackSuccessfulPlacement();
 
       const remaining = updatedShapes.filter(Boolean);
       if (remaining.length === 0) {
@@ -222,6 +259,8 @@ const BlockPuzzleScreen = () => {
 
   const restartGame = () => {
     pointsAwardedRef.current = false;
+    successfulPlacementsCountRef.current = 0;
+    isShowingInterstitialRef.current = false;
     const freshBoard = createBoard();
     setPlacedBoard(freshBoard);
     setScore(0);
