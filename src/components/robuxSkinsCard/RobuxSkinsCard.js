@@ -15,6 +15,7 @@ import { SVG } from '../../assets';
 import { handleImageDownload } from '../../helpers';
 import Label from '../../common';
 import { en } from '../../languages';
+import { showRewardedAdForAction } from '../../services/ads';
 
 const RobuxSkinsCard = ({ item }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -22,23 +23,49 @@ const RobuxSkinsCard = ({ item }) => {
   const [modalTitle, setModalTitle] = useState('');
   const [modalMessage, setModalMessage] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isAdFlowInProgress, setIsAdFlowInProgress] = useState(false);
 
-  const triggerDownload = () => {
-    handleImageDownload(
-      item.image,
-      (title, msg) => {
-        setModalType('success');
-        setModalTitle(title);
-        setModalMessage(msg);
-        setModalVisible(true);
-      },
-      (title, msg) => {
+  const performDownload = () => {
+    return new Promise(resolve => {
+      handleImageDownload(
+        item.image,
+        (title, msg) => {
+          setModalType('success');
+          setModalTitle(title);
+          setModalMessage(msg);
+          setModalVisible(true);
+          resolve(true);
+        },
+        (title, msg) => {
+          setModalType('error');
+          setModalTitle(title);
+          setModalMessage(msg);
+          setModalVisible(true);
+          resolve(false);
+        },
+      );
+    });
+  };
+
+  const triggerDownload = async () => {
+    if (isAdFlowInProgress) {
+      return;
+    }
+
+    setIsAdFlowInProgress(true);
+
+    try {
+      const result = await showRewardedAdForAction(performDownload);
+
+      if (!result?.completed && result?.reason !== 'action_failed') {
         setModalType('error');
-        setModalTitle(title);
-        setModalMessage(msg);
+        setModalTitle('Download Locked');
+        setModalMessage('Watch the full rewarded ad to unlock download.');
         setModalVisible(true);
-      },
-    );
+      }
+    } finally {
+      setIsAdFlowInProgress(false);
+    }
   };
 
   const isSuccess = modalType === 'success';
@@ -78,6 +105,7 @@ const RobuxSkinsCard = ({ item }) => {
         style={styles.downloadButton}
         activeOpacity={0.85}
         onPress={triggerDownload}
+        disabled={isAdFlowInProgress}
       >
         <SvgIcon icon={SVG.download} height={hp(1.8)} width={hp(1.8)} />
         <Label style={styles.downloadButtonText}>{en.save}</Label>

@@ -19,12 +19,14 @@ import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
+import { showRewardedAdForAction } from '../../services/ads';
 
 const SpinWheelScreen = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
   const [isSpinning, setIsSpinning] = useState(false);
   const [winnerModalVisible, setWinnerModalVisible] = useState(false);
   const [selectedReward, setSelectedReward] = useState(null);
+  const [isSpinAgainAdInProgress, setIsSpinAgainAdInProgress] = useState(false);
   const navigation = useNavigation();
   const { addPoints } = useTotalPoints();
 
@@ -91,6 +93,23 @@ const SpinWheelScreen = () => {
     inputRange: [0, 360],
     outputRange: ['0deg', '360deg'],
   });
+
+  const handleSpinAgainWithRewardAd = async () => {
+    if (isSpinAgainAdInProgress) {
+      return;
+    }
+
+    setIsSpinAgainAdInProgress(true);
+
+    try {
+      await showRewardedAdForAction(() => {
+        setWinnerModalVisible(false);
+        startSpin();
+      });
+    } finally {
+      setIsSpinAgainAdInProgress(false);
+    }
+  };
 
   return (
     <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
@@ -239,10 +258,8 @@ const SpinWheelScreen = () => {
               </View>
               <TouchableOpacity
                 style={styles.spinAgainBtn}
-                onPress={() => {
-                  setWinnerModalVisible(false);
-                  startSpin();
-                }}
+                onPress={handleSpinAgainWithRewardAd}
+                disabled={isSpinAgainAdInProgress}
               >
                 <Label style={styles.btnTextActive}>{en.spinAgain}</Label>
               </TouchableOpacity>

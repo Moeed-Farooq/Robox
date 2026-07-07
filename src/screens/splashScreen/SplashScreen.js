@@ -7,6 +7,8 @@ import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
 import { SVG } from '../../assets';
 import useSplashAnimation from '../../hooks/useSplashAnimation';
+import Image from '../../common/Image';
+import { IMAGES } from '../../assets/images';
 
 const SplashScreen = ({ navigation }) => {
   const handleComplete = useCallback(() => {
@@ -52,7 +54,7 @@ const SplashScreen = ({ navigation }) => {
           <Animated.View style={[styles.logoRing, logoRingStyle]} />
           <View style={styles.logoGlow}>
             <View style={styles.logoContainer}>
-              <SVG.logo width="100%" height="100%" />
+              <Image src={IMAGES.LOGO} style={styles.logoImage}/>
             </View>
           </View>
         </Animated.View>
@@ -140,28 +142,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: wp(44),
     height: wp(44),
-    borderRadius: wp(22),
+    borderRadius: wp(2),
     borderWidth: 1.5,
     borderColor: COLORS.yellow,
   },
   logoGlow: {
     width: wp(42),
     height: wp(42),
-    borderRadius: wp(21),
+    borderRadius: wp(2),
     backgroundColor: COLORS.darkWhite + HEX_OPACITY[12],
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: COLORS.darkWhite + HEX_OPACITY[25],
-    shadowColor: COLORS.yellow,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.45,
-    shadowRadius: 20,
-    elevation: 12,
   },
   logoContainer: {
     width: wp(30),
     height: wp(30),
+  },
+  logoImage: {
+    width: wp(30),
+    height: wp(30),
+    borderRadius: wp(2),
   },
   titleBlock: {
     alignItems: 'center',

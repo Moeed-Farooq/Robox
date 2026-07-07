@@ -4,12 +4,16 @@ import { COLORS } from './src/enums/StyleGuide';
 import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { anonymousLogin, ensureFirestoreUserDocument, getCurrentUser } from './src/services';
-import { SafeAreaView } from "react-native-safe-area-context";
+import { initializeAds } from './src/services/ads';
 
 
 const App = () => {
   const [authLoading, setAuthLoading] = useState(true);
-  const [authError, setAuthError] = useState<Error | null>(null);
+  const [authError, setAuthError] = useState('');
+
+  useEffect(() => {
+    initializeAds();
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -25,7 +29,11 @@ const App = () => {
         }
       } catch (error) {
         if (isMounted) {
-          setAuthError(error instanceof Error ? error : new Error('Anonymous authentication failed.'));
+          setAuthError(
+            error instanceof Error
+              ? error.message
+              : 'Anonymous authentication failed.',
+          );
         }
       } finally {
         if (isMounted) {
@@ -43,7 +51,7 @@ const App = () => {
 
   useEffect(() => {
     if (__DEV__ && authError) {
-      console.warn('Anonymous auth initialization failed:', authError.message);
+      console.warn('Anonymous auth initialization failed:', authError);
     }
   }, [authError]);
 

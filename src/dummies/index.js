@@ -648,163 +648,163 @@ export const WORD_QUIZ_DATA = [
     question: 'Which programming language is used for coding in Roblox?',
     rightAnswer: 'Lua',
   },
-  // {
-  //   id: '4',
-  //   question: "What is the common nickname for Roblox's iconic default avatar?",
-  //   rightAnswer: 'Noob',
-  // },
-  // {
-  //   id: '5',
-  //   question:
-  //     'What is the online username of Roblox co-founder David Baszucki?',
-  //   rightAnswer: 'Builderman',
-  // },
-  // {
-  //   id: '6',
-  //   question:
-  //     'What is the name of the popular Roblox game focused on adopting pets?',
-  //   rightAnswer: 'AdoptMe',
-  // },
-  // {
-  //   id: '7',
-  //   question:
-  //     'What do you call your virtual character or representation in Roblox?',
-  //   rightAnswer: 'Avatar',
-  // },
-  // {
-  //   id: '8',
-  //   question: "What is the name of Roblox's monthly paid subscription service?",
-  //   rightAnswer: 'Premium',
-  // },
-  // {
-  //   id: '9',
-  //   question:
-  //     'Which popular Roblox horror/escape game features an antagonistic pig?',
-  //   rightAnswer: 'Piggy',
-  // },
-  // {
-  //   id: '10',
-  //   question:
-  //     'What action stops a specific user from contacting or bothering you?',
-  //   rightAnswer: 'Block',
-  // },
-  // {
-  //   id: '11',
-  //   question:
-  //     'What is the main store called where you buy official avatar clothes and items?',
-  //   rightAnswer: 'Catalog',
-  // },
-  // {
-  //   id: '12',
-  //   question:
-  //     'What term is used for completely new players who lack customization?',
-  //   rightAnswer: 'Noob',
-  // },
-  // {
-  //   id: '13',
-  //   question:
-  //     'What button do you click in Roblox Studio to test your creation?',
-  //   rightAnswer: 'Play',
-  // },
-  // {
-  //   id: '14',
-  //   question:
-  //     'What feature allows players to type messages to their friends in real-time?',
-  //   rightAnswer: 'Chat',
-  // },
-  // {
-  //   id: '15',
-  //   question: 'Where do you send a complaint if someone breaks Roblox rules?',
-  //   rightAnswer: 'Support',
-  // },
-  // {
-  //   id: '16',
-  //   question: 'What was the name of the old, removed Roblox currency?',
-  //   rightAnswer: 'Tix',
-  // },
-  // {
-  //   id: '17',
-  //   question:
-  //     'What is the name of the annual awards ceremony for Roblox developers?',
-  //   rightAnswer: 'Bloxys',
-  // },
-  // {
-  //   id: '18',
-  //   question:
-  //     'What is the general term used for individual worlds or maps in Roblox?',
-  //   rightAnswer: 'Games',
-  // },
-  // {
-  //   id: '19',
-  //   question: 'What is the short term used for obstacle courses in Roblox?',
-  //   rightAnswer: 'Obby',
-  // },
-  // {
-  //   id: '20',
-  //   question:
-  //     'Games where you live a virtual life and build cities fall under which genre?',
-  //   rightAnswer: 'Roleplay',
-  // },
-  // {
-  //   id: '21',
-  //   question:
-  //     'What do you use in Roblox Studio to move, scale, or rotate objects?',
-  //   rightAnswer: 'Tools',
-  // },
-  // {
-  //   id: '22',
-  //   question:
-  //     'What is the term for virtual items you can buy to use across various games?',
-  //   rightAnswer: 'Gear',
-  // },
-  // {
-  //   id: '23',
-  //   question:
-  //     'What system allows developers to exchange their earned Robux for real money?',
-  //   rightAnswer: 'DevEx',
-  // },
-  // {
-  //   id: '24',
-  //   question:
-  //     'What US state is the official headquarters of Roblox located in?',
-  //   rightAnswer: 'California',
-  // },
-  // {
-  //   id: '25',
-  //   question:
-  //     'What status is given to a player who has full administrative control over a game server?',
-  //   rightAnswer: 'Admin',
-  // },
-  // {
-  //   id: '26',
-  //   question:
-  //     'What type of program do exploiters use to illegally modify Roblox gameplay?',
-  //   rightAnswer: 'Script',
-  // },
-  // {
-  //   id: '27',
-  //   question:
-  //     'What do you call a person who builds models and environments in Roblox?',
-  //   rightAnswer: 'Builder',
-  // },
-  // {
-  //   id: '28',
-  //   question:
-  //     'What tag is applied to text in Roblox chat when it gets censored by filters?',
-  //   rightAnswer: 'Hashtags',
-  // },
-  // {
-  //   id: '29',
-  //   question:
-  //     'Under which main genre category do fighting and sword games usually fall?',
-  //   rightAnswer: 'Action',
-  // },
-  // {
-  //   id: '30',
-  //   question:
-  //     'What is the name of the original platform name before it was renamed to Roblox?',
-  //   rightAnswer: 'DynaBlocks',
-  // },
+  {
+    id: '4',
+    question: "What is the common nickname for Roblox's iconic default avatar?",
+    rightAnswer: 'Noob',
+  },
+  {
+    id: '5',
+    question:
+      'What is the online username of Roblox co-founder David Baszucki?',
+    rightAnswer: 'Builderman',
+  },
+  {
+    id: '6',
+    question:
+      'What is the name of the popular Roblox game focused on adopting pets?',
+    rightAnswer: 'AdoptMe',
+  },
+  {
+    id: '7',
+    question:
+      'What do you call your virtual character or representation in Roblox?',
+    rightAnswer: 'Avatar',
+  },
+  {
+    id: '8',
+    question: "What is the name of Roblox's monthly paid subscription service?",
+    rightAnswer: 'Premium',
+  },
+  {
+    id: '9',
+    question:
+      'Which popular Roblox horror/escape game features an antagonistic pig?',
+    rightAnswer: 'Piggy',
+  },
+  {
+    id: '10',
+    question:
+      'What action stops a specific user from contacting or bothering you?',
+    rightAnswer: 'Block',
+  },
+  {
+    id: '11',
+    question:
+      'What is the main store called where you buy official avatar clothes and items?',
+    rightAnswer: 'Catalog',
+  },
+  {
+    id: '12',
+    question:
+      'What term is used for completely new players who lack customization?',
+    rightAnswer: 'Noob',
+  },
+  {
+    id: '13',
+    question:
+      'What button do you click in Roblox Studio to test your creation?',
+    rightAnswer: 'Play',
+  },
+  {
+    id: '14',
+    question:
+      'What feature allows players to type messages to their friends in real-time?',
+    rightAnswer: 'Chat',
+  },
+  {
+    id: '15',
+    question: 'Where do you send a complaint if someone breaks Roblox rules?',
+    rightAnswer: 'Support',
+  },
+  {
+    id: '16',
+    question: 'What was the name of the old, removed Roblox currency?',
+    rightAnswer: 'Tix',
+  },
+  {
+    id: '17',
+    question:
+      'What is the name of the annual awards ceremony for Roblox developers?',
+    rightAnswer: 'Bloxy Awards',
+  },
+  {
+    id: '18',
+    question:
+      'What is the general term used for individual worlds or maps in Roblox?',
+    rightAnswer: 'Games',
+  },
+  {
+    id: '19',
+    question: 'What is the short term used for obstacle courses in Roblox?',
+    rightAnswer: 'Obby',
+  },
+  {
+    id: '20',
+    question:
+      'Games where you live a virtual life and build cities fall under which genre?',
+    rightAnswer: 'Roleplay',
+  },
+  {
+    id: '21',
+    question:
+      'What do you use in Roblox Studio to move, scale, or rotate objects?',
+    rightAnswer: 'Tools',
+  },
+  {
+    id: '22',
+    question:
+      'What is the term for virtual items you can buy to use across various games?',
+    rightAnswer: 'Gear',
+  },
+  {
+    id: '23',
+    question:
+      'What system allows developers to exchange their earned Robux for real money?',
+    rightAnswer: 'DevEx',
+  },
+  {
+    id: '24',
+    question:
+      'What US state is the official headquarters of Roblox located in?',
+    rightAnswer: 'California',
+  },
+  {
+    id: '25',
+    question:
+      'What status is given to a player who has full administrative control over a game server?',
+    rightAnswer: 'Admin',
+  },
+  {
+    id: '26',
+    question:
+      'What type of program do exploiters use to illegally modify Roblox gameplay?',
+    rightAnswer: 'Script',
+  },
+  {
+    id: '27',
+    question:
+      'What do you call a person who builds models and environments in Roblox?',
+    rightAnswer: 'Builder',
+  },
+  {
+    id: '28',
+    question:
+      'What tag is applied to text in Roblox chat when it gets censored by filters?',
+    rightAnswer: 'Hashtags',
+  },
+  {
+    id: '29',
+    question:
+      'Under which main genre category do fighting and sword games usually fall?',
+    rightAnswer: 'Action',
+  },
+  {
+    id: '30',
+    question:
+      'What is the name of the original platform name before it was renamed to Roblox?',
+    rightAnswer: 'DynaBlocks',
+  },
 ];
 
 export const CONVERSION_TYPES = [

@@ -15,6 +15,7 @@ import { ROBUX_SKINS_SCREEN_TABS } from '../../dummies';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { en } from '../../languages';
 import { fetchRobuxSkinsPageByTab } from '../../services';
+import { AppBannerAd } from '../../services/ads';
 
 const ListHeader = ({ navigation, selectedTab, onSelectTab, tabsDisabled }) => (
   <View>
@@ -272,6 +273,10 @@ const RobuxSkinsScreen = ({ navigation }) => {
         onEndReached={loadMoreSkins}
         onEndReachedThreshold={0.35}
       />
+
+      <View style={styles.bannerContainer}>
+        <AppBannerAd />
+      </View>
     </SafeAreaView>
   );
 };
@@ -371,6 +376,11 @@ const styles = StyleSheet.create({
   },
   paginationLoaderContainer: {
     paddingVertical: hp(2),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  bannerContainer: {
+    paddingBottom: hp(1),
     alignItems: 'center',
     justifyContent: 'center',
   },

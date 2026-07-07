@@ -1,17 +1,75 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useRef } from 'react';
+import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'react-native';
 import * as ui from '../screens';
 import { COLORS } from '../enums/StyleGuide';
 import { SCREEN, TAB } from '../enums';
 import BottomNavigator from './BottomNavigator';
+import { preloadInterstitialAd, showInterstitialIfAvailable } from '../services/ads';
 
 const Stack = createNativeStackNavigator();
+const navigationRef = createNavigationContainerRef();
+
+const getActiveRouteName = state => {
+  if (!state || typeof state.index !== 'number') {
+    return null;
+  }
+
+  const route = state.routes?.[state.index];
+
+  if (!route) {
+    return null;
+  }
+
+  if (route.state) {
+    return getActiveRouteName(route.state) || route.name;
+  }
+
+  return route.name;
+};
 
 const RootNavigator = () => {
+  const previousRouteNameRef = useRef(null);
+  const hasSkippedInitialNavigationAdRef = useRef(false);
+
+  const handleNavigationStateChange = () => {
+    if (!navigationRef.isReady()) {
+      return;
+    }
+
+    const rootState = navigationRef.getRootState();
+    const currentRouteName = getActiveRouteName(rootState);
+
+    if (!currentRouteName) {
+      return;
+    }
+
+    const previousRouteName = previousRouteNameRef.current;
+
+    if (previousRouteName && previousRouteName !== currentRouteName) {
+      if (!hasSkippedInitialNavigationAdRef.current) {
+        hasSkippedInitialNavigationAdRef.current = true;
+        previousRouteNameRef.current = currentRouteName;
+        return;
+      }
+
+      const shown = showInterstitialIfAvailable();
+
+      if (!shown) {
+        preloadInterstitialAd();
+      }
+    }
+
+    previousRouteNameRef.current = currentRouteName;
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={handleNavigationStateChange}
+      onStateChange={handleNavigationStateChange}
+    >
       <StatusBar backgroundColor={COLORS.splashBg} barStyle="light-content" />
 
       <Stack.Navigator screenOptions={{ headerShown: false }}>

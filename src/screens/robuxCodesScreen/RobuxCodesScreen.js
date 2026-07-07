@@ -20,6 +20,7 @@ import {
 import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
+import { AppBannerAd } from '../../services/ads';
 
 const RobuxCodesScreen = () => {
   const navigation = useNavigation();
@@ -52,14 +53,17 @@ const RobuxCodesScreen = () => {
 
   return (
     <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
-    <FlatList
-      data={ROBUX_CODES}
-      renderItem={renderItem}
-      keyExtractor={item => item.id.toString()}
-      ListHeaderComponent={renderHeader}
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.listContainer}
-    />
+      <FlatList
+        data={ROBUX_CODES}
+        renderItem={renderItem}
+        keyExtractor={item => item.id.toString()}
+        ListHeaderComponent={renderHeader}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContainer}
+      />
+      <View style={styles.bannerContainer}>
+        <AppBannerAd />
+      </View>
     </SafeAreaView>
   );
 };
@@ -99,5 +103,11 @@ const styles = StyleSheet.create({
 
   placeholder: {
     width: wp(10),
+  },
+  bannerContainer: {
+    paddingBottom: hp(1),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.splashBg,
   },
 });
