@@ -1,6 +1,6 @@
 import { SVG } from '../assets';
 import { IMAGES } from '../assets/images';
-import { SCREEN } from '../enums';
+import { SCREEN, SETTINGS_ACTION } from '../enums';
 import { COLORS } from '../enums/StyleGuide';
 
 export const bottomIcons = {
@@ -255,12 +255,14 @@ export const SETTINGS_SECTIONS = [
         title: 'Rate App',
         subtitle: 'Rate us on the app store',
         icon: SVG.starRating,
+        action: SETTINGS_ACTION.RATE_APP,
       },
       {
         id: '6',
         title: 'Share app',
         subtitle: 'Share with friends',
         icon: SVG.share,
+        action: SETTINGS_ACTION.SHARE_APP,
       },
       {
         id: '7',
@@ -285,7 +287,7 @@ export const SETTINGS_SECTIONS = [
       {
         id: '10',
         title: 'App Version',
-        subtitle: 'Version 1.4.0',
+        subtitle: 'Version 1.0.0',
         icon: SVG.about,
       },
     ],

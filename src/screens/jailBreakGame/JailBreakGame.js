@@ -18,6 +18,10 @@ import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
 import { en } from '../../languages';
 import useTotalPoints from '../../hooks/useTotalPoints';
+import {
+  preloadInterstitialAd,
+  showInterstitialIfAvailable,
+} from '../../services/ads';
 
 const CAR_SIZE = wp(14);
 const ITEM_SIZE = wp(12);
@@ -30,6 +34,7 @@ const JailBreakGame = () => {
   const [gameResult, setGameResult] = useState(null);
   const [collectedCount, setCollectedCount] = useState(0);
   const pointsAwardedRef = useRef(false);
+  const isShowingInterstitialRef = useRef(false);
 
   const boardLayout = useRef({ width: 0, height: 0 });
 
@@ -56,7 +61,12 @@ const JailBreakGame = () => {
   const contextY = useSharedValue(initialCarPos.y);
 
   useEffect(() => {
+    preloadInterstitialAd();
+  }, []);
+
+  useEffect(() => {
     if (modalVisible) return;
+
     const interval = setInterval(() => {
       setTimer(prev => {
         if (prev <= 1) {
@@ -154,6 +164,7 @@ const JailBreakGame = () => {
     setTimer(60);
     setModalVisible(false);
     setGameResult(null);
+    isShowingInterstitialRef.current = false;
   };
 
   useEffect(() => {
@@ -162,6 +173,22 @@ const JailBreakGame = () => {
     }
 
     pointsAwardedRef.current = true;
+
+    const resetInterstitialGuard = () => {
+      isShowingInterstitialRef.current = false;
+    };
+
+    isShowingInterstitialRef.current = true;
+
+    const shown = showInterstitialIfAvailable({
+      onClosed: resetInterstitialGuard,
+      onError: resetInterstitialGuard,
+    });
+
+    if (!shown) {
+      resetInterstitialGuard();
+      preloadInterstitialAd();
+    }
 
     addPoints(100).catch(error => {
       // Allow retry if points write fails.

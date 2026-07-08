@@ -6,7 +6,7 @@ import {
   FlatList,
   Modal,
   StatusBar,
-  Animated, // Animated import kiya
+  Animated, 
 } from 'react-native';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
@@ -17,6 +17,10 @@ import { useNavigation } from '@react-navigation/native';
 import { FruitCard } from '../../components';
 import { en } from '../../languages';
 import useTotalPoints from '../../hooks/useTotalPoints';
+import {
+  preloadInterstitialAd,
+  showInterstitialIfAvailable,
+} from '../../services/ads';
 
 const BloxFruitsGame = () => {
   const [cards, setCards] = useState([]);
@@ -30,13 +34,21 @@ const BloxFruitsGame = () => {
 
   const timerRef = useRef(null);
   const pointsAwardedRef = useRef(false);
+  const isShowingInterstitialRef = useRef(false);
+  const mismatchTimeoutRef = useRef(null);
   
   // Animation value initialization
   const timerScale = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     setupGame();
-    return () => clearInterval(timerRef.current);
+    preloadInterstitialAd();
+    return () => {
+      clearInterval(timerRef.current);
+      if (mismatchTimeoutRef.current) {
+        clearTimeout(mismatchTimeoutRef.current);
+      }
+    };
   }, []);
 
   // Timer countdown aur animation trigger
@@ -67,7 +79,13 @@ const BloxFruitsGame = () => {
   }, [timeLeft, isVictory]);
 
   const setupGame = () => {
+    if (mismatchTimeoutRef.current) {
+      clearTimeout(mismatchTimeoutRef.current);
+      mismatchTimeoutRef.current = null;
+    }
+
     pointsAwardedRef.current = false;
+    isShowingInterstitialRef.current = false;
     setCards(generateGameCards());
     setSelectedCards([]);
     setScore(0);
@@ -91,10 +109,44 @@ const BloxFruitsGame = () => {
     });
   }, [addPoints, isVictory, score]);
 
+  const showMismatchInterstitial = () => {
+    if (isShowingInterstitialRef.current) {
+      return;
+    }
+
+    isShowingInterstitialRef.current = true;
+
+    const resetInterstitialGuard = () => {
+      isShowingInterstitialRef.current = false;
+    };
+
+    const shown = showInterstitialIfAvailable({
+      onClosed: resetInterstitialGuard,
+      onError: resetInterstitialGuard,
+    });
+
+    if (!shown) {
+      resetInterstitialGuard();
+      preloadInterstitialAd();
+    }
+  };
+
+  const flipBackMismatchedCards = (firstIndex, secondIndex) => {
+    setCards(latestCards => {
+      const resetCards = [...latestCards];
+      resetCards[firstIndex].isFlipped = false;
+      resetCards[secondIndex].isFlipped = false;
+      return resetCards;
+    });
+    setSelectedCards([]);
+    showMismatchInterstitial();
+  };
+
   const handleCardTap = useCallback(
     index => {
       setCards(prevCards => {
         if (
+          isShowingInterstitialRef.current ||
           prevCards[index].isFlipped ||
           prevCards[index].isMatched ||
           selectedCards.length === 2
@@ -121,17 +173,12 @@ const BloxFruitsGame = () => {
                 setIsVictory(true);
               }
               return [];
-            } else {
-              setTimeout(() => {
-                setCards(latestCards => {
-                  const resetCards = [...latestCards];
-                  resetCards[firstIndex].isFlipped = false;
-                  resetCards[secondIndex].isFlipped = false;
-                  return resetCards;
-                });
-                setSelectedCards([]);
-              }, 1000);
             }
+
+            mismatchTimeoutRef.current = setTimeout(() => {
+              mismatchTimeoutRef.current = null;
+              flipBackMismatchedCards(firstIndex, secondIndex);
+            }, 1000);
           }
           return newSelected;
         });

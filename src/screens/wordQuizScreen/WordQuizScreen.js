@@ -12,13 +12,14 @@ import { SVG } from '../../assets';
 import { en } from '../../languages';
 import { WORD_QUIZ_DATA } from '../../dummies';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
-import { generateLetters, formatTime, TOTAL_TIME } from '../../helpers';
+import { generateLetters, formatTime, TOTAL_TIME, isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
 import {
   preloadInterstitialAd,
   showInterstitialIfAvailable,
   showRewardedAdForAction,
 } from '../../services/ads';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const WordQuizScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -237,7 +238,7 @@ const WordQuizScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.container]}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.infoCard}>
@@ -357,7 +358,7 @@ const WordQuizScreen = () => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -368,7 +369,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.splashBg,
     paddingHorizontal: wp(5),
-    paddingVertical: wp(5),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
   header: {
     flexDirection: 'row',

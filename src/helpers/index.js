@@ -1,7 +1,8 @@
 import { FRUITS_DATA } from '../dummies';
-import { Alert, Platform, PermissionsAndroid ,Share } from 'react-native';
+import { Alert, Platform, PermissionsAndroid ,Share, Linking } from 'react-native';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import ReactNativeBlobUtil from 'react-native-blob-util';
+import { APP_STORE } from '../enums';
 
 
 export const hexToRgba = (hex, opacity = 1) => {
@@ -154,3 +155,113 @@ export const shareAvatar = async (promptText, styleName) => {
 };
 
 export const isIOS = () => Platform.OS === 'ios';
+
+const openExternalUrl = async urls => {
+  for (const url of urls) {
+    try {
+      const canOpen = await Linking.canOpenURL(url);
+      if (canOpen) {
+        await Linking.openURL(url);
+        return true;
+      }
+    } catch (error) {
+      console.warn('Failed to open URL:', url, error?.message || error);
+    }
+  }
+
+  return false;
+};
+
+const resolveIosAppStoreId = async () => {
+  if (APP_STORE.IOS_APP_STORE_ID) {
+    return APP_STORE.IOS_APP_STORE_ID;
+  }
+
+  try {
+    const response = await fetch(
+      `https://itunes.apple.com/lookup?bundleId=${APP_STORE.IOS_BUNDLE_ID}`,
+    );
+    const data = await response.json();
+    return data?.results?.[0]?.trackId || null;
+  } catch (error) {
+    console.warn('Failed to resolve App Store ID:', error?.message || error);
+    return null;
+  }
+};
+
+export const openAppStore = async () => {
+  try {
+    if (Platform.OS === 'android') {
+      const packageName = APP_STORE.ANDROID_PACKAGE_NAME;
+      const opened = await openExternalUrl([
+        `market://details?id=${packageName}`,
+        `https://play.google.com/store/apps/details?id=${packageName}`,
+      ]);
+
+      if (!opened) {
+        Alert.alert('Unable to open store', 'Could not open the Play Store.');
+      }
+
+      return;
+    }
+
+    if (Platform.OS === 'ios') {
+      const appStoreId = await resolveIosAppStoreId();
+
+      if (!appStoreId) {
+        Alert.alert(
+          'Unable to open store',
+          'This app is not available on the App Store yet.',
+        );
+        return;
+      }
+
+      const opened = await openExternalUrl([
+        `itms-apps://apps.apple.com/app/id${appStoreId}?action=write-review`,
+        `https://apps.apple.com/app/id${appStoreId}?action=write-review`,
+        `itms-apps://apps.apple.com/app/id${appStoreId}`,
+        `https://apps.apple.com/app/id${appStoreId}`,
+      ]);
+
+      if (!opened) {
+        Alert.alert('Unable to open store', 'Could not open the App Store.');
+      }
+    }
+  } catch (error) {
+    Alert.alert(
+      'Unable to open store',
+      'Something went wrong. Please try again later.',
+    );
+    console.warn('Failed to open app store:', error?.message || error);
+  }
+};
+
+const getAppStoreShareUrl = async () => {
+  if (Platform.OS === 'android') {
+    return `https://play.google.com/store/apps/details?id=${APP_STORE.ANDROID_PACKAGE_NAME}`;
+  }
+
+  if (Platform.OS === 'ios') {
+    const appStoreId = await resolveIosAppStoreId();
+
+    return appStoreId ? `https://apps.apple.com/app/id${appStoreId}` : null;
+  }
+
+  return `https://play.google.com/store/apps/details?id=${APP_STORE.ANDROID_PACKAGE_NAME}`;
+};
+
+export const shareApp = async () => {
+  try {
+    const storeUrl = await getAppStoreShareUrl();
+    const message = storeUrl
+      ? `Check out Robux Game Puzzles! Download the app here: ${storeUrl}`
+      : 'Check out Robux Game Puzzles! Search for it on the App Store or Play Store.';
+
+    const shareContent =
+      Platform.OS === 'ios' && storeUrl ? { message, url: storeUrl } : { message };
+
+    await Share.share(shareContent);
+  } catch (error) {
+    console.warn('Failed to share app:', error?.message || error);
+  }
+};

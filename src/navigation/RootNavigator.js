@@ -30,6 +30,8 @@ const getActiveRouteName = state => {
   return route.name;
 };
 
+const getRootStackSize = state => state?.routes?.length ?? 0;
+
 const shouldShowNavigationInterstitial = (previousRouteName, currentRouteName) => {
   if (!previousRouteName || previousRouteName === currentRouteName) {
     return false;
@@ -43,6 +45,7 @@ const shouldShowNavigationInterstitial = (previousRouteName, currentRouteName) =
 
 const RootNavigator = () => {
   const previousRouteNameRef = useRef(null);
+  const previousStackSizeRef = useRef(null);
   const hasSkippedInitialNavigationAdRef = useRef(false);
 
   const handleNavigationStateChange = () => {
@@ -52,17 +55,25 @@ const RootNavigator = () => {
 
     const rootState = navigationRef.getRootState();
     const currentRouteName = getActiveRouteName(rootState);
+    const currentStackSize = getRootStackSize(rootState);
 
     if (!currentRouteName) {
       return;
     }
 
     const previousRouteName = previousRouteNameRef.current;
+    const previousStackSize = previousStackSizeRef.current;
+    const isBackNavigation =
+      previousStackSize !== null && currentStackSize < previousStackSize;
 
-    if (shouldShowNavigationInterstitial(previousRouteName, currentRouteName)) {
+    if (
+      !isBackNavigation &&
+      shouldShowNavigationInterstitial(previousRouteName, currentRouteName)
+    ) {
       if (!hasSkippedInitialNavigationAdRef.current) {
         hasSkippedInitialNavigationAdRef.current = true;
         previousRouteNameRef.current = currentRouteName;
+        previousStackSizeRef.current = currentStackSize;
         return;
       }
 
@@ -74,6 +85,7 @@ const RootNavigator = () => {
     }
 
     previousRouteNameRef.current = currentRouteName;
+    previousStackSizeRef.current = currentStackSize;
   };
 
   return (

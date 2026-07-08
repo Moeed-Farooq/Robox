@@ -19,6 +19,7 @@ import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { isIOS } from '../../helpers';
 import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { AppBannerAd } from '../../services/ads';
 
 const RbxCalculatorScreen = () => {
   const navigation = useNavigation();
@@ -47,7 +48,7 @@ const RbxCalculatorScreen = () => {
   };
 
   return (
-    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.container]}>
+    <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.content}>
           <View style={styles.header}>
@@ -132,6 +133,9 @@ const RbxCalculatorScreen = () => {
         </View>
         </View>
       </TouchableWithoutFeedback>
+      <View style={styles.bannerContainer}>
+        <AppBannerAd />
+      </View>
       </SafeAreaView>
   );
 };
@@ -139,14 +143,14 @@ const RbxCalculatorScreen = () => {
 export default RbxCalculatorScreen;
 
 const styles = StyleSheet.create({
-  container: {
+  mainContainer: {
     flex: 1,
     backgroundColor: COLORS.splashBg,
-    paddingHorizontal: wp(5),
-    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
   content: {
     flex: 1,
+    paddingHorizontal: wp(5),
+    paddingVertical: isIOS() ? wp(1) : hp(2),
   },
 
   header: {
@@ -270,5 +274,10 @@ const styles = StyleSheet.create({
     borderColor: COLORS.green,
     borderWidth: wp(0.3),
     alignSelf: 'center',
+  },
+  bannerContainer: {
+    paddingBottom: hp(1),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

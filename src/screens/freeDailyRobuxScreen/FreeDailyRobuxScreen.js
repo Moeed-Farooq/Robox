@@ -57,20 +57,7 @@ const FreeDailyRobuxScreen = () => {
             onPress={() => navigation.navigate(SCREEN.DAILY_ROBUX_QUIZ)}
           />
         </View>
-        <View style={styles.btnWrap}>
-          <Button
-            icon={
-              <SvgIcon
-                icon={SVG.gameControllerColorful}
-                width={hp(2)}
-                height={hp(2)}
-              />
-            }
-            text={en.playRobuxBlast}
-            textStyle={styles.playBtnText}
-            style={styles.playBtn}
-          />
-        </View>
+       
       </View>
     </SafeAreaView>
   );

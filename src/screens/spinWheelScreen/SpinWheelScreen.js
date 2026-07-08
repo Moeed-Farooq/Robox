@@ -20,7 +20,7 @@ import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
-import { preloadRewardedAd, showRewardedAdForAction } from '../../services/ads';
+import { preloadRewardedAd, showRewardedAdForAction, AppBannerAd } from '../../services/ads';
 
 const SpinWheelScreen = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -153,6 +153,7 @@ const SpinWheelScreen = () => {
 
   return (
     <SafeAreaView style={[{ flex: 1, backgroundColor: COLORS.splashBg }, styles.mainContainer]}>
+      <View style={styles.content}>
       <View style={styles.headerRow}>
         <TouchableOpacity style={styles.iconButton}>
           <SvgIcon
@@ -268,6 +269,7 @@ const SpinWheelScreen = () => {
         />
         <Label style={styles.spinButtonText}>{en.spin}</Label>
       </TouchableOpacity>
+      </View>
 
       {winnerModalVisible && (
         <Modal transparent animationType="fade" visible={winnerModalVisible}>
@@ -313,6 +315,10 @@ const SpinWheelScreen = () => {
           </View>
         </Modal>
       )}
+
+      <View style={styles.bannerContainer}>
+        <AppBannerAd />
+      </View>
     </SafeAreaView>
   );
 };
@@ -323,6 +329,9 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.splashBg,
+  },
+  content: {
+    flex: 1,
     alignItems: 'center',
     paddingVertical: isIOS() ? wp(1) : hp(2),
   },
@@ -427,8 +436,8 @@ const styles = StyleSheet.create({
     width: wp(80),
     paddingVertical: hp(2),
     borderRadius: hp(2),
-    position: 'absolute',
-    bottom: hp(6),
+    marginTop: 'auto',
+    marginBottom: hp(2),
     borderWidth: 1,
     borderColor: COLORS.whiteBorderLight,
   },
@@ -509,5 +518,10 @@ const styles = StyleSheet.create({
     color: COLORS.green,
     fontSize: hp(1.8),
     fontFamily: FONT.semiBold,
+  },
+  bannerContainer: {
+    paddingBottom: hp(1),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
