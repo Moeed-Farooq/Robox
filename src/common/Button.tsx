@@ -59,9 +59,16 @@ const styles = StyleSheet.create({
     height: hp(6.5),
     borderRadius: hp(2.5),
     justifyContent: 'center',
-    backgroundColor: COLORS.splashBg,
-    flexDirection:'row',
-    gap:hp(2)
+    backgroundColor: COLORS.accent,
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow,
+    shadowColor: COLORS.accent,
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.32,
+    shadowRadius: 9,
+    elevation: 7,
+    flexDirection: 'row',
+    gap: hp(2),
   },
 
   iconContainer: {
@@ -78,6 +85,9 @@ const styles = StyleSheet.create({
     marginBottom: -0,
     fontSize: 14,
     lineHeight: 22,
-    color: COLORS.black,
+    color: COLORS.bgPurpleDark,
+    textShadowColor: COLORS.lightYellow + '80',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
 });

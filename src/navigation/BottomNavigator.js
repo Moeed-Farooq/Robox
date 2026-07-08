@@ -70,13 +70,17 @@ const BottomNavigator = () => {
           borderRadius: wp(8),
           backgroundColor: 'transparent',
           borderWidth: wp(0.6),
-          borderColor: COLORS.lightYellow + HEX_OPACITY[29],
-          elevation: 0,
+          borderColor: COLORS.lightYellow + HEX_OPACITY[55],
+          shadowColor: COLORS.accent,
+          shadowOffset: { width: 0, height: 8 },
+          shadowOpacity: 0.35,
+          shadowRadius: 16,
+          elevation: 14,
         },
         tabBarBackground: () => (
           <LinearGradient
-            colors={[COLORS.Purple, COLORS.surfaceAlt]}
-            start={{ x: 1, y: 0 }}
+            colors={[COLORS.surfaceAlt, COLORS.Purple, COLORS.bgPurpleDark]}
+            start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={[
               StyleSheet.absoluteFill,
@@ -107,10 +111,13 @@ const styles = StyleSheet.create({
     height: wp(11),
     borderRadius: wp(5.5),
     ...commonStyles.center,
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.white + HEX_OPACITY[6],
+    borderWidth: 1,
+    borderColor: COLORS.white + HEX_OPACITY[12],
   },
   activeIconBg: {
-    // backgroundColor: 'rgba(255,122,89,0.18)',
+    backgroundColor: COLORS.accent + HEX_OPACITY[20],
+    borderColor: COLORS.lightYellow + HEX_OPACITY[68],
   },
   text: {
     fontSize: 11,
@@ -120,6 +127,9 @@ const styles = StyleSheet.create({
   },
   activeText: {
     color: COLORS.lightYellow,
+    textShadowColor: COLORS.accent + HEX_OPACITY[45],
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
   },
   inactiveText: {
     color: COLORS.mutedText,

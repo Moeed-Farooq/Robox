@@ -38,7 +38,7 @@ export const KEYBOARD_TYPE = {
 };
 export const ADS = {
   ADS_DOCUMENT: 'showAds',
-  ADS_FIELD: 'showAds',
+  ADS_FIELD: 'enabled',
 };
 export const FIREBASE_COLLECTIONS = {
   USERS_COLLECTION: 'users',

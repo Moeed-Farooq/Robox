@@ -9,19 +9,29 @@ const DailyRewardsCards = ({ item }) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-    onPress={()=>navigation.navigate(item.screen)}
-     style={styles.card}>
-      <View style={styles.imageContainer}>
-        <Image source={item.src} style={styles.image} resizeMode="cover" />
-      </View>
+      onPress={() => navigation.navigate(item.screen)}
+      style={styles.card}
+    >
+      <View style={styles.innerPanel}>
+        <View style={styles.imageContainer}>
+          <Image source={item.src} style={styles.image} resizeMode="cover" />
+        </View>
 
-      <View style={styles.textContainer}>
-        <Label style={styles.title1}>{item.title1}</Label>
-        <View style={styles.bottomRow}>
-          <View style={[styles.rewardContainer, { backgroundColor: hexToRgba(item.color, 0.2) }]}> 
-            <Label style={[styles.reward, { color: item.color }]}>{item.reward}</Label>
+        <View style={styles.textContainer}>
+          <Label style={styles.title1}>{item.title1}</Label>
+          <View style={styles.bottomRow}>
+            <View
+              style={[
+                styles.rewardContainer,
+                { backgroundColor: hexToRgba(item.color, 0.2) },
+              ]}
+            >
+              <Label style={[styles.reward, { color: item.color }]}>
+                {item.reward}
+              </Label>
+            </View>
+            <Label style={styles.title2}>{item.title2}</Label>
           </View>
-          <Label style={styles.title2}>{item.title2}</Label>
         </View>
       </View>
     </TouchableOpacity>
@@ -32,38 +42,52 @@ export default DailyRewardsCards;
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    paddingHorizontal: wp(3.5),
+    paddingHorizontal: wp(1.8),
+    paddingVertical: hp(0.9),
     marginBottom: hp(1.3),
     alignItems: 'center',
-    backgroundColor: COLORS.surfaceElevated+ HEX_OPACITY[22],
+    backgroundColor: COLORS.surfaceElevated + HEX_OPACITY[58],
     borderRadius: wp(5),
     minHeight: hp(14),
-    // borderWidth: 1,
-    // borderColor: COLORS.borderSoft,
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow + HEX_OPACITY[24],
+    justifyContent: 'center',
   },
-imageContainer: {
-  width: wp(15),
-  height: wp(15),
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginRight: wp(3),
-  borderRadius: wp(2),
-  backgroundColor: 'rgba(255,255,255,0.05)',
-  overflow: 'hidden', 
-},
+  innerPanel: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: wp(4),
+    overflow: 'hidden',
+    backgroundColor: COLORS.bgPurpleDark + HEX_OPACITY[36],
+    paddingHorizontal: wp(3),
+    paddingVertical: hp(1.2),
+  },
+  imageContainer: {
+    width: wp(15),
+    height: wp(15),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: wp(3),
+    borderRadius: wp(3),
+    backgroundColor: COLORS.white + HEX_OPACITY[6],
+    overflow: 'hidden',
+  },
 
-image: {
-  width: '100%',
-  height: '100%',
-},
+  image: {
+    width: '100%',
+    height: '100%',
+  },
   textContainer: {
     flex: 1,
   },
   title1: {
-    color: COLORS.white,
+    color: COLORS.newwhite,
     fontSize: hp(1.95),
-    fontFamily: FONT.semiBold,
+    fontFamily: FONT.bold,
+    textShadowColor: COLORS.black + HEX_OPACITY[35],
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 4,
   },
   bottomRow: {
     flexDirection: 'row',
@@ -72,7 +96,7 @@ image: {
     flexWrap: 'wrap',
   },
   title2: {
-    color: COLORS.mutedText,
+    color: COLORS.lightestWhite,
     fontSize: hp(1.35),
     marginLeft: wp(2.5),
     fontFamily: FONT.regular,
@@ -85,5 +109,7 @@ image: {
     paddingVertical: wp(1.1),
     paddingHorizontal: hp(1),
     borderRadius: wp(3.5),
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow + HEX_OPACITY[20],
   },
 });

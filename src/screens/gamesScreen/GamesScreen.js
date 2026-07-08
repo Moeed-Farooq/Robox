@@ -1,6 +1,5 @@
 import { SectionList, StyleSheet, View } from 'react-native';
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 import { COLORS, wp, hp, FONT, HEX_OPACITY } from '../../enums/StyleGuide';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
@@ -14,25 +13,27 @@ const GamesScreen = () => {
 
   const renderSectionHeader = ({ section }) => (
     <View style={styles.sectionHeader}>
-      <View style={styles.headerLeft}>
+      <View style={styles.sectionHeaderInner}>
+        <View style={styles.headerLeft}>
+          <View
+            style={[
+              styles.headerIconContainer,
+              { backgroundColor: section.bgcolor },
+            ]}
+          >
+            <SvgIcon icon={section.icon} width={hp(2.2)} height={hp(2.2)} />
+          </View>
+
+          <View style={styles.headerCopy}>
+            <Label style={styles.sectionTitle}>{section.title}</Label>
+            <Label style={styles.sectionSubtitle}>{section.detail}</Label>
+          </View>
+        </View>
+
         <View
-          style={[
-            styles.headerIconContainer,
-            { backgroundColor: section.bgcolor },
-          ]}
-        >
-          <SvgIcon icon={section.icon} width={hp(2.2)} height={hp(2.2)} />
-        </View>
-
-        <View style={styles.headerCopy}>
-          <Label style={styles.sectionTitle}>{section.title}</Label>
-          <Label style={styles.sectionSubtitle}>{section.detail}</Label>
-        </View>
+          style={[styles.sectionIndicator, { backgroundColor: section.bgcolor }]}
+        />
       </View>
-
-      <View
-        style={[styles.sectionIndicator, { backgroundColor: section.bgcolor }]}
-      />
     </View>
   );
 
@@ -80,7 +81,9 @@ const styles = StyleSheet.create({
     borderRadius: wp(6),
     padding: wp(5),
     marginBottom: hp(2),
-    backgroundColor:COLORS.surfaceElevated+ HEX_OPACITY[42]
+    backgroundColor: COLORS.orange + HEX_OPACITY[60],
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow,
   },
 
   eyebrow: {
@@ -93,9 +96,12 @@ const styles = StyleSheet.create({
   },
 
   titleText: {
-    color: COLORS.white,
+    color: COLORS.newwhite,
     fontSize: hp(3),
-    fontFamily: FONT.bold,
+    fontFamily: FONT.extraBold,
+    textShadowColor: COLORS.accent + HEX_OPACITY[38],
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 7,
   },
 
   heroSubtitle: {
@@ -112,11 +118,25 @@ const styles = StyleSheet.create({
     marginTop: hp(2.2),
     marginBottom: hp(1.3),
     marginHorizontal: wp(1),
-    backgroundColor:COLORS.surfaceElevated+ HEX_OPACITY[62],
-  paddingVertical:hp(2),
-//   marginHorizontal:hp(2),
- paddingHorizontal:hp(2),
- borderRadius:hp(1)
+    backgroundColor: COLORS.surfaceElevated + HEX_OPACITY[75],
+    paddingVertical: hp(2),
+    paddingHorizontal: hp(2),
+    borderRadius: hp(1.4),
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow + HEX_OPACITY[16],
+    padding: hp(0.9),
+  },
+
+  sectionHeaderInner: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: hp(1.2),
+    overflow: 'hidden',
+    backgroundColor: COLORS.bgPurpleDark + HEX_OPACITY[30],
+    paddingVertical: hp(1.1),
+    paddingHorizontal: hp(1.4),
   },
 
   headerLeft: {
