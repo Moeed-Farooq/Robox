@@ -24,7 +24,7 @@ const HomeHeroBanner = ({ navigation, totalPoints = 0, totalPointsLoading = fals
   return (
     <Animated.View style={[styles.heroShell, cardEnter]}>
       <LinearGradient
-        colors={[COLORS.gradientStart, COLORS.gradientMid, COLORS.gradientEnd]}
+        colors={[COLORS.bgPurpleDark, COLORS.gradientStart, COLORS.gradientMid]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={StyleSheet.absoluteFill}
@@ -107,11 +107,13 @@ const styles = StyleSheet.create({
     marginTop: hp(1),
     marginBottom: hp(2.5),
     overflow: 'hidden',
-    shadowColor: COLORS.black,
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow + HEX_OPACITY[30],
+    shadowColor: COLORS.accent,
     shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.28,
-    shadowRadius: 18,
-    elevation: 10,
+    shadowOpacity: 0.35,
+    shadowRadius: 20,
+    elevation: 12,
   },
   heroContent: {
     paddingTop: hp(2.4),
@@ -127,14 +129,14 @@ const styles = StyleSheet.create({
     height: wp(28),
     top: -hp(2),
     right: -wp(4),
-    backgroundColor: COLORS.darkWhite + HEX_OPACITY[15],
+    backgroundColor: COLORS.Purple + HEX_OPACITY[20],
   },
   heroOrbAccent: {
     width: wp(22),
     height: wp(22),
     bottom: -hp(1),
     left: -wp(6),
-    backgroundColor: COLORS.contrastYellow + HEX_OPACITY[20],
+    backgroundColor: COLORS.accent + HEX_OPACITY[20],
   },
   heroTopRow: {
     flexDirection: 'row',
@@ -149,13 +151,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    backgroundColor: COLORS.darkWhite + HEX_OPACITY[18],
+    backgroundColor: COLORS.accent + HEX_OPACITY[17],
     paddingHorizontal: wp(3),
     paddingVertical: hp(0.5),
     borderRadius: hp(2),
     marginBottom: hp(1),
     borderWidth: 1,
-    borderColor: COLORS.darkWhite + HEX_OPACITY[22],
+    borderColor: COLORS.lightYellow + HEX_OPACITY[45],
   },
   liveDot: {
     width: hp(0.9),
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     marginRight: wp(1.5),
   },
   liveBadgeText: {
-    color: COLORS.creamWhite,
+    color: COLORS.white,
     fontSize: hp(1.25),
     fontFamily: FONT.semiBold,
     letterSpacing: wp(0.6),
@@ -179,16 +181,22 @@ const styles = StyleSheet.create({
     opacity: 0.95,
   },
   totalPointsText: {
-    color: COLORS.yellow,
+    color: COLORS.lightYellow,
     fontSize: hp(1.9),
     marginTop: hp(0.8),
     fontFamily: FONT.semiBold,
+    textShadowColor: COLORS.accent + HEX_OPACITY[55],
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 5,
   },
   robuxText: {
     fontSize: hp(3.2),
     lineHeight: hp(4.2),
-    fontFamily: FONT.semiBold,
+    fontFamily: FONT.extraBold,
     letterSpacing: 0.3,
+    textShadowColor: COLORS.accent + HEX_OPACITY[45],
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
   },
   controllerWrap: {
     width: hp(7.2),
@@ -203,28 +211,33 @@ const styles = StyleSheet.create({
     height: hp(7.2),
     borderRadius: hp(3.6),
     borderWidth: 2,
-    borderColor: COLORS.yellow,
+    borderColor: COLORS.lightYellow,
   },
   controller: {
     width: hp(6.4),
     height: hp(6.4),
-    backgroundColor: COLORS.darkWhite + HEX_OPACITY[22],
+    backgroundColor: COLORS.accent + HEX_OPACITY[20],
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: hp(2.2),
     borderWidth: 1,
-    borderColor: COLORS.darkWhite + HEX_OPACITY[35],
+    borderColor: COLORS.lightYellow + HEX_OPACITY[65],
+    shadowColor: COLORS.accent,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.35,
+    shadowRadius: 6,
+    elevation: 5,
   },
   heroFooter: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: hp(2.2),
-    backgroundColor: COLORS.black + HEX_OPACITY[18],
+    backgroundColor: COLORS.bgPurpleDark + HEX_OPACITY[52],
     borderRadius: hp(2),
     paddingVertical: hp(1.1),
     paddingHorizontal: wp(3),
     borderWidth: 1,
-    borderColor: COLORS.darkWhite + HEX_OPACITY[12],
+    borderColor: COLORS.lightYellow + HEX_OPACITY[20],
   },
   heroChip: {
     flex: 1,
@@ -234,7 +247,7 @@ const styles = StyleSheet.create({
     gap: wp(1.5),
   },
   heroChipText: {
-    color: COLORS.lightWhite,
+    color: COLORS.newwhite,
     fontSize: hp(1.25),
     fontFamily: FONT.medium,
   },

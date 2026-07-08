@@ -31,7 +31,7 @@ const SplashScreen = ({ navigation }) => {
       <StatusBar backgroundColor={COLORS.splashBg} barStyle="light-content" />
 
       <LinearGradient
-        colors={[COLORS.splashBg, COLORS.gradientMid, COLORS.bgPurpleDark]}
+        colors={[COLORS.bgPurpleDark, COLORS.splashBg, COLORS.gradientStart, COLORS.Purple]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={StyleSheet.absoluteFill}
@@ -143,17 +143,22 @@ const styles = StyleSheet.create({
     height: wp(44),
     borderRadius: wp(8),
     borderWidth: 1.5,
-    borderColor: COLORS.yellow,
+    borderColor: COLORS.lightYellow,
+    shadowColor: COLORS.accent,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
+    elevation: 7,
   },
   logoGlow: {
     width: wp(42),
     height: wp(42),
     borderRadius: wp(8),
-    backgroundColor: COLORS.darkWhite + HEX_OPACITY[12],
+    backgroundColor: COLORS.accent + HEX_OPACITY[12],
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: COLORS.darkWhite + HEX_OPACITY[25],
+    borderColor: COLORS.lightYellow + HEX_OPACITY[45],
   },
   logoContainer: {
     width: wp(30),
@@ -173,6 +178,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     textAlign: 'center',
     paddingHorizontal: wp(6),
+    textShadowColor: COLORS.accent + HEX_OPACITY[40],
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
   },
   subtitle: {
     color: COLORS.lightWhite,
@@ -190,20 +198,20 @@ const styles = StyleSheet.create({
   },
   progressShell: {
     width: '100%',
-    shadowColor: COLORS.yellow,
+    shadowColor: COLORS.accent,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.35,
-    shadowRadius: 8,
-    elevation: 4,
+    shadowOpacity: 0.45,
+    shadowRadius: 11,
+    elevation: 6,
   },
   progressBarBg: {
     width: '100%',
     height: hp(0.9),
-    backgroundColor: COLORS.darkWhite + HEX_OPACITY[10],
+    backgroundColor: COLORS.white + HEX_OPACITY[9],
     borderRadius: hp(2),
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: COLORS.darkWhite + HEX_OPACITY[15],
+    borderColor: COLORS.lightYellow + HEX_OPACITY[30],
   },
   progressFillWrap: {
     height: '100%',

@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
@@ -26,34 +26,36 @@ const GamesCards = ({ item }) => {
   const navigation = useNavigation();
   return (
     <View style={styles.card}>
-      <View style={[styles.iconContainer, { backgroundColor: item.bgcolor }]}>
-        <SvgIcon icon={item.icon} width={hp(3)} height={hp(3)} />
-      </View>
-
-      <View style={styles.content}>
-        <Label style={styles.title}>{item.name}</Label>
-
-        <Label style={styles.detail}>{item.detail}</Label>
-
-        <View style={styles.bottomRow}>
-          <View
-            style={[
-              styles.levelContainer,
-              { backgroundColor: currentLevelColor.bg },
-            ]}
-          >
-            <Label style={[styles.level, { color: currentLevelColor.text }]}>
-              {item.level}
-            </Label>
-          </View>
-
-          <Label style={styles.subDetail}>{item.subDetail}</Label>
+      <View style={styles.innerPanel}>
+        <View style={[styles.iconContainer, { backgroundColor: item.bgcolor }]}>
+          <SvgIcon icon={item.icon} width={hp(3)} height={hp(3)} />
         </View>
-      </View>
 
-      <TouchableOpacity activeOpacity={0.8} style={styles.playButton} onPress={() => navigation.navigate(item.screen)}>
-        <SvgIcon icon={SVG.play} width={hp(1.8)} height={hp(1.8)} />
-      </TouchableOpacity>
+        <View style={styles.content}>
+          <Label style={styles.title}>{item.name}</Label>
+
+          <Label style={styles.detail}>{item.detail}</Label>
+
+          <View style={styles.bottomRow}>
+            <View
+              style={[
+                styles.levelContainer,
+                { backgroundColor: currentLevelColor.bg },
+              ]}
+            >
+              <Label style={[styles.level, { color: currentLevelColor.text }]}>
+                {item.level}
+              </Label>
+            </View>
+
+            <Label style={styles.subDetail}>{item.subDetail}</Label>
+          </View>
+        </View>
+
+        <TouchableOpacity activeOpacity={0.8} style={styles.playButton} onPress={() => navigation.navigate(item.screen)}>
+          <SvgIcon icon={SVG.play} width={hp(1.8)} height={hp(1.8)} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -62,15 +64,24 @@ export default GamesCards;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: COLORS.surfaceElevated+ HEX_OPACITY[22],
+    backgroundColor: COLORS.surfaceElevated + HEX_OPACITY[90],
     borderRadius: hp(2),
-    paddingHorizontal: hp(3),
-    paddingVertical: hp(1),
+    paddingHorizontal: hp(1.5),
+    paddingVertical: hp(2),
+    marginBottom: hp(1.5),
+    marginHorizontal: hp(2),
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+  },
+  innerPanel: {
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: hp(1.5),
-    
-  marginHorizontal:hp(2),
+    borderRadius: hp(1.6),
+    overflow: 'hidden',
+    backgroundColor: COLORS.bgPurpleDark + HEX_OPACITY[34],
+    paddingHorizontal: hp(2),
+    paddingVertical: hp(1),
   },
 
   iconContainer: {
@@ -87,13 +98,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: COLORS.white,
+    color: COLORS.newwhite,
     fontSize: hp(1.8),
-    fontFamily: FONT.semiBold,
+    fontFamily: FONT.bold,
   },
 
   detail: {
-    color: COLORS.mutedText,
+    color: COLORS.lightestWhite,
     fontSize: hp(1.4),
     marginTop: hp(0.4),
     fontFamily: FONT.regular,
@@ -117,7 +128,7 @@ const styles = StyleSheet.create({
   },
 
   subDetail: {
-    color: COLORS.mutedText,
+    color: COLORS.lightestWhite,
     fontSize: hp(1.2),
     marginLeft: wp(3),
     textAlign: 'center',
@@ -131,5 +142,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: wp(2),
+    borderWidth: 1,
+    borderColor: COLORS.lightYellow + HEX_OPACITY[52],
+    shadowColor: COLORS.accent,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.32,
+    shadowRadius: 6,
+    elevation: 5,
   },
 });
