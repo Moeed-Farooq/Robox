@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { preloadInterstitialAd, showInterstitialIfAvailable } from '../../services/ads';
 import { SETTINGS_ACTION } from '../../enums';
-import { openAppStore, shareApp } from '../../helpers';
+import { openAppStore, shareApp, openSupportEmail } from '../../helpers';
 
 const SettingsScreen = () => {
   const [sections, setSections] = useState(SETTINGS_SECTIONS);
@@ -65,6 +65,11 @@ const SettingsScreen = () => {
 
         if (item?.action === SETTINGS_ACTION.SHARE_APP) {
           shareApp();
+          return;
+        }
+
+        if (item?.action === SETTINGS_ACTION.HELP_SUPPORT) {
+          openSupportEmail();
           return;
         }
 

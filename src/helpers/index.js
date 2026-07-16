@@ -1,8 +1,11 @@
 import { FRUITS_DATA } from '../dummies';
 import { Alert, Platform, PermissionsAndroid ,Share, Linking } from 'react-native';
-import { CameraRoll } from '@react-native-camera-roll/camera-roll';
+import {
+  CameraRoll,
+  iosRequestAddOnlyGalleryPermission,
+} from '@react-native-camera-roll/camera-roll';
 import ReactNativeBlobUtil from 'react-native-blob-util';
-import { APP_STORE } from '../enums';
+import { APP_STORE, SUPPORT } from '../enums';
 
 
 export const hexToRgba = (hex, opacity = 1) => {
@@ -74,6 +77,17 @@ export const checkPermission = async () => {
     );
     return granted === PermissionsAndroid.RESULTS.GRANTED;
   }
+
+  if (Platform.OS === 'ios') {
+    try {
+      const status = await iosRequestAddOnlyGalleryPermission();
+      return status === 'granted' || status === 'limited';
+    } catch (error) {
+      console.warn('Failed to request Photos permission:', error?.message || error);
+      return false;
+    }
+  }
+
   return true;
 };
 
@@ -86,7 +100,12 @@ export const handleImageDownload = async (imageUrl, onSuccess, onError) => {
 
   const hasPermission = await checkPermission();
   if (!hasPermission) {
-    onError('Permission Denied', 'Storage write access is required to save assets.');
+    onError(
+      'Permission Denied',
+      Platform.OS === 'ios'
+        ? 'Photos access is required to save skins and emotes. Enable it in Settings.'
+        : 'Storage write access is required to save assets.',
+    );
     return;
   }
 
@@ -96,10 +115,14 @@ export const handleImageDownload = async (imageUrl, onSuccess, onError) => {
 
     const date = new Date();
     const filePath = `${CacheDir}/item_${Math.floor(date.getTime() + date.getSeconds())}.png`;
+    const saveUri = filePath.startsWith('file://') ? filePath : `file://${filePath}`;
 
     const response = await fetch(imageUrl, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36',
+        'User-Agent':
+          Platform.OS === 'ios'
+            ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15'
+            : 'Mozilla/5.0 (Linux; Android 10) AppleWebKit/537.36',
         Accept: 'image/png,image/jpeg,image/*',
       },
     });
@@ -110,23 +133,37 @@ export const handleImageDownload = async (imageUrl, onSuccess, onError) => {
 
     const blob = await response.blob();
     const reader = new FileReader();
-    reader.readAsDataURL(blob);
+
+    reader.onerror = () => {
+      onError('Download Failed', 'Could not read the downloaded image.');
+    };
+
     reader.onloadend = async () => {
       try {
-        const base64Data = reader.result.split(',')[1];
-        await fs.writeFile(filePath, base64Data, 'base64');
+        if (!reader.result || typeof reader.result !== 'string') {
+          onError('Download Failed', 'Could not process the downloaded image.');
+          return;
+        }
 
-        await CameraRoll.save(filePath, { type: 'photo' });
-        
-        // Trigger Dynamic Success Modal Callback
-        onSuccess('Downloaded Successfuly', 'The skin has been saved to your gallery!');
+        const base64Data = reader.result.split(',')[1];
+        if (!base64Data) {
+          onError('Download Failed', 'The downloaded image data was empty.');
+          return;
+        }
+
+        await fs.writeFile(filePath, base64Data, 'base64');
+        await CameraRoll.save(saveUri, { type: 'photo' });
+
+        onSuccess('Downloaded Successfuly', 'Saved to your Photos gallery!');
 
         fs.unlink(filePath).catch(err => console.log('Clean up err:', err));
       } catch (saveError) {
-        onError('Compilation Error', 'Failed to compile raw asset streams onto local memory.');
+        onError('Save Failed', 'Could not save this item to your Photos gallery.');
         console.log('Conversion/Save Error:', saveError);
       }
     };
+
+    reader.readAsDataURL(blob);
   } catch (err) {
     onError('Network Error', 'The live server layer interrupted the connection stream.');
     console.log('Standard Fetch Core Error: ', err);
@@ -263,5 +300,18 @@ export const shareApp = async () => {
     await Share.share(shareContent);
   } catch (error) {
     console.warn('Failed to share app:', error?.message || error);
+  }
+};
+
+export const openSupportEmail = async () => {
+  const email = SUPPORT.EMAIL;
+  const subject = encodeURIComponent('Robux Game Puzzles Support');
+  const mailtoUrl = `mailto:${email}?subject=${subject}`;
+
+  try {
+    await Linking.openURL(mailtoUrl);
+  } catch (error) {
+    Alert.alert('Unable to open email', `Please contact us at ${email}`);
+    console.warn('Failed to open support email:', error?.message || error);
   }
 };

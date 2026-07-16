@@ -35,6 +35,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Robox needs access to save skins and emotes to your Photos library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Robox needs access to your Photos library to save skins and emotes.</string>
 	<key>RCTNewArchEnabled</key>
 	<true/>
 	<key>UIAppFonts</key>

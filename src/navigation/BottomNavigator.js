@@ -15,6 +15,7 @@ import {
 } from '../enums/StyleGuide';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import LinearGradient from 'react-native-linear-gradient';
+import { isIOS } from '../helpers';
 
 const ICON_SIZE = wp(6);
 
@@ -27,7 +28,7 @@ const renderIcon =
     }
 
     return (
-      <View style={[styles.tabContainer, item.title && { marginTop: hp(6) }]}>
+      <View style={[styles.tabContainer, item.title && { marginTop: isIOS() ? hp(7) : hp(6) }]}>
         <View style={[styles.iconBg, focused && styles.activeIconBg]}>
           <SvgIcon
             icon={focused ? item.activeIcon : item.iconName}

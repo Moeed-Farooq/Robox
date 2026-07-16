@@ -1,8 +1,8 @@
-const USE_PRODUCTION_ADS = true;
+const USE_PRODUCTION_ADS = false;
 
 const PRODUCTION_AD_IDS = {
   appIdAndroid: 'ca-app-pub-6091683149476586~1317862771',
-  appIdIOS: '',
+  appIdIOS: 'ca-app-pub-6091683149476586~1317862771',
   banner: 'ca-app-pub-6091683149476586/3752454424',
   rewarded: 'ca-app-pub-6091683149476586/8954598659',
   interstitial: 'ca-app-pub-6091683149476586/9004781104',

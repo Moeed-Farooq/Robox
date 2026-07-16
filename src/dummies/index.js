@@ -276,6 +276,7 @@ export const SETTINGS_SECTIONS = [
         title: 'Help And Support',
         subtitle: 'Get help with the app',
         icon: SVG.help,
+        action: SETTINGS_ACTION.HELP_SUPPORT,
       },
       {
         id: '9',

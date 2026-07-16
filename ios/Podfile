@@ -10,6 +10,8 @@ prepare_react_native_project!
 
 # Required for @react-native-firebase (Firebase Swift pods)
 $RNFirebaseAsStaticFramework = true
+# Required when using use_frameworks! with react-native-google-mobile-ads
+$RNGoogleMobileAdsAsStaticFramework = true
 
 linkage = ENV['USE_FRAMEWORKS'] || 'static'
 Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green

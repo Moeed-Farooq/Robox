@@ -58,4 +58,9 @@ export const APP_STORE = {
 export const SETTINGS_ACTION = {
   RATE_APP: 'RATE_APP',
   SHARE_APP: 'SHARE_APP',
+  HELP_SUPPORT: 'HELP_SUPPORT',
+};
+
+export const SUPPORT = {
+  EMAIL: 'support@perkmedia-group.com',
 };
