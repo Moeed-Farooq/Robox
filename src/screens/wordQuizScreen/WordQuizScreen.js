@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   Modal,
+  Alert,
 } from 'react-native';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
@@ -15,6 +16,7 @@ import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { generateLetters, formatTime, TOTAL_TIME, isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
 import {
+  getRewardedAdUserMessage,
   preloadInterstitialAd,
   showInterstitialIfAvailable,
   showRewardedAdForAction,
@@ -117,11 +119,33 @@ const WordQuizScreen = () => {
   };
 
   useEffect(() => {
-    if (!showResult || pointsAwardedRef.current || score <= 0) {
+    if (!showResult || pointsAwardedRef.current) {
       return;
     }
 
     pointsAwardedRef.current = true;
+
+    const resetInterstitialGuard = () => {
+      isShowingInterstitialRef.current = false;
+    };
+
+    if (!isShowingInterstitialRef.current) {
+      isShowingInterstitialRef.current = true;
+
+      const shown = showInterstitialIfAvailable({
+        onClosed: resetInterstitialGuard,
+        onError: resetInterstitialGuard,
+      });
+
+      if (!shown) {
+        resetInterstitialGuard();
+        preloadInterstitialAd();
+      }
+    }
+
+    if (score <= 0) {
+      return;
+    }
 
     addPoints(score).catch(error => {
       // Allow retry if write fails.
@@ -232,9 +256,13 @@ const WordQuizScreen = () => {
       return;
     }
 
-    await showRewardedAdForAction(() => {
+    const result = await showRewardedAdForAction(() => {
       applyHint();
     });
+
+    if (!result?.completed) {
+      Alert.alert('Hint Locked', getRewardedAdUserMessage(result?.reason));
+    }
   };
 
   return (

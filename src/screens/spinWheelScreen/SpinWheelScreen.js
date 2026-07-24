@@ -20,7 +20,7 @@ import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
-import { preloadRewardedAd, showRewardedAdForAction, AppBannerAd } from '../../services/ads';
+import { preloadRewardedAd, showRewardedAdForAction, AppBannerAd, getRewardedAdUserMessage } from '../../services/ads';
 
 const SpinWheelScreen = () => {
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -120,13 +120,15 @@ const SpinWheelScreen = () => {
           setSelectedReward(null);
           Alert.alert(
             'Reward Error',
-            'Ad completed but reward could not be granted right now. Please try again.',
+            getRewardedAdUserMessage(result?.reason),
           );
         } else {
           setSelectedReward(null);
           Alert.alert(
-            'Reward Not Granted',
-            'Watch the full rewarded ad to claim your spin reward.',
+            result?.reason === 'ad_not_ready' || result?.reason === 'show_failed'
+              ? 'Ad Unavailable'
+              : 'Reward Not Granted',
+            getRewardedAdUserMessage(result?.reason),
           );
         }
       } finally {

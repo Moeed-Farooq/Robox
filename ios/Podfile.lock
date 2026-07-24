@@ -3386,6 +3386,8 @@ PODS:
     - ReactCommon/turbomodule/core
     - SocketRocket
     - Yoga
+  - react-native-in-app-review (4.4.2):
+    - React-Core
   - react-native-keyboard-controller (1.21.12):
     - boost
     - DoubleConversion
@@ -4685,6 +4687,7 @@ DEPENDENCIES:
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
+  - react-native-in-app-review (from `../node_modules/react-native-in-app-review`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
@@ -4866,6 +4869,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-blob-util"
   react-native-cameraroll:
     :path: "../node_modules/@react-native-camera-roll/camera-roll"
+  react-native-in-app-review:
+    :path: "../node_modules/react-native-in-app-review"
   react-native-keyboard-controller:
     :path: "../node_modules/react-native-keyboard-controller"
   react-native-pager-view:
@@ -5040,6 +5045,7 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: 175741856a8f6a31e20b973cb784db023256b259
   react-native-blob-util: b28c476975a9cdbf2afde81784739d791c892750
   react-native-cameraroll: ae31ba7ee17d31c5ee05d7bb248742e3af482783
+  react-native-in-app-review: 1516ba69d60d58053b7eb3aaaf8d2a5a74af8b57
   react-native-keyboard-controller: 0c99b25d678203fc6f50691f85500bd45d1cd021
   react-native-pager-view: 3a5c38bfaadea13d891c9acd62130347a8eee8df
   react-native-safe-area-context: 7794f18549493f369e4ca4b3cd66843bd050ac66

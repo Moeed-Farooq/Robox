@@ -20,10 +20,7 @@ const SplashScreen = ({ navigation }) => {
     orbAStyle,
     orbBStyle,
     orbCStyle,
-    logoWrapStyle,
-    logoRingStyle,
     fadeUp,
-    progressWidth,
   } = useSplashAnimation(handleComplete);
 
   return (
@@ -49,14 +46,13 @@ const SplashScreen = ({ navigation }) => {
       <Animated.View style={[styles.orb, styles.orbPurple, orbCStyle]} />
 
       <View style={styles.centerContent}>
-        <Animated.View style={[styles.logoWrap, logoWrapStyle]}>
-          <Animated.View style={[styles.logoRing, logoRingStyle]} />
+        <View style={styles.logoWrap}>
           <View style={styles.logoGlow}>
             <View style={styles.logoContainer}>
-              <Image src={IMAGES.LOGO} style={styles.logoImage}/>
+              <Image src={IMAGES.LOGO} style={styles.logoImage} />
             </View>
           </View>
-        </Animated.View>
+        </View>
 
         <Animated.View style={[styles.titleBlock, fadeUp(0.3)]}>
           <Label style={styles.titleMain} color={COLORS.white}>
@@ -68,21 +64,6 @@ const SplashScreen = ({ navigation }) => {
           <Label style={styles.subtitle}>{en.getPremiumRewards}</Label>
         </Animated.View>
       </View>
-
-      <Animated.View style={[styles.bottomSection, fadeUp(0.65)]}>
-        <View style={styles.progressShell}>
-          <View style={styles.progressBarBg}>
-            <Animated.View style={[styles.progressFillWrap, { width: progressWidth }]}>
-              <LinearGradient
-                colors={[COLORS.yellow, COLORS.accent, COLORS.Purple]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.gradientFill}
-              />
-            </Animated.View>
-          </View>
-        </View>
-      </Animated.View>
     </View>
   );
 };
@@ -137,19 +118,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: hp(3),
   },
-  logoRing: {
-    position: 'absolute',
-    width: wp(44),
-    height: wp(44),
-    borderRadius: wp(8),
-    borderWidth: 1.5,
-    borderColor: COLORS.lightYellow,
-    shadowColor: COLORS.accent,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10,
-    elevation: 7,
-  },
   logoGlow: {
     width: wp(42),
     height: wp(42),
@@ -190,34 +158,5 @@ const styles = StyleSheet.create({
     letterSpacing: 0.4,
     textAlign: 'center',
     paddingHorizontal: wp(8),
-  },
-  bottomSection: {
-    alignItems: 'center',
-    paddingBottom: hp(8),
-    paddingHorizontal: wp(12),
-  },
-  progressShell: {
-    width: '100%',
-    shadowColor: COLORS.accent,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.45,
-    shadowRadius: 11,
-    elevation: 6,
-  },
-  progressBarBg: {
-    width: '100%',
-    height: hp(0.9),
-    backgroundColor: COLORS.white + HEX_OPACITY[9],
-    borderRadius: hp(2),
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: COLORS.lightYellow + HEX_OPACITY[30],
-  },
-  progressFillWrap: {
-    height: '100%',
-  },
-  gradientFill: {
-    flex: 1,
-    borderRadius: hp(2),
   },
 });

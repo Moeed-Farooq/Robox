@@ -15,7 +15,7 @@ import { SVG } from '../../assets';
 import { handleImageDownload } from '../../helpers';
 import Label from '../../common';
 import { en } from '../../languages';
-import { showRewardedAdForAction } from '../../services/ads';
+import { showRewardedAdForAction, getRewardedAdUserMessage } from '../../services/ads';
 
 const RobuxSkinsCard = ({ item }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -59,8 +59,17 @@ const RobuxSkinsCard = ({ item }) => {
 
       if (!result?.completed && result?.reason !== 'action_failed') {
         setModalType('error');
-        setModalTitle('Download Locked');
-        setModalMessage('Watch the full rewarded ad to unlock download.');
+        setModalTitle(
+          result?.reason === 'ad_not_ready' || result?.reason === 'show_failed'
+            ? 'Ad Unavailable'
+            : 'Download Locked',
+        );
+        setModalMessage(getRewardedAdUserMessage(result?.reason));
+        setModalVisible(true);
+      } else if (result?.reason === 'action_failed') {
+        setModalType('error');
+        setModalTitle('Download Error');
+        setModalMessage(getRewardedAdUserMessage(result?.reason));
         setModalVisible(true);
       }
     } finally {

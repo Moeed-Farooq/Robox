@@ -5,6 +5,7 @@ import {
   View,
   Modal,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
@@ -26,6 +27,7 @@ import { isIOS } from '../../helpers';
 import useTotalPoints from '../../hooks/useTotalPoints';
 import {
   AppBannerAd,
+  getRewardedAdUserMessage,
   preloadInterstitialAd,
   showInterstitialIfAvailable,
   showRewardedAdForAction,
@@ -276,20 +278,49 @@ const BlockPuzzleScreen = () => {
     setIsRestartAdInProgress(true);
 
     try {
-      await showRewardedAdForAction(() => {
+      const result = await showRewardedAdForAction(() => {
         restartGame();
       });
+
+      if (!result?.completed) {
+        Alert.alert(
+          'Restart Locked',
+          getRewardedAdUserMessage(result?.reason),
+        );
+      }
     } finally {
       setIsRestartAdInProgress(false);
     }
   };
 
   useEffect(() => {
-    if (!isGameOver || pointsAwardedRef.current || score <= 0) {
+    if (!isGameOver || pointsAwardedRef.current) {
       return;
     }
 
     pointsAwardedRef.current = true;
+
+    const resetInterstitialGuard = () => {
+      isShowingInterstitialRef.current = false;
+    };
+
+    if (!isShowingInterstitialRef.current) {
+      isShowingInterstitialRef.current = true;
+
+      const shown = showInterstitialIfAvailable({
+        onClosed: resetInterstitialGuard,
+        onError: resetInterstitialGuard,
+      });
+
+      if (!shown) {
+        resetInterstitialGuard();
+        preloadInterstitialAd();
+      }
+    }
+
+    if (score <= 0) {
+      return;
+    }
 
     addPoints(score).catch(error => {
       // Allow retry if write fails.

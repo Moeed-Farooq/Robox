@@ -1,4 +1,4 @@
-const USE_PRODUCTION_ADS = false;
+const USE_PRODUCTION_ADS = true;
 
 const PRODUCTION_AD_IDS = {
   appIdAndroid: 'ca-app-pub-6091683149476586~1317862771',

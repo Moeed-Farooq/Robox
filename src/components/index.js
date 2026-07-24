@@ -10,6 +10,8 @@ import FreeEmotesCards from './freeEmotesCards';
 import RobuxSkinsCard from './robuxSkinsCard';
 import GeneratedAvatarCard from './generatedAvatarCard';
 import HomeHeroBanner from './homeHeroBanner';
+import EngagementPromptModal from './engagementPromptModal';
+import EngagementPromptsHost from './engagementPromptsHost';
 
 export {
   DailyRewardsCards,
@@ -24,4 +26,6 @@ export {
   RobuxSkinsCard,
   GeneratedAvatarCard,
   HomeHeroBanner,
+  EngagementPromptModal,
+  EngagementPromptsHost,
 };

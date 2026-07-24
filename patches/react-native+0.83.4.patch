@@ -1,0 +1,18 @@
+diff --git a/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.mm b/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.mm
+index 6646570..0fc7dfe 100644
+--- a/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.mm
++++ b/node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios/ReactCommon/RCTTurboModule.mm
+@@ -470,7 +470,12 @@ TraceSection s(
+     @try {
+       [inv invokeWithTarget:strongModule];
+     } @catch (NSException *exception) {
+-      throw convertNSExceptionToJSError(runtime, exception, std::string{moduleName}, methodNameStr);
++      // Void methods are always async, re-throw instead of converting to
++      // JSError, same as the async branch in performMethodInvocation.
++      // Fixes iOS 26 launch crash (Hermes heap corruption / SIGABRT) from
++      // convertNSExceptionToJSError on the TurboModule queue.
++      // See: https://github.com/facebook/react-native/pull/56694
++      @throw exception;
+     } @finally {
+       [retainedObjectsForInvocation removeAllObjects];
+     }

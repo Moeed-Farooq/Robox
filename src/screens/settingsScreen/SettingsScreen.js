@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, SectionList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, SectionList, TouchableOpacity } from 'react-native';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
@@ -11,13 +11,35 @@ import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { preloadInterstitialAd, showInterstitialIfAvailable } from '../../services/ads';
 import { SETTINGS_ACTION } from '../../enums';
-import { openAppStore, shareApp, openSupportEmail } from '../../helpers';
+import {
+  getAppStoreShareUrl,
+  openAppStore,
+  openSupportEmail,
+  requestNativeAppReview,
+  shareApp,
+} from '../../helpers';
 
 const SettingsScreen = () => {
   const [sections, setSections] = useState(SETTINGS_SECTIONS);
+  const [appLink, setAppLink] = useState('');
   const navigation = useNavigation();
   const visibleSections = sections.filter(section => section.title !== 'Preferences');
-  // const visibleSections = sections;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getAppStoreShareUrl()
+      .then(url => {
+        if (isMounted && url) {
+          setAppLink(url);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleToggle = (sectionTitle, itemId, itemTitle, value) => {
     setSections(prevSections =>
@@ -48,6 +70,13 @@ const SettingsScreen = () => {
     }
   };
 
+  const handleRateApp = async () => {
+    const launched = await requestNativeAppReview();
+    if (!launched) {
+      await openAppStore();
+    }
+  };
+
   const renderSectionHeader = ({ section }) => (
     <Label style={styles.sectionTitle}>{section.title}</Label>
   );
@@ -59,7 +88,7 @@ const SettingsScreen = () => {
       onToggle={value => handleToggle(section.title, item.id, item.title, value)}
       onPress={() => {
         if (item?.action === SETTINGS_ACTION.RATE_APP) {
-          openAppStore();
+          handleRateApp();
           return;
         }
 
@@ -88,6 +117,37 @@ const SettingsScreen = () => {
     </View>
   );
 
+  const renderListFooter = () => {
+    if (!appLink) {
+      return null;
+    }
+
+    return (
+      <View style={styles.appLinkCard}>
+        <Label style={styles.appLinkTitle}>App link</Label>
+        <Label style={styles.appLinkValue} numberOfLines={2}>
+          {appLink}
+        </Label>
+        <View style={styles.appLinkActions}>
+          <TouchableOpacity
+            style={styles.appLinkButton}
+            activeOpacity={0.85}
+            onPress={() => shareApp()}
+          >
+            <Label style={styles.appLinkButtonText}>Share Link</Label>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.appLinkButton, styles.appLinkButtonSecondary]}
+            activeOpacity={0.85}
+            onPress={() => openAppStore()}
+          >
+            <Label style={styles.appLinkButtonTextSecondary}>Open Store</Label>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.splashBg }}>
       <SectionList
@@ -96,6 +156,7 @@ const SettingsScreen = () => {
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         ListHeaderComponent={renderListHeader}
+        ListFooterComponent={renderListFooter}
         stickySectionHeadersEnabled={false}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
@@ -137,5 +198,59 @@ const styles = StyleSheet.create({
     color: COLORS.lightYellow,
     fontSize: hp(2.2),
     fontFamily: FONT.semiBold,
+  },
+
+  appLinkCard: {
+    marginTop: hp(3),
+    padding: wp(4),
+    borderRadius: hp(1.6),
+    backgroundColor: COLORS.surfaceElevated,
+    borderWidth: 1,
+    borderColor: COLORS.blue,
+  },
+
+  appLinkTitle: {
+    color: COLORS.lightYellow,
+    fontSize: hp(1.8),
+    fontFamily: FONT.semiBold,
+  },
+
+  appLinkValue: {
+    color: COLORS.lightestWhite,
+    fontSize: hp(1.4),
+    fontFamily: FONT.regular,
+    marginTop: hp(1),
+  },
+
+  appLinkActions: {
+    flexDirection: 'row',
+    marginTop: hp(1.5),
+    gap: wp(2),
+  },
+
+  appLinkButton: {
+    flex: 1,
+    backgroundColor: COLORS.accent,
+    borderRadius: hp(1.2),
+    paddingVertical: hp(1.2),
+    alignItems: 'center',
+  },
+
+  appLinkButtonSecondary: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderColor: COLORS.whiteBorderLight,
+  },
+
+  appLinkButtonText: {
+    color: COLORS.black,
+    fontSize: hp(1.5),
+    fontFamily: FONT.semiBold,
+  },
+
+  appLinkButtonTextSecondary: {
+    color: COLORS.newwhite,
+    fontSize: hp(1.5),
+    fontFamily: FONT.medium,
   },
 });

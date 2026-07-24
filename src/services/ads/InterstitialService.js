@@ -10,6 +10,8 @@ let interstitialAd = null;
 let interstitialLoaded = false;
 let interstitialLoading = false;
 let listenersAttached = false;
+let lastInterstitialShownAt = 0;
+const MIN_INTERSTITIAL_INTERVAL_MS = 45000;
 const interstitialCloseSubscribers = new Set();
 const interstitialErrorSubscribers = new Set();
 
@@ -112,6 +114,16 @@ export const showInterstitialIfAvailable = options => {
     const ad = ensureInterstitialInstance();
     const onClosed = options?.onClosed;
     const onError = options?.onError;
+    const ignoreCooldown = Boolean(options?.ignoreCooldown);
+    const now = Date.now();
+
+    if (
+      !ignoreCooldown &&
+      lastInterstitialShownAt > 0 &&
+      now - lastInterstitialShownAt < MIN_INTERSTITIAL_INTERVAL_MS
+    ) {
+      return false;
+    }
 
     if (!interstitialLoaded) {
       preloadInterstitialAd();
@@ -126,6 +138,7 @@ export const showInterstitialIfAvailable = options => {
       interstitialErrorSubscribers.add(onError);
     }
 
+    lastInterstitialShownAt = now;
     ad.show();
     return true;
   } catch (error) {
