@@ -23,6 +23,7 @@ import {
   preloadInterstitialAd,
   showInterstitialIfAvailable,
 } from '../../services/ads';
+import { POINT_REWARDS } from '../../enums';
 
 const CAR_SIZE = wp(14);
 const ITEM_SIZE = wp(12);
@@ -197,7 +198,7 @@ const JailBreakGame = () => {
 
     pointsAwardedRef.current = true;
 
-    addPoints(100).catch(error => {
+    addPoints(POINT_REWARDS.JAIL_BREAK_ESCAPE).catch(error => {
       // Allow retry if points write fails.
       pointsAwardedRef.current = false;
       console.warn('Failed to save Jail Break reward:', error?.message || error);

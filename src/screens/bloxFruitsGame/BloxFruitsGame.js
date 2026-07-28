@@ -22,6 +22,7 @@ import {
   preloadInterstitialAd,
   showInterstitialIfAvailable,
 } from '../../services/ads';
+import { POINT_REWARDS } from '../../enums';
 
 const BloxFruitsGame = () => {
   const [cards, setCards] = useState([]);
@@ -141,16 +142,12 @@ const BloxFruitsGame = () => {
       }
     }
 
-    if (score <= 0) {
-      return;
-    }
-
-    addPoints(score).catch(error => {
+    addPoints(POINT_REWARDS.BLOX_FRUITS_WIN).catch(error => {
       // Allow retry if write fails.
       pointsAwardedRef.current = false;
       console.warn('Failed to save Blox Fruits score:', error?.message || error);
     });
-  }, [addPoints, isVictory, score]);
+  }, [addPoints, isVictory]);
 
   const showMismatchInterstitial = () => {
     if (isShowingInterstitialRef.current) {

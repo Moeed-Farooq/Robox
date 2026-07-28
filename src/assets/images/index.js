@@ -8,4 +8,5 @@ export const IMAGES = {
   BLOCK_PUZZLE: require('./blockPuzzle.png'),
   SPIN_WHEEL: require('./spinWheel.png'),
   LOGO: require('./logo.png'),
+  PERKOX_LOGO: require('./icon-perkox.png'),
 };

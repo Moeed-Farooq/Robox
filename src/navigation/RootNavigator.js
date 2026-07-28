@@ -119,6 +119,8 @@ const RootNavigator = () => {
         <Stack.Screen name={SCREEN.PHANTOM_FORCES_GAME} component={ui.PhantomForcesGame} />
         <Stack.Screen name={SCREEN.ROYALE_HIGH_GAME} component={ui.RoyaleHighGame} />
         <Stack.Screen name={SCREEN.FLEE_THE_FACILITY_GAME} component={ui.FleeTheFacilityGame} />
+        <Stack.Screen name={SCREEN.PERKOX_OFFERWALL_SCREEN} component={ui.PerkoxOfferwallScreen} />
+        <Stack.Screen name={SCREEN.PERKOX_WEBVIEW_SCREEN} component={ui.PerkoxWebViewScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

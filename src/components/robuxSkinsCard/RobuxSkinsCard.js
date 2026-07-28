@@ -7,6 +7,7 @@ import {
   Modal,
   Text,
   StatusBar,
+  Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
@@ -52,29 +53,42 @@ const RobuxSkinsCard = ({ item }) => {
       return;
     }
 
-    setIsAdFlowInProgress(true);
+    Alert.alert(
+      'Watch Ad to Download',
+      'Watch this ad to unlock this skin download.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Watch Ad',
+          onPress: async () => {
+            setIsAdFlowInProgress(true);
 
-    try {
-      const result = await showRewardedAdForAction(performDownload);
+            try {
+              const result = await showRewardedAdForAction(performDownload);
 
-      if (!result?.completed && result?.reason !== 'action_failed') {
-        setModalType('error');
-        setModalTitle(
-          result?.reason === 'ad_not_ready' || result?.reason === 'show_failed'
-            ? 'Ad Unavailable'
-            : 'Download Locked',
-        );
-        setModalMessage(getRewardedAdUserMessage(result?.reason));
-        setModalVisible(true);
-      } else if (result?.reason === 'action_failed') {
-        setModalType('error');
-        setModalTitle('Download Error');
-        setModalMessage(getRewardedAdUserMessage(result?.reason));
-        setModalVisible(true);
-      }
-    } finally {
-      setIsAdFlowInProgress(false);
-    }
+              if (!result?.completed && result?.reason !== 'action_failed') {
+                setModalType('error');
+                setModalTitle(
+                  result?.reason === 'ad_not_ready' ||
+                    result?.reason === 'show_failed'
+                    ? 'Ad Unavailable'
+                    : 'Download Locked',
+                );
+                setModalMessage(getRewardedAdUserMessage(result?.reason));
+                setModalVisible(true);
+              } else if (result?.reason === 'action_failed') {
+                setModalType('error');
+                setModalTitle('Download Error');
+                setModalMessage(getRewardedAdUserMessage(result?.reason));
+                setModalVisible(true);
+              }
+            } finally {
+              setIsAdFlowInProgress(false);
+            }
+          },
+        },
+      ],
+    );
   };
 
   const isSuccess = modalType === 'success';

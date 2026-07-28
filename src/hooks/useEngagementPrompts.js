@@ -4,7 +4,7 @@ import {
   markRatePromptShown,
   markSharePromptShown,
 } from '../services/engagement/EngagementPromptService';
-import { openAppStore, requestNativeAppReview, shareApp } from '../helpers';
+import { rateApp, shareApp } from '../helpers';
 
 const useEngagementPrompts = totalPoints => {
   const [promptType, setPromptType] = useState(null);
@@ -70,10 +70,7 @@ const useEngagementPrompts = totalPoints => {
 
     try {
       if (currentType === 'rate') {
-        const launched = await requestNativeAppReview();
-        if (!launched) {
-          await openAppStore();
-        }
+        await rateApp();
       } else if (currentType === 'share') {
         await shareApp();
       }
