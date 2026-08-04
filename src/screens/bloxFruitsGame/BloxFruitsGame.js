@@ -6,8 +6,9 @@ import {
   FlatList,
   Modal,
   StatusBar,
-  Animated, 
+  Animated,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
@@ -36,6 +37,7 @@ const BloxFruitsGame = () => {
   const pointsAwardedRef = useRef(false);
   const isShowingInterstitialRef = useRef(false);
   const mismatchTimeoutRef = useRef(null);
+  const mismatchCountRef = useRef(0);
   
   // Animation value initialization
   const timerScale = useRef(new Animated.Value(1)).current;
@@ -74,6 +76,24 @@ const BloxFruitsGame = () => {
       }, 1000);
     } else if (timeLeft === 0) {
       clearInterval(timerRef.current);
+
+      if (!isVictory && !isShowingInterstitialRef.current) {
+        isShowingInterstitialRef.current = true;
+
+        const resetInterstitialGuard = () => {
+          isShowingInterstitialRef.current = false;
+        };
+
+        const shown = showInterstitialIfAvailable({
+          onClosed: resetInterstitialGuard,
+          onError: resetInterstitialGuard,
+        });
+
+        if (!shown) {
+          resetInterstitialGuard();
+          preloadInterstitialAd();
+        }
+      }
     }
     return () => clearInterval(timerRef.current);
   }, [timeLeft, isVictory]);
@@ -86,6 +106,7 @@ const BloxFruitsGame = () => {
 
     pointsAwardedRef.current = false;
     isShowingInterstitialRef.current = false;
+    mismatchCountRef.current = 0;
     setCards(generateGameCards());
     setSelectedCards([]);
     setScore(0);
@@ -96,11 +117,33 @@ const BloxFruitsGame = () => {
   };
 
   useEffect(() => {
-    if (!isVictory || pointsAwardedRef.current || score <= 0) {
+    if (!isVictory || pointsAwardedRef.current) {
       return;
     }
 
     pointsAwardedRef.current = true;
+
+    const resetInterstitialGuard = () => {
+      isShowingInterstitialRef.current = false;
+    };
+
+    if (!isShowingInterstitialRef.current) {
+      isShowingInterstitialRef.current = true;
+
+      const shown = showInterstitialIfAvailable({
+        onClosed: resetInterstitialGuard,
+        onError: resetInterstitialGuard,
+      });
+
+      if (!shown) {
+        resetInterstitialGuard();
+        preloadInterstitialAd();
+      }
+    }
+
+    if (score <= 0) {
+      return;
+    }
 
     addPoints(score).catch(error => {
       // Allow retry if write fails.
@@ -111,6 +154,13 @@ const BloxFruitsGame = () => {
 
   const showMismatchInterstitial = () => {
     if (isShowingInterstitialRef.current) {
+      return;
+    }
+
+    mismatchCountRef.current += 1;
+
+    // Throttle mismatch ads so gameplay stays usable.
+    if (mismatchCountRef.current % 3 !== 0) {
       return;
     }
 
@@ -190,7 +240,7 @@ const BloxFruitsGame = () => {
   );
 
   return (
-    <View style={styles.mainContainer}>
+    <SafeAreaView style={styles.mainContainer}>
       <View style={styles.contentContainer}>
         {/* Header Row */}
         <View style={styles.heroTopRow}>
@@ -297,7 +347,7 @@ const BloxFruitsGame = () => {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -310,7 +360,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: wp(5),
-    paddingTop: hp(2),
   },
   heroTopRow: {
     flexDirection: 'row',

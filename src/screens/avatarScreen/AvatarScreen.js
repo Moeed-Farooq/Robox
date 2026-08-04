@@ -6,6 +6,7 @@ import {
   View,
   ActivityIndicator,
   Modal,
+  Alert,
 } from 'react-native';
 import React, { useState, useCallback, useMemo } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
@@ -18,7 +19,10 @@ import { AvatarStyleCard, GeneratedAvatarCard } from '../../components';
 import { AVATAR_STYLES } from '../../dummies';
 import { getAvatarStyleName, generateUniqueId } from '../../helpers';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { showRewardedAdForAction } from '../../services/ads';
+import {
+  getRewardedAdUserMessage,
+  showRewardedAdForAction,
+} from '../../services/ads';
 
 const AvatarScreen = () => {
   const [prompt, setPrompt] = useState('');
@@ -59,9 +63,16 @@ const AvatarScreen = () => {
       return;
     }
 
-    await showRewardedAdForAction(() => {
+    const result = await showRewardedAdForAction(() => {
       generateAvatar();
     });
+
+    if (!result?.completed) {
+      Alert.alert(
+        'Generate Locked',
+        getRewardedAdUserMessage(result?.reason),
+      );
+    }
   };
 
   const toggleFavorite = useCallback(id => {

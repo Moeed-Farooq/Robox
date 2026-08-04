@@ -253,14 +253,14 @@ export const SETTINGS_SECTIONS = [
       {
         id: '5',
         title: 'Rate App',
-        subtitle: 'Rate us on the app store',
+        subtitle: 'Enjoying the app? Rate us',
         icon: SVG.starRating,
         action: SETTINGS_ACTION.RATE_APP,
       },
       {
         id: '6',
         title: 'Share app',
-        subtitle: 'Share with friends',
+        subtitle: 'Invite friends with your app link',
         icon: SVG.share,
         action: SETTINGS_ACTION.SHARE_APP,
       },

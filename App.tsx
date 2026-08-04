@@ -5,6 +5,7 @@ import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { anonymousLogin, ensureFirestoreUserDocument, getCurrentUser } from './src/services';
 import { initializeAds } from './src/services/ads';
+import EngagementPromptsHost from './src/components/engagementPromptsHost';
 
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1 }} pointerEvents={authLoading ? 'none' : 'auto'}>
       <StatusBar backgroundColor={COLORS.splashBg} barStyle={'light-content'} />
         <RootNavigator />
+        <EngagementPromptsHost />
     </GestureHandlerRootView>
   );
 };

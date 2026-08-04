@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { StyleSheet, View, Modal, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   GestureHandlerRootView,
   GestureDetector,
@@ -168,27 +169,33 @@ const JailBreakGame = () => {
   };
 
   useEffect(() => {
-    if (!modalVisible || gameResult !== 'ESCAPED' || pointsAwardedRef.current) {
+    if (!modalVisible || !gameResult) {
       return;
     }
-
-    pointsAwardedRef.current = true;
 
     const resetInterstitialGuard = () => {
       isShowingInterstitialRef.current = false;
     };
 
-    isShowingInterstitialRef.current = true;
+    if (!isShowingInterstitialRef.current) {
+      isShowingInterstitialRef.current = true;
 
-    const shown = showInterstitialIfAvailable({
-      onClosed: resetInterstitialGuard,
-      onError: resetInterstitialGuard,
-    });
+      const shown = showInterstitialIfAvailable({
+        onClosed: resetInterstitialGuard,
+        onError: resetInterstitialGuard,
+      });
 
-    if (!shown) {
-      resetInterstitialGuard();
-      preloadInterstitialAd();
+      if (!shown) {
+        resetInterstitialGuard();
+        preloadInterstitialAd();
+      }
     }
+
+    if (gameResult !== 'ESCAPED' || pointsAwardedRef.current) {
+      return;
+    }
+
+    pointsAwardedRef.current = true;
 
     addPoints(100).catch(error => {
       // Allow retry if points write fails.
@@ -199,10 +206,24 @@ const JailBreakGame = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.mainContainer}>
+      <SafeAreaView style={styles.mainContainer}>
         <View style={styles.header}>
-          <Label style={styles.jailBreakText}>{en.jailBreak}</Label>
-          <Label style={styles.subtext}>{en.escapeFromPrison}</Label>
+          <TouchableOpacity
+            style={styles.closeButton}
+            onPress={() => navigation.goBack()}
+          >
+            <SvgIcon
+              icon={SVG.goBack}
+              height={hp(4)}
+              width={hp(4)}
+              color={COLORS.white}
+            />
+          </TouchableOpacity>
+          <View style={styles.headerTitle}>
+            <Label style={styles.jailBreakText}>{en.jailBreak}</Label>
+            <Label style={styles.subtext}>{en.escapeFromPrison}</Label>
+          </View>
+          <View style={{ width: wp(13) }} />
         </View>
 
         <View style={styles.statsContainer}>
@@ -328,7 +349,7 @@ const JailBreakGame = () => {
             </View>
           </View>
         </Modal>
-      </View>
+      </SafeAreaView>
     </GestureHandlerRootView>
   );
 };
@@ -343,8 +364,22 @@ const styles = StyleSheet.create({
     paddingTop: hp(2),
   },
   header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: hp(2),
+  },
+  headerTitle: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  closeButton: {
+    backgroundColor: COLORS.yellow,
+    width: wp(13),
+    height: wp(13),
+    borderRadius: wp(6.5),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   jailBreakText: {
     fontFamily: FONT.bold,

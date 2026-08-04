@@ -273,7 +273,7 @@ export const openAppStore = async () => {
   }
 };
 
-const getAppStoreShareUrl = async () => {
+export const getAppStoreShareUrl = async () => {
   if (Platform.OS === 'android') {
     return `https://play.google.com/store/apps/details?id=${APP_STORE.ANDROID_PACKAGE_NAME}`;
   }
@@ -287,17 +287,32 @@ const getAppStoreShareUrl = async () => {
   return `https://play.google.com/store/apps/details?id=${APP_STORE.ANDROID_PACKAGE_NAME}`;
 };
 
+export const requestNativeAppReview = async () => {
+  try {
+    const InAppReview = require('react-native-in-app-review').default;
+
+    if (!InAppReview?.isAvailable?.()) {
+      return false;
+    }
+
+    await InAppReview.RequestInAppReview();
+    return true;
+  } catch (error) {
+    console.warn('Native in-app review unavailable:', error?.message || error);
+    return false;
+  }
+};
+
 export const shareApp = async () => {
   try {
     const storeUrl = await getAppStoreShareUrl();
+    // Keep the link only in `message`. Passing `url` as well on iOS
+    // duplicates the store link in the shared text.
     const message = storeUrl
-      ? `Check out Robux Game Puzzles! Download the app here: ${storeUrl}`
-      : 'Check out Robux Game Puzzles! Search for it on the App Store or Play Store.';
+      ? `Invite 2 friends and help us grow! Download Robux Game Puzzles here: ${storeUrl}`
+      : 'Invite 2 friends and help us grow! Search for Robux Game Puzzles on the App Store or Play Store.';
 
-    const shareContent =
-      Platform.OS === 'ios' && storeUrl ? { message, url: storeUrl } : { message };
-
-    await Share.share(shareContent);
+    await Share.share({ message });
   } catch (error) {
     console.warn('Failed to share app:', error?.message || error);
   }

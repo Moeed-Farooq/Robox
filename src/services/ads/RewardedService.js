@@ -81,6 +81,23 @@ export const preloadRewardedAd = () => {
 
 export const isRewardedAdReady = () => rewardedLoaded;
 
+export const REWARDED_AD_UNAVAILABLE_MESSAGE =
+  'Ad not available right now. Please try again later.';
+
+export const getRewardedAdUserMessage = reason => {
+  switch (reason) {
+    case 'ad_not_ready':
+    case 'show_failed':
+      return REWARDED_AD_UNAVAILABLE_MESSAGE;
+    case 'reward_not_earned':
+      return 'Watch the full rewarded ad to claim your reward.';
+    case 'action_failed':
+      return 'Ad completed but reward could not be granted right now. Please try again.';
+    default:
+      return REWARDED_AD_UNAVAILABLE_MESSAGE;
+  }
+};
+
 export const showRewardedAdForAction = action => {
   return new Promise(resolve => {
     const completeWithoutAd = async reason => {
