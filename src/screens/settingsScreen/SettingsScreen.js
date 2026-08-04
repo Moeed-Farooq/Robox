@@ -15,7 +15,7 @@ import {
   getAppStoreShareUrl,
   openAppStore,
   openSupportEmail,
-  requestNativeAppReview,
+  rateApp,
   shareApp,
 } from '../../helpers';
 
@@ -71,10 +71,7 @@ const SettingsScreen = () => {
   };
 
   const handleRateApp = async () => {
-    const launched = await requestNativeAppReview();
-    if (!launched) {
-      await openAppStore();
-    }
+    await rateApp();
   };
 
   const renderSectionHeader = ({ section }) => (

@@ -11,8 +11,10 @@ import { SVG } from '../../assets';
 import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
 import { QUIZ_DATA } from '../../dummies';
+import { POINT_REWARDS } from '../../enums';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { isIOS } from '../../helpers';
+import useTotalPoints from '../../hooks/useTotalPoints';
 import { en } from '../../languages';
 import {
   preloadInterstitialAd,
@@ -21,6 +23,7 @@ import {
 
 const DailyRobuxQuiz = () => {
   const navigation = useNavigation();
+  const { addPoints } = useTotalPoints();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -31,6 +34,7 @@ const DailyRobuxQuiz = () => {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const isShowingInterstitialRef = useRef(false);
   const nextQuestionTimeoutRef = useRef(null);
+  const pointsAwardedRef = useRef(false);
 
   const clearPendingNextQuestion = () => {
     if (nextQuestionTimeoutRef.current) {
@@ -71,6 +75,18 @@ const DailyRobuxQuiz = () => {
     setShowAnswer(false);
     setTimer(30);
   };
+
+  useEffect(() => {
+    if (!quizFinished || pointsAwardedRef.current) {
+      return;
+    }
+
+    pointsAwardedRef.current = true;
+    addPoints(POINT_REWARDS.DAILY_QUIZ_COMPLETE).catch(error => {
+      pointsAwardedRef.current = false;
+      console.warn('Failed to save Daily Quiz reward:', error?.message || error);
+    });
+  }, [addPoints, quizFinished]);
 
   useEffect(() => {
     if (showAnswer || selectedAnswer) return;

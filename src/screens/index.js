@@ -23,6 +23,8 @@ import ArsenalGame from './arsenalGame';
 import PhantomForcesGame from './phantomForcesGame';
 import RoyaleHighGame from './royaleHighGame';
 import FleeTheFacilityGame from './fleeTheFacilityGame';
+import PerkoxOfferwallScreen from './perkoxOfferwallScreen';
+import PerkoxWebViewScreen from './perkoxWebViewScreen';
 
 export {
   HomeScreen,
@@ -50,4 +52,6 @@ export {
   PhantomForcesGame,
   RoyaleHighGame,
   FleeTheFacilityGame,
+  PerkoxOfferwallScreen,
+  PerkoxWebViewScreen,
 };

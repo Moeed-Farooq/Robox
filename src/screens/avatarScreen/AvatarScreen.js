@@ -63,16 +63,28 @@ const AvatarScreen = () => {
       return;
     }
 
-    const result = await showRewardedAdForAction(() => {
-      generateAvatar();
-    });
+    Alert.alert(
+      'Watch Ad to Generate',
+      'Watch this ad to generate 1 AI avatar.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Watch Ad',
+          onPress: async () => {
+            const result = await showRewardedAdForAction(() => {
+              generateAvatar();
+            });
 
-    if (!result?.completed) {
-      Alert.alert(
-        'Generate Locked',
-        getRewardedAdUserMessage(result?.reason),
-      );
-    }
+            if (!result?.completed) {
+              Alert.alert(
+                'Generate Locked',
+                getRewardedAdUserMessage(result?.reason),
+              );
+            }
+          },
+        },
+      ],
+    );
   };
 
   const toggleFavorite = useCallback(id => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image, TouchableOpacity, Alert } from 'react-native';
 import Label from '../../common';
 import { COLORS, FONT, HEX_OPACITY, hp, wp } from '../../enums/StyleGuide';
 import { hexToRgba } from '../../helpers';
@@ -7,11 +7,20 @@ import { useNavigation } from '@react-navigation/native';
 
 const DailyRewardsCards = ({ item }) => {
   const navigation = useNavigation();
+
+  const handlePress = () => {
+    if (item?.comingSoon) {
+      Alert.alert('Coming Soon', 'Perkox Offerwall Rewards is coming soon. Stay tuned!');
+      return;
+    }
+
+    if (item?.screen) {
+      navigation.navigate(item.screen);
+    }
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate(item.screen)}
-      style={styles.card}
-    >
+    <TouchableOpacity onPress={handlePress} style={styles.card}>
       <View style={styles.innerPanel}>
         <View style={styles.imageContainer}>
           <Image source={item.src} style={styles.image} resizeMode="cover" />

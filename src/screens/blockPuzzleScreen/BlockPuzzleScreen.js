@@ -32,6 +32,7 @@ import {
   showInterstitialIfAvailable,
   showRewardedAdForAction,
 } from '../../services/ads';
+import { POINT_REWARDS } from '../../enums';
 
 const BlockPuzzleScreen = () => {
   const BOARD_SIZE = 8;
@@ -275,22 +276,34 @@ const BlockPuzzleScreen = () => {
       return;
     }
 
-    setIsRestartAdInProgress(true);
+    Alert.alert(
+      'Watch Ad to Restart',
+      'Watch this ad to restart the Block Puzzle game.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Watch Ad',
+          onPress: async () => {
+            setIsRestartAdInProgress(true);
 
-    try {
-      const result = await showRewardedAdForAction(() => {
-        restartGame();
-      });
+            try {
+              const result = await showRewardedAdForAction(() => {
+                restartGame();
+              });
 
-      if (!result?.completed) {
-        Alert.alert(
-          'Restart Locked',
-          getRewardedAdUserMessage(result?.reason),
-        );
-      }
-    } finally {
-      setIsRestartAdInProgress(false);
-    }
+              if (!result?.completed) {
+                Alert.alert(
+                  'Restart Locked',
+                  getRewardedAdUserMessage(result?.reason),
+                );
+              }
+            } finally {
+              setIsRestartAdInProgress(false);
+            }
+          },
+        },
+      ],
+    );
   };
 
   useEffect(() => {
@@ -318,16 +331,12 @@ const BlockPuzzleScreen = () => {
       }
     }
 
-    if (score <= 0) {
-      return;
-    }
-
-    addPoints(score).catch(error => {
+    addPoints(POINT_REWARDS.BLOCK_PUZZLE_GAME_OVER).catch(error => {
       // Allow retry if write fails.
       pointsAwardedRef.current = false;
       console.warn('Failed to save Block Puzzle score:', error?.message || error);
     });
-  }, [addPoints, isGameOver, score]);
+  }, [addPoints, isGameOver]);
 
   const DraggableShape = ({ shapeData, index }) => {
     if (!shapeData || !shapeData.matrix) return null;

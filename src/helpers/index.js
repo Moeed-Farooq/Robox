@@ -248,7 +248,7 @@ export const openAppStore = async () => {
       if (!appStoreId) {
         Alert.alert(
           'Unable to open store',
-          'This app is not available on the App Store yet.',
+          'This app is not on the App Store yet (TestFlight-only builds cannot open a public listing). Add IOS_APP_STORE_ID in AppEnums once the app has an Apple ID in App Store Connect.',
         );
         return;
       }
@@ -301,6 +301,16 @@ export const requestNativeAppReview = async () => {
     console.warn('Native in-app review unavailable:', error?.message || error);
     return false;
   }
+};
+
+/**
+ * Explicit "Rate App" actions should open the store page.
+ * Apple's in-app review API often shows on Simulator but is suppressed on
+ * TestFlight / real devices (quota + no guarantee the UI appears).
+ * Returning success from RequestInAppReview does NOT mean a dialog was shown.
+ */
+export const rateApp = async () => {
+  await openAppStore();
 };
 
 export const shareApp = async () => {

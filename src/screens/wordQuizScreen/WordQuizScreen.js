@@ -22,6 +22,7 @@ import {
   showRewardedAdForAction,
 } from '../../services/ads';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { POINT_REWARDS } from '../../enums';
 
 const WordQuizScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -143,16 +144,12 @@ const WordQuizScreen = () => {
       }
     }
 
-    if (score <= 0) {
-      return;
-    }
-
-    addPoints(score).catch(error => {
+    addPoints(POINT_REWARDS.WORD_QUIZ_COMPLETE).catch(error => {
       // Allow retry if write fails.
       pointsAwardedRef.current = false;
       console.warn('Failed to save Word Quiz score:', error?.message || error);
     });
-  }, [addPoints, score, showResult]);
+  }, [addPoints, showResult]);
 
   useEffect(() => {
     preloadInterstitialAd();
@@ -256,13 +253,25 @@ const WordQuizScreen = () => {
       return;
     }
 
-    const result = await showRewardedAdForAction(() => {
-      applyHint();
-    });
+    Alert.alert(
+      'Watch Ad for Hint',
+      'Watch this ad to unlock 1 letter hint for the current word.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Watch Ad',
+          onPress: async () => {
+            const result = await showRewardedAdForAction(() => {
+              applyHint();
+            });
 
-    if (!result?.completed) {
-      Alert.alert('Hint Locked', getRewardedAdUserMessage(result?.reason));
-    }
+            if (!result?.completed) {
+              Alert.alert('Hint Locked', getRewardedAdUserMessage(result?.reason));
+            }
+          },
+        },
+      ],
+    );
   };
 
   return (

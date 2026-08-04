@@ -12,6 +12,7 @@ import GeneratedAvatarCard from './generatedAvatarCard';
 import HomeHeroBanner from './homeHeroBanner';
 import EngagementPromptModal from './engagementPromptModal';
 import EngagementPromptsHost from './engagementPromptsHost';
+import PerkoxOfferCard from './perkoxOfferCard';
 
 export {
   DailyRewardsCards,
@@ -28,4 +29,5 @@ export {
   HomeHeroBanner,
   EngagementPromptModal,
   EngagementPromptsHost,
+  PerkoxOfferCard,
 };

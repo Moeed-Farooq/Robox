@@ -24,6 +24,8 @@ export const SCREEN = {
   PHANTOM_FORCES_GAME: 'PhantomForcesGame',
   ROYALE_HIGH_GAME: 'RoyaleHighGame',
   TOWER_HELL_GAME: 'TowerHellGame',
+  PERKOX_OFFERWALL_SCREEN: 'PerkoxOfferwallScreen',
+  PERKOX_WEBVIEW_SCREEN: 'PerkoxWebViewScreen',
 };
 export const TAB = {
   BOTTOM: 'BottomNavigator',
