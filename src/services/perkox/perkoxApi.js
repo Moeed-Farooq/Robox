@@ -136,8 +136,7 @@ export const fetchPerkoxOffers = async ({
     api_key: PERKOX_CONFIG.API_KEY,
     player_id: String(playerId),
     offers_page: String(safeOffersPage),
-    hot_offers_page: String(safeHotOffersPage),
-    user_agent: `Robox/${Platform.OS}`,
+    hot_offers_page: String(safeHotOffersPage)
   });
 
   const response = await fetch(

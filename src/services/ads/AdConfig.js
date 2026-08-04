@@ -1,11 +1,13 @@
 const USE_PRODUCTION_ADS = true;
 
 const PRODUCTION_AD_IDS = {
-  appIdAndroid: 'ca-app-pub-6091683149476586~1317862771',
-  appIdIOS: 'ca-app-pub-6091683149476586~1317862771',
-  banner: 'ca-app-pub-6091683149476586/3752454424',
-  rewarded: 'ca-app-pub-6091683149476586/8954598659',
-  interstitial: 'ca-app-pub-6091683149476586/9004781104',
+  appIdAndroid: 'ca-app-pub-6091683149476586~1820232130',
+  appIdIOS: 'ca-app-pub-6091683149476586~1820232130',
+  banner: 'ca-app-pub-6091683149476586/5283804159',
+  rewarded: 'ca-app-pub-6091683149476586/1567920427',
+  interstitial: 'ca-app-pub-6091683149476586/5774758745',
+  nativeAdvanced: 'ca-app-pub-6091683149476586/7342423067',
+  appOpen: 'ca-app-pub-6091683149476586/7418444680',
 };
 
 const TEST_AD_IDS = {
