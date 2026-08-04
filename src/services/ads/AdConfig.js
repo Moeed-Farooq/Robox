@@ -16,6 +16,8 @@ const TEST_AD_IDS = {
   banner: 'ca-app-pub-3940256099942544/6300978111',
   rewarded: 'ca-app-pub-3940256099942544/5224354917',
   interstitial: 'ca-app-pub-3940256099942544/1033173712',
+  nativeAdvanced: 'ca-app-pub-3940256099942544/2247696110',
+  appOpen: 'ca-app-pub-3940256099942544/9257395921',
 };
 
 const ACTIVE_AD_IDS = USE_PRODUCTION_ADS ? PRODUCTION_AD_IDS : TEST_AD_IDS;

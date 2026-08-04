@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   StyleSheet,
   TouchableOpacity,
@@ -12,10 +13,14 @@ import Label from '../../common';
 import SvgIcon from '../../common/SvgIcon';
 import { RobuxSkinsCard } from '../../components';
 import { ROBUX_SKINS_SCREEN_TABS } from '../../dummies';
+import { ENGAGEMENT_THRESHOLDS } from '../../enums';
 import { COLORS, FONT, hp, wp } from '../../enums/StyleGuide';
 import { en } from '../../languages';
+import useTotalPoints from '../../hooks/useTotalPoints';
 import { fetchRobuxSkinsPageByTab } from '../../services';
 import { AppBannerAd } from '../../services/ads';
+
+const UNLOCK_POINTS = ENGAGEMENT_THRESHOLDS.FEATURE_UNLOCK;
 
 const ListHeader = ({ navigation, selectedTab, onSelectTab, tabsDisabled }) => (
   <View>
@@ -61,6 +66,7 @@ const ListHeader = ({ navigation, selectedTab, onSelectTab, tabsDisabled }) => (
 );
 
 const RobuxSkinsScreen = ({ navigation }) => {
+  const { totalPoints, loading: pointsLoading } = useTotalPoints();
   const [selectedTab, setSelectedTab] = useState('all');
   const [skinsData, setSkinsData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,8 +77,25 @@ const RobuxSkinsScreen = ({ navigation }) => {
   const activeRequestTabRef = useRef('all');
   const activeRequestIdRef = useRef(0);
   const activeAbortControllerRef = useRef(null);
+  const hasRedirectedRef = useRef(false);
 
   const normalizedSelectedTab = String(selectedTab || 'all').toLowerCase();
+  const isFeatureLocked =
+    !pointsLoading && Number(totalPoints) < UNLOCK_POINTS;
+
+  useEffect(() => {
+    if (!isFeatureLocked || hasRedirectedRef.current) {
+      return;
+    }
+
+    hasRedirectedRef.current = true;
+    Alert.alert(
+      en.featureLocked,
+      en.featureLockedMessage.replace('{points}', String(UNLOCK_POINTS)),
+      [{ text: en.ok, onPress: () => navigation.goBack() }],
+    );
+    navigation.goBack();
+  }, [isFeatureLocked, navigation]);
 
   const loadSkins = useCallback(async (tabValue = 'all') => {
     const normalizedTab = String(tabValue || 'all').toLowerCase();
@@ -192,8 +215,12 @@ const RobuxSkinsScreen = ({ navigation }) => {
   ]);
 
   useEffect(() => {
+    if (pointsLoading || isFeatureLocked) {
+      return;
+    }
+
     loadSkins(normalizedSelectedTab);
-  }, [loadSkins, normalizedSelectedTab]);
+  }, [isFeatureLocked, loadSkins, normalizedSelectedTab, pointsLoading]);
 
   useEffect(() => {
     return () => {

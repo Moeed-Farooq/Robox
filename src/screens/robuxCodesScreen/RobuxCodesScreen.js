@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
+  Alert,
   FlatList,
   StyleSheet,
   TouchableOpacity,
@@ -11,6 +12,7 @@ import SvgIcon from '../../common/SvgIcon';
 import { SVG } from '../../assets';
 import { RobuxCodesCards } from '../../components';
 import { ROBUX_CODES } from '../../dummies';
+import { ENGAGEMENT_THRESHOLDS } from '../../enums';
 import {
   COLORS,
   FONT,
@@ -20,10 +22,30 @@ import {
 import { en } from '../../languages';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isIOS } from '../../helpers';
+import useTotalPoints from '../../hooks/useTotalPoints';
 import { AppBannerAd } from '../../services/ads';
+
+const UNLOCK_POINTS = ENGAGEMENT_THRESHOLDS.FEATURE_UNLOCK;
 
 const RobuxCodesScreen = () => {
   const navigation = useNavigation();
+  const { totalPoints, loading } = useTotalPoints();
+  const hasRedirectedRef = useRef(false);
+  const isFeatureLocked = !loading && Number(totalPoints) < UNLOCK_POINTS;
+
+  useEffect(() => {
+    if (!isFeatureLocked || hasRedirectedRef.current) {
+      return;
+    }
+
+    hasRedirectedRef.current = true;
+    Alert.alert(
+      en.featureLocked,
+      en.featureLockedMessage.replace('{points}', String(UNLOCK_POINTS)),
+      [{ text: en.ok, onPress: () => navigation.goBack() }],
+    );
+    navigation.goBack();
+  }, [isFeatureLocked, navigation]);
 
   const renderItem = useCallback(
     ({ item }) => <RobuxCodesCards item={item} />,

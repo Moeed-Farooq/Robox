@@ -111,6 +111,10 @@
   "intenseSurvival":"⚡Intense Survival",
   "fastHackTeam":"🏃‍♂️ Fast Running • 🔒 Hacking • 🎯 Teamwork",
   "loadingSkins": "Loading Skins...",
-  "loadingEmotes": "Loading Emotes..."
+  "loadingEmotes": "Loading Emotes...",
+  "featureLocked": "Feature Locked",
+  "featureLockedMessage": "Earn {points} points to unlock this feature. Keep playing games and completing rewards!",
+  "unlockAt": "Unlock at {points} pts",
+  "sponsored": "Sponsored"
 
 }

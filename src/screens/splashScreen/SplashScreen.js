@@ -8,10 +8,20 @@ import Label from '../../common';
 import useSplashAnimation from '../../hooks/useSplashAnimation';
 import Image from '../../common/Image';
 import { IMAGES } from '../../assets/images';
+import { showAppOpenIfAvailable } from '../../services/ads';
 
 const SplashScreen = ({ navigation }) => {
   const handleComplete = useCallback(() => {
-    navigation.replace(TAB.BOTTOM);
+    const goHome = () => navigation.replace(TAB.BOTTOM);
+
+    const shown = showAppOpenIfAvailable({
+      onClosed: goHome,
+      onError: goHome,
+    });
+
+    if (!shown) {
+      goHome();
+    }
   }, [navigation]);
 
   const {
