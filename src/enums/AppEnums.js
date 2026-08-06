@@ -67,6 +67,7 @@ export const INTERSTITIAL_ADS_SCREENS = [
 export const ENGAGEMENT_THRESHOLDS = {
   RATE: 50,
   SHARE: 70,
+  FEATURE_UNLOCK: 1000,
 };
 
 export const APP_STORE = {

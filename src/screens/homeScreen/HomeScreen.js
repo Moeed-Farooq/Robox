@@ -9,6 +9,7 @@ import { DailyReward, RobuxFeaturesData } from '../../dummies';
 import { DailyRewardsCards, HomeHeroBanner, RobuxFeaturesCards } from '../../components';
 import useHomeScreenAnimation from '../../hooks/useHomeScreenAnimation';
 import useTotalPoints from '../../hooks/useTotalPoints';
+import { AppNativeAd } from '../../services/ads';
 
 const AnimatedScrollView = Animated.createAnimatedComponent(
   Animated.ScrollView,
@@ -20,7 +21,9 @@ const HomeScreen = () => {
   const { totalPoints, loading } = useTotalPoints();
 
   const renderDailyRewards = ({ item }) => <DailyRewardsCards item={item} />;
-  const renderRobuxFeatures = ({ item }) => <RobuxFeaturesCards item={item} />;
+  const renderRobuxFeatures = ({ item }) => (
+    <RobuxFeaturesCards item={item} totalPoints={totalPoints} />
+  );
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -47,6 +50,10 @@ const HomeScreen = () => {
             scrollEnabled={false}
             contentContainerStyle={styles.listSpacing}
           />
+        </View>
+
+        <View style={styles.nativeAdWrap}>
+          <AppNativeAd />
         </View>
 
         <View style={styles.sectionWrap}>
@@ -86,6 +93,9 @@ const styles = StyleSheet.create({
     paddingBottom: hp(18),
   },
   sectionWrap: {
+    marginBottom: hp(2),
+  },
+  nativeAdWrap: {
     marginBottom: hp(2),
   },
   sectionHeader: {

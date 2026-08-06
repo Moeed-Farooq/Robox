@@ -1,6 +1,7 @@
 import mobileAds from 'react-native-google-mobile-ads';
 import { preloadRewardedAd } from './RewardedService';
 import { preloadInterstitialAd } from './InterstitialService';
+import { preloadAppOpenAd } from './AppOpenAdService';
 import { areAdsEnabled, initializeAdsSettings } from './AdsSettingsService';
 
 let initializationPromise = null;
@@ -25,6 +26,7 @@ export const initializeAds = async () => {
 
     preloadRewardedAd();
     preloadInterstitialAd();
+    preloadAppOpenAd();
 
     return true;
   })();

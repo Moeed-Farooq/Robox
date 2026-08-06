@@ -1,4 +1,5 @@
 export { default as AppBannerAd } from './BannerAd';
+export { default as AppNativeAd } from './NativeAd';
 export { initializeAds } from './AdManager';
 export { areAdsEnabled, initializeAdsSettings, isAdsConfigLoaded } from './AdsSettingsService';
 export {
@@ -13,4 +14,9 @@ export {
   showInterstitialIfAvailable,
   isInterstitialAdReady,
 } from './InterstitialService';
+export {
+  preloadAppOpenAd,
+  showAppOpenIfAvailable,
+  isAppOpenAdReady,
+} from './AppOpenAdService';
 export { PRODUCTION_AD_IDS, TEST_AD_IDS, USE_PRODUCTION_ADS } from './AdConfig';

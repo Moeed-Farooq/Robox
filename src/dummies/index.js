@@ -57,8 +57,20 @@ export const DailyReward = [
 ];
 
 export const RobuxFeaturesData = [
-  { id: 1, title: 'Robux Codes', screen: SCREEN.ROBUX_CODES_SCREEN, src: IMAGES.ROBUX_CODES },
-  { id: 2, title: 'Robux Skins', screen: SCREEN.ROBUX_SKINS_SCREEN, src: IMAGES.ROBUX_SKINS },
+  {
+    id: 1,
+    title: 'Robux Codes',
+    screen: SCREEN.ROBUX_CODES_SCREEN,
+    src: IMAGES.ROBUX_CODES,
+    requiresUnlock: true,
+  },
+  {
+    id: 2,
+    title: 'Robux Skins',
+    screen: SCREEN.ROBUX_SKINS_SCREEN,
+    src: IMAGES.ROBUX_SKINS,
+    requiresUnlock: true,
+  },
   { id: 3, title: 'Wordy Robux', screen: SCREEN.WORD_QUIZ_SCREEN, src: IMAGES.WORDY_ROBUX },
   { id: 4, title: 'RBX Calculator', screen: SCREEN.RBX_CALCULATOR_SCREEN, src: IMAGES.RBX_CALCULATOR },
   { id: 5, title: 'Block Puzzle', screen: SCREEN.BLOCK_PUZZLE_SCREEN, src: IMAGES.BLOCK_PUZZLE },
