@@ -194,10 +194,10 @@ class RoboxPerkoxOfferwallViewController: UIViewController, WKNavigationDelegate
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     // Phone-like back: swipe from left edge goes WebView history, then dismisses.
-    if gestureRecognizers?.contains(where: { $0.name == "roboxPerkoxEdgeBack" }) != true {
+    if view.gestureRecognizers?.contains(where: { $0.name == "roboxPerkoxEdgeBack" }) != true {
       let edge = UIScreenEdgePanGestureRecognizer(
         target: self,
-        action: #selector(handleEdgeSwipeBack(_:)),
+        action: #selector(handleEdgeSwipeBack(_:))
       )
       edge.edges = .left
       edge.name = "roboxPerkoxEdgeBack"

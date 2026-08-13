@@ -2,6 +2,9 @@
 export const PERKOX_APP_ID = 'app_9Lyr0Y2Az3nQKT6TJFQXHAl4wbi2L9tm';
 export const PERKOX_SDK_ID = 'sdk_wQiZ7pMiaMXAp6gypBpjvH6CMrDMi8lu';
 export const PERKOX_API_KEY = 'api_lbMCbclgqSFvtSOaHqQnZwHETNbpyRZP';
+export const PERKOX_IOS_APP_ID = 'app_MMSZKO8LZtg897i80r9tEQKCb3EhCpCf';
+export const PERKOX_IOS_SDK_ID = 'sdk_UdD1zFT00hbAGUUTxoEc2Au6u5u4OTPn';
+export const PERKOX_IOS_API_KEY = 'api_IP7vtphvB2AZ8E3X7o4QeMuTyyxmByz3';
 export const PERKOX_BETA = 'false';
 export const PERKOX_OFFERS_URL = 'https://api.perkox.com/offerwall/api/offers';
 export const PERKOX_WEB_OFFERWALL_URL = 'https://perkwall.com';

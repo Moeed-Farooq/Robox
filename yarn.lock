@@ -1801,10 +1801,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@perkoxofficial/react-native-sdk@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@perkoxofficial/react-native-sdk/-/react-native-sdk-1.0.2.tgz#7e1b7e3a340180db341b95c4b2b5b8a731df3a91"
-  integrity sha512-5XFpV9hlmpFeCCjh/bbaoDGY9rHnjr/4NpA07X2imdG7hR7pQvqPS4QGxVfimU5gi+t8CfOHLdfgC9mbGPzAtQ==
+"@perkoxofficial/react-native-sdk@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@perkoxofficial/react-native-sdk/-/react-native-sdk-2.0.0.tgz#0e4af3660d11468d7af3b737b733f36c1e098c90"
+  integrity sha512-znKfV2msnmOmd2q8/SH/boMJvvZI87563cakIB8sELOGRjEDyczJwqm97T64cxfLnCnzJTNyCT/5JWWpUyd6OQ==
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
