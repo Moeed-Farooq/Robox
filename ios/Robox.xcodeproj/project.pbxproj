@@ -17,6 +17,9 @@
 		5802A4CC9D294704A956B90A /* PlayfairDisplay-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60DD47987243404F96E86705 /* PlayfairDisplay-Italic.ttf */; };
 		5F00094D12928C750807BD55 /* Pods_Robox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE81EBA2986BCD8B54C71486 /* Pods_Robox.framework */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
+		A1B2C3D40E5F678901234501 /* RoboxPerkoxModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40E5F678901234511 /* RoboxPerkoxModule.swift */; };
+		A1B2C3D40E5F678901234502 /* RoboxPerkoxModule.m in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40E5F678901234512 /* RoboxPerkoxModule.m */; };
+		A1B2C3D40E5F678901234503 /* RoboxPerkoxOfferwallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D40E5F678901234513 /* RoboxPerkoxOfferwallViewController.swift */; };
 		7B29EF5571854FE4BBB9F3EF /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 721396FD551941F4BFFB3F5E /* Poppins-Medium.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		85ACB304C6C54DAA9FA1F99B /* ManufacturingConsent-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 238519FAA49145A09A8596F5 /* ManufacturingConsent-Regular.ttf */; };
@@ -46,6 +49,9 @@
 		721396FD551941F4BFFB3F5E /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		75B77FCAF9714951B6F0051D /* PlayfairDisplay-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PlayfairDisplay-Black.ttf"; path = "../src/assets/fonts/PlayfairDisplay-Black.ttf"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Robox/AppDelegate.swift; sourceTree = "<group>"; };
+		A1B2C3D40E5F678901234511 /* RoboxPerkoxModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoboxPerkoxModule.swift; path = Robox/RoboxPerkoxModule.swift; sourceTree = "<group>"; };
+		A1B2C3D40E5F678901234512 /* RoboxPerkoxModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RoboxPerkoxModule.m; path = Robox/RoboxPerkoxModule.m; sourceTree = "<group>"; };
+		A1B2C3D40E5F678901234513 /* RoboxPerkoxOfferwallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoboxPerkoxOfferwallViewController.swift; path = Robox/RoboxPerkoxOfferwallViewController.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Robox/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8782AE2EF223400D9434E1A5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		930D30637C7C4C61A755AB74 /* PlayfairDisplay-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "PlayfairDisplay-Bold.ttf"; path = "../src/assets/fonts/PlayfairDisplay-Bold.ttf"; sourceTree = "<group>"; };
@@ -75,6 +81,9 @@
 				E2C3F4F92FF83E3700DA6C37 /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
+				A1B2C3D40E5F678901234511 /* RoboxPerkoxModule.swift */,
+				A1B2C3D40E5F678901234512 /* RoboxPerkoxModule.m */,
+				A1B2C3D40E5F678901234513 /* RoboxPerkoxOfferwallViewController.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
@@ -360,6 +369,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				761780ED2CA45674006654EE /* AppDelegate.swift in Sources */,
+				A1B2C3D40E5F678901234501 /* RoboxPerkoxModule.swift in Sources */,
+				A1B2C3D40E5F678901234502 /* RoboxPerkoxModule.m in Sources */,
+				A1B2C3D40E5F678901234503 /* RoboxPerkoxOfferwallViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

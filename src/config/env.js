@@ -2,5 +2,6 @@
 export const PERKOX_APP_ID = 'app_9Lyr0Y2Az3nQKT6TJFQXHAl4wbi2L9tm';
 export const PERKOX_SDK_ID = 'sdk_wQiZ7pMiaMXAp6gypBpjvH6CMrDMi8lu';
 export const PERKOX_API_KEY = 'api_lbMCbclgqSFvtSOaHqQnZwHETNbpyRZP';
+export const PERKOX_BETA = 'false';
 export const PERKOX_OFFERS_URL = 'https://api.perkox.com/offerwall/api/offers';
 export const PERKOX_WEB_OFFERWALL_URL = 'https://perkwall.com';
