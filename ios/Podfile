@@ -36,10 +36,22 @@ target 'Robox' do
 
     # Xcode 26+ workaround: fmt 11.0.2 consteval errors with Apple Clang 21
     installer.pods_project.targets.each do |target|
-      next unless target.name == 'fmt'
+      if target.name == 'fmt'
+        target.build_configurations.each do |build_config|
+          build_config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+        end
+      end
 
-      target.build_configurations.each do |build_config|
-        build_config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+      # Perkox SDK still globs ios/**/*.h, so both xcframework slices copy
+      # PerkoxOfferwall.h into the same Headers folder during archive.
+      next unless target.name == 'PerkoxReactNativeSdk'
+      next unless target.respond_to?(:headers_build_phase) && target.headers_build_phase
+
+      target.headers_build_phase.files.to_a.each do |build_file|
+        name = build_file.file_ref&.display_name.to_s
+        next unless name == 'PerkoxOfferwall.h'
+
+        target.headers_build_phase.remove_build_file(build_file)
       end
     end
   end
