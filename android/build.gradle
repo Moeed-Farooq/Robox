@@ -20,3 +20,10 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+// Required by @perkoxofficial/react-native-sdk (also enabled by default in RN via includeJitpackRepository).
+allprojects {
+    repositories {
+        maven { url 'https://www.jitpack.io' }
+    }
+}

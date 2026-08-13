@@ -3,6 +3,22 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Allow resolving Play Store / market intents from offerwall redirects (Android 11+). -->
+    <queries>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="market" />
+      </intent>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" android:host="play.google.com" />
+      </intent>
+      <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https" android:host="apps.apple.com" />
+      </intent>
+      <package android:name="com.android.vending" />
+    </queries>
 
     <application
       android:name=".MainApplication"
@@ -29,5 +45,11 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
       </activity>
+      <activity
+        android:name=".perkox.RoboxPerkoxOfferwallActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:hardwareAccelerated="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:exported="false" />
     </application>
 </manifest>

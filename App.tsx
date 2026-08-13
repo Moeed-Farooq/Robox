@@ -5,6 +5,7 @@ import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { anonymousLogin, ensureFirestoreUserDocument, getCurrentUser } from './src/services';
 import { initializeAds, showAppOpenIfAvailable } from './src/services/ads';
+import { initPerkoxSdk } from './src/services/perkox/perkoxSdk';
 import EngagementPromptsHost from './src/components/engagementPromptsHost';
 
 
@@ -42,6 +43,19 @@ const App = () => {
           await ensureFirestoreUserDocument(existingUser);
         } else {
           await anonymousLogin();
+        }
+
+        try {
+          await initPerkoxSdk();
+        } catch (perkoxError) {
+          if (__DEV__) {
+            console.warn(
+              'Perkox SDK initialization failed:',
+              perkoxError instanceof Error
+                ? perkoxError.message
+                : perkoxError,
+            );
+          }
         }
       } catch (error) {
         if (isMounted) {
