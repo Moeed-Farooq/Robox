@@ -28,6 +28,7 @@
       android:allowBackup="false"
       android:theme="@style/AppTheme"
       android:usesCleartextTraffic="${usesCleartextTraffic}"
+    tools:replace="android:allowBackup"
       android:supportsRtl="true">
       <meta-data
         android:name="com.google.android.gms.ads.APPLICATION_ID"

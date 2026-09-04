@@ -1,6 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { FIREBASE_COLLECTIONS } from '../enums';
+import { checkAndFireCoinMilestones } from './appsflyer/appsflyerService';
 
 const getUserRefByUid = uid => firestore().collection(FIREBASE_COLLECTIONS.USERS_COLLECTION).doc(uid);
 
@@ -66,7 +67,9 @@ export const refreshUserTotalPoints = async () => {
   await ensureFirestoreUserDocument(user);
 
   const snapshot = await getUserRefByUid(user.uid).get();
-  return Number(snapshot.data()?.totalPoints || 0);
+  const totalPoints = Number(snapshot.data()?.totalPoints || 0);
+  checkAndFireCoinMilestones(totalPoints);
+  return totalPoints;
 };
 
 export const subscribeToUserTotalPoints = (onValue, onError) => {
@@ -80,6 +83,7 @@ export const subscribeToUserTotalPoints = (onValue, onError) => {
   return getUserRefByUid(user.uid).onSnapshot(
     snapshot => {
       const points = Number(snapshot.data()?.totalPoints || 0);
+      checkAndFireCoinMilestones(points);
       onValue?.(points);
     },
     error => {
@@ -126,6 +130,7 @@ export const addPointsToUserTotal = async points => {
     return nextPoints;
   });
 
+  checkAndFireCoinMilestones(updatedTotalPoints);
   return updatedTotalPoints;
 };
 

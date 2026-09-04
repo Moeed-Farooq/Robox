@@ -1188,6 +1188,7 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240722.0)
+  - AppsFlyerFramework/Strict (6.18.0)
   - AsyncStorage (3.1.1):
     - boost
     - DoubleConversion
@@ -3332,6 +3333,9 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - SocketRocket
+  - react-native-appsflyer (6.18.0):
+    - AppsFlyerFramework/Strict (= 6.18.0)
+    - React
   - react-native-blob-util (0.24.10):
     - boost
     - DoubleConversion
@@ -4716,6 +4720,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-appsflyer (from `../node_modules/react-native-appsflyer`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-in-app-review (from `../node_modules/react-native-in-app-review`)
@@ -4776,6 +4781,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - AppsFlyerFramework
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAppCheckInterop
@@ -4899,6 +4905,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-appsflyer:
+    :path: "../node_modules/react-native-appsflyer"
   react-native-blob-util:
     :path: "../node_modules/react-native-blob-util"
   react-native-cameraroll:
@@ -5012,6 +5020,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: a05cc83bf02079535e17169a73c5be5ba47f714b
+  AppsFlyerFramework: c1e1e4cd3b98ffdca2fe32b17ae93909e409b6ab
   AsyncStorage: d7dcc63ec84ccd43e489b5dcdbd4bf93d12f04eb
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   BoringSSL-GRPC: dded2a44897e45f28f08ae87a55ee4bcd19bc508
@@ -5080,6 +5089,7 @@ SPEC CHECKSUMS:
   React-logger: 993e4b9793768764e0fdd379ad1d6582f7905463
   React-Mapbuffer: 0b0d3c3074187e72d8a6e8cacce120cb24581565
   React-microtasksnativemodule: 175741856a8f6a31e20b973cb784db023256b259
+  react-native-appsflyer: 727ca97c81536e6309fb9e6c763fd9338edb589c
   react-native-blob-util: b28c476975a9cdbf2afde81784739d791c892750
   react-native-cameraroll: ae31ba7ee17d31c5ee05d7bb248742e3af482783
   react-native-in-app-review: 1516ba69d60d58053b7eb3aaaf8d2a5a74af8b57
@@ -5141,6 +5151,6 @@ SPEC CHECKSUMS:
   SwiftUIIntrospect: fee9aa07293ee280373a591e1824e8ddc869ba5d
   Yoga: c7fcecd3a5864321db161a74cf2cd735f800c119
 
-PODFILE CHECKSUM: 6f15038798326b696a71826a528a8178658a1c8e
+PODFILE CHECKSUM: a63fa2644430520af5dd1a6381cf880d2d7e8ef2
 
 COCOAPODS: 1.16.2

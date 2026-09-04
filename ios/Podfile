@@ -8,6 +8,9 @@ require Pod::Executable.execute_command('node', ['-p',
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
+# AppsFlyer strict mode (kids / COPPA SDK variant)
+$RNAppsFlyerStrictMode = true
+
 # Required for @react-native-firebase (Firebase Swift pods)
 $RNFirebaseAsStaticFramework = true
 # Required when using use_frameworks! with react-native-google-mobile-ads
