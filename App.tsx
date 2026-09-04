@@ -3,7 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { COLORS } from './src/enums/StyleGuide';
 import RootNavigator from './src/navigation/RootNavigator';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { anonymousLogin, ensureFirestoreUserDocument, getCurrentUser } from './src/services';
+import {
+  anonymousLogin,
+  ensureFirestoreUserDocument,
+  getCurrentUser,
+  initAppsFlyer,
+} from './src/services';
 import { initializeAds, showAppOpenIfAvailable } from './src/services/ads';
 import { initPerkoxSdk } from './src/services/perkox/perkoxSdk';
 import EngagementPromptsHost from './src/components/engagementPromptsHost';
@@ -16,6 +21,7 @@ const App = () => {
 
   useEffect(() => {
     initializeAds();
+    initAppsFlyer();
   }, []);
 
   useEffect(() => {

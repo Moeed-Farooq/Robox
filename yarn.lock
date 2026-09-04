@@ -6641,6 +6641,11 @@ react-is@^19.1.0, react-is@^19.2.0:
   resolved "https://registry.npmjs.org/react-is/-/react-is-19.2.7.tgz"
   integrity sha512-kZFnouyVv7eP/Phmrlo9FK+zcAdriZJvzxXHF1Sl1P377WSGe2G/JxVolhTrB/jeV47lKImhNUsijjHAAbcl/A==
 
+react-native-appsflyer@^6.18.0:
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/react-native-appsflyer/-/react-native-appsflyer-6.18.0.tgz#a2ae7b554d1e7717f711fbe7e88cd0689b006f34"
+  integrity sha512-rsRWbsfr+7pCsDdnTRjgKdO8Ed0ICQPUM6zlHU3RSiTrAgNf04h4k8Ci6tLfbJax3gAN8bo7QqfWhnpA2jBqBQ==
+
 react-native-blob-util@^0.24.10:
   version "0.24.10"
   resolved "https://registry.npmjs.org/react-native-blob-util/-/react-native-blob-util-0.24.10.tgz"
